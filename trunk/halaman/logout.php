@@ -1,14 +1,13 @@
 <?php
-if (isset($_POST['logout']))
-{
-    @session_destroy("pengguna");
-    unset($_SESSION['pengguna']);
-    unset($_SESSION['keranjang_belanja']);
+
+$nama = $_SESSION["pengguna"]["nama"];
+
+unset($_SESSION['pengguna']);
+unset($_SESSION['keranjang_belanja']);
+session_destroy();
 ?>
-<script language="javascript"> alert("kembali ke index")
-    location.href="http://localhost/perdagangan_elektronik/index.php"
+<script>
+    alert("Terima kasih, <?php echo($nama);?>.");
+    location.href = "<?php echo(buat_url());?>";
 </script>
 <?php
-    
-}
-?>

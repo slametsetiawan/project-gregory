@@ -11,39 +11,44 @@ else
 
 if(!isset($_SESSION["pengguna"]))
 {
-    if(isset($_POST["submit"]))
-    {
-        $sql = "
-            SELECT
-                *
-            FROM
-                pengguna
-            WHERE
-                kode = '".$_POST["kode"]."' AND
-                kata_kunci = '".md5($_POST["kata_kunci"])."'
-            LIMIT 0, 1";
-        
-        $sumber_data = mysql_query($sql);
-        
-        $pengguna = mysql_fetch_assoc($sumber_data);
-        
-        $pesan_umpan_balik = "";
-        
-        if($pengguna==FALSE)
-        {
-            $pesan_umpan_balik = "<div class=\"warning\">Akun tidak ditemukan.</div>";
-        }
-        else
-        {
-            $_SESSION["pengguna"] = $pengguna;
-            header("location:".buat_url($redirect)); 
-        }
-    }
     ?>
     <div id="halaman_login">
         <h3>Formulir Login</h3>
         <div>
-            <?php echo($pesan_umpan_balik); ?>
+            <?php
+            if(isset($_POST["login"]))
+            {
+                $sql = "
+                    SELECT
+                        *
+                    FROM
+                        pengguna
+                    WHERE
+                        kode = '".$_POST["kode"]."' AND
+                        kata_kunci = '".md5($_POST["kata_kunci"])."'
+                    LIMIT 0, 1";
+                
+                $sumber_data = mysql_query($sql);
+                
+                $pengguna = mysql_fetch_assoc($sumber_data);
+                
+                if($pengguna==FALSE)
+                {
+                    ?><div class="warning">Akun tidak ditemukan.</div><?php
+                }
+                else
+                {
+                    $_SESSION["pengguna"] = $pengguna;
+                    //header("location:".buat_url($redirect)); <-- mestinya header already sent cos pake template
+                    ?>
+                    <script>
+                        alert("Selamat datang, <?php echo($_SESSION["pengguna"]["nama"]);?>.");
+                        location.href = "<?php echo(buat_url($redirect));?>";
+                    </script>
+                    <?php
+                }
+            }
+            ?>
         </div>
         <form method="post" action="<?php echo(buat_url("login", array("redirect"=>$redirect)));?>">
             <table>
@@ -62,7 +67,7 @@ if(!isset($_SESSION["pengguna"]))
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="submit" value="Login"/>
+                        <input type="submit" name="login" value="Login"/>
                     </td>
                 </tr>
             </table>
@@ -73,5 +78,11 @@ if(!isset($_SESSION["pengguna"]))
 else
 {
     //echo("Anda sudah login sebagai ".$_SESSION["pengguna"]["nama"]);
-    header("location:".buat_url($redirect));
+    //header("location:".buat_url($redirect));
+    ?>
+    <script>
+        alert("Anda sudah login, <?php echo($_SESSION["pengguna"]["nama"]);?>.");
+        location.href = "<?php echo(buat_url($redirect));?>";
+    </script>
+    <?php
 }

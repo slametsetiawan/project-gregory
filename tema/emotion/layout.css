@@ -1,0 +1,172 @@
+a:active,
+a:link,
+a:visited
+{
+    color: #58B;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover
+{
+    text-decoration: underline;
+}
+div.clear
+{
+    float: none;
+    clear: both;
+}
+body
+{
+    margin: 0;
+    padding: 0;
+    font: 12px "tahoma";
+    background-color: #CDE;
+    overflow: scroll;
+}
+body, table, input
+{
+    font: 12px "tahoma";
+    color: #234;
+}
+body div.sheet
+{
+    width: 950px;
+    margin: auto;
+    border: solid 5px #BCD;
+    border-width: 0px 5px;
+    padding: 10px;
+    background-color: #DEF;
+}
+body div.top-sheet div.top-left-sheet
+{
+    float: left;
+}
+body div.top-sheet div.top-right-sheet
+{
+    float: right;
+}
+body div.top-sheet div.top-left-sheet div.site-name
+{
+    font-size: 30px;
+    font-variant: small-caps;
+    font-weight: bold;
+    color: #ACE;
+}
+body div.top-sheet div.top-left-sheet div.site-sub-name
+{
+    font-size: 14px;
+    color: #579;
+}
+body div.top-middle-sheet
+{
+    margin: 10px 0px;
+}
+body div.top-middle-sheet ul
+{
+    margin: 0px;
+    padding: 0px;
+    float: right;
+}
+body div.top-middle-sheet ul li
+{
+    list-style: none;
+    float: left;
+}
+body div.top-middle-sheet ul li a
+{
+    padding: 8px 16px;
+}
+body div.top-middle-sheet ul li a:hover
+{
+    background-color: #CDE;
+}
+body div.header-sheet
+{
+    width: 950px;
+    height: 350px;
+    margin: 20px 0px;
+    background-color: #789;
+    background-image: url("images/header.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+body div.body-sheet div.side-body
+{
+    width: 230px;
+    padding: 10px;
+    float: left;
+}
+body div.body-sheet div.main-body
+{
+    width: 680px;
+    padding: 10px;
+    float: left;
+}
+body div.body-sheet div.side-body ul
+{
+    margin: 0px;
+    padding: 0px;
+}
+body div.body-sheet div.side-body ul li
+{
+    list-style: none;
+}
+body div.body-sheet div.side-body ul li a
+{
+    display: block;
+    padding: 4px 8px;
+}
+body div.body-sheet div.side-body ul li a:hover
+{
+    background-color: #CDE;
+}
+body div.body-sheet div.side-body div.widget
+{
+    padding-bottom: 20px;
+}
+body div.body-sheet div.side-body div.widget div.title
+{
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+body div.body-sheet div.main-body h3
+{
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+body div.footer-sheet
+{
+    margin: 0px;
+    padding: 20px;
+    background-color: #58A;
+    color: #FFF;
+}
+body div.footer-sheet div.left-footer,
+body div.footer-sheet div.center-footer,
+body div.footer-sheet div.right-footer
+{
+    width: 290px;
+    float: left;
+}
+body div.footer-sheet div.center-footer
+{
+    margin: 0px 20px;
+}
+body div.footer-sheet div.left-footer div.title,
+body div.footer-sheet div.center-footer div.title,
+body div.footer-sheet div.right-footer div.title
+{
+    margin-bottom: 10px;
+    font-size:20px;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+body div.bottom-sheet
+{
+    padding: 10px 0px;
+}

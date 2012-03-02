@@ -1,6 +1,25 @@
-<div id="halaman_keranjang_belanja">
+<style>
+div.halaman_keranjang_belanja table tr th,
+div.halaman_keranjang_belanja table tr td
+{
+    padding: 2px 3px;
+}
+div.halaman_keranjang_belanja table tr th
+{
+    background-color: #CCC;
+}
+div.halaman_keranjang_belanja table tr:nth-child(odd)
+{
+    background-color: #EEE;
+}
+div.halaman_keranjang_belanja table tr:nth-child(even)
+{
+    background-color: #DDD;
+}
+</style>
+<div class="halaman_keranjang_belanja">
     <h3>Keranjang Belanja</h3>
-    <table width="100%" border="1">
+    <table width="100%">
         <tr>
             <th>No.</th>
             <th>Kode Produk</th>
@@ -27,28 +46,27 @@
                         FROM
                             produk
                         WHERE
-                            no = '".$no_produk."'
-                        LIMIT 0, 1";
-                    $sumber_data = mysql_query($sql);
-                    $produk = mysql_fetch_assoc($sumber_data);
+                            no = '".$no_produk."'";
+                    $sumber_data_produk = mysql_query($sql);
+                    $produk = mysql_fetch_assoc($sumber_data_produk);
                     
                     if($produk!=FALSE)
                     {
                         $total_keseluruhan = $total_keseluruhan + ($produk["harga"]*$kuantitas_produk);
                         ?>
                         <tr>
-                            <td><?php echo($no_urut++);?></td>
-                            <td><?php echo($produk["kode"]);?></td>
-                            <td><?php echo($produk["nama"]); ?></td>
-                            <td>
-                                <form method="post" action="<?php echo(buat_url("ubah_produk_di_keranjang_belanja", array("nomer"=>$nomer,"kuantitas"=>$kuantitas))) ?>">
+                            <td align="right"><?php echo($no_urut++);?></td>
+                            <td align="left"><?php echo($produk["kode"]);?></td>
+                            <td align="left"><?php echo($produk["nama"]); ?></td>
+                            <td align="center">
+                                <form method="post" action="<?php echo(buat_url("ubah_kuantitas_produk_di_keranjang_belanja")) ?>">
                                     <input type="hidden" name="no_produk" value="<?php echo($produk["no"]);?>"/>
-                                    <input type="text" name="kuantitas" value="<?php echo($kuantitas_produk);?>" size="3" />
-                                    <input type="submit" name="submit" value="Ubah Kuantitas" />
+                                    <input type="text" name="kuantitas" value="<?php echo($kuantitas_produk);?>" size="4" />
+                                    <input type="submit" name="ubah_kuantitas_produk_di_keranjang_belanja" value="Ubah" />
                                 </form>
                             </td>
-                            <td><?php echo($produk["harga"]);?></td>
-                            <td><?php echo($produk["harga"]*$kuantitas_produk);?></td>
+                            <td align="right">Rp.<?php echo(number_format($produk["harga"], 2, ",", "."));?></td>
+                            <td align="right">Rp.<?php echo(number_format(($produk["harga"]*$kuantitas_produk), 2, ",", "."));?></td>
                             <td align="center">
                                 <input type="button" value="Hapus" onclick="location.href='<?php echo(buat_url("hapus_produk_di_keranjang_belanja", array("no_produk"=>$produk["no"])))?>';" />
                             </td>
@@ -61,41 +79,18 @@
         ?>
         <tr>
             <td colspan="4"></td>
-            <td>Total Keseluruhan</td>
-            <td>
-                <?php
-                         if(isset($_SESSION["keranjang_belanja"]))
-                         {
-                            echo(@$total_keseluruhan);
-                         }
-                    ?>
-            </td>
+            <td align="left" style="font-weight: bold;">Total Keseluruhan</td>
+            <td align="right">Rp.<?php echo(number_format(@$total_keseluruhan, 2, ",", "."));?></td>
             <td></td>
         </tr>
     </table>
     <div>
         <strong>
             <center>
-                <a href="<?php echo(buat_url("katalog"));?>">&lt;&lt; Kembali ke Katalog</a></a> |
-                <?php
-                        if(isset($_SESSION["keranjang_belanja"]))
-                        {
-                            if (@$total_keseluruhan == 0)
-                            {
-                                ?>
-                                <script language="javascript"> alert("Anda belum Berbelanja")
-                                location.href="index.php?halaman=katalog"
-                                </script>
-                                <?php
-                            }
-                            else
-                            {
-                            ?>
-                <a href="<?php echo(buat_url("login", array("redirect"=>"pengiriman","total"=>$total_keseluruhan)));?>">Selesaikan Belanja &gt;&gt;</a>
-                        <?php
-                            }
-                        }
-                        ?>
+                <a href="<?php echo(buat_url("katalog"));?>">&lt;&lt; Kembali ke Katalog</a></a>
+                <?php if(isset($_SESSION["keranjang_belanja"]) && count($_SESSION["keranjang_belanja"])>0):?>
+                    | <a href="<?php echo(buat_url("login", array("redirect"=>"pengiriman")));?>">Selesaikan Belanja &gt;&gt;</a>
+                <?php endif;?>
             </center>
         </strong>
     </div>

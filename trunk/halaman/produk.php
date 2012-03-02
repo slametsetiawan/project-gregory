@@ -30,69 +30,90 @@ if (isset($_GET["no"]))
         ?>
         <div id="halaman_produk">
             <h3>Produk <?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?></h3>
-            <table>
+            <table align="center">
                 <tr>
-                    <td>
-                        <img src="<?php echo(url_dasar())?>/images/produk/<?php echo "1";echo($produk["no"])?>.jpg" width="142" height="188" />
-                        <br />
-                        <a href="<?php echo(url_dasar())?>/images/produk/<?php echo "1";echo($produk["no"])?>.jpg">Lihat gambar penuhnya</a>
+                    <td valign="top" align=left>
+                        <div>
+                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg" target="_blank">
+                                <img
+                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
+                                    width="90"
+                                    height="120"
+                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                />
+                            </a>
+                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg" target="_blank">
+                                <img
+                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg"
+                                    width="90"
+                                    height="120"
+                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                />
+                            </a>
+                        </div>
+                        <div>
+                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg" target="_blank">
+                                <img
+                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg"
+                                    width="90"
+                                    height="120"
+                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                />
+                            </a>
+                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg" target="_blank">
+                                <img
+                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg"
+                                    width="90"
+                                    height="120"
+                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                />
+                            </a>
+                        </div>
                     </td>
-                    <td>
-                        <img src="<?php echo(url_dasar())?>/images/produk/<?php echo "2";echo($produk["no"])?>.jpg" width="142" height="188" />
-                        <br />
-                        <a href="<?php echo(url_dasar())?>/images/produk/<?php echo "2";echo($produk["no"])?>.jpg">Lihat gambar penuhnya</a>
-                    </td>
-                    <td>
-                        <img src="<?php echo(url_dasar())?>/images/produk/<?php echo "3";echo($produk["no"])?>.jpg" width="142" height="188" />
-                        <br />
-                        <a href="<?php echo(url_dasar())?>/images/produk/<?php echo "3";echo($produk["no"])?>.jpg">Lihat gambar penuhnya</a>
-                    </td>
-                </tr>
-                <tr>
                     <td valign="top">
                         <form method="post" action="<?php echo(buat_url("tambahkan_ke_keranjang"));?>">
-                            <table align="left">
+                            <input type="hidden" name="no_produk" value="<?php echo($produk["no"]);?>"/>
+                            <table>
                                 <tr>
-                                    <td align="right"><strong>Kode : </strong></td>
-                                    <td><?php echo($produk["kode"]);?></td>
+                                    <td align="right" style="font-weight: bold;">Kode</td>
+                                    <td align="left"><?php echo($produk["kode"]);?></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><strong>Nama : </strong></td>
-                                    <td><?php echo($produk["nama"]);?></td>
+                                    <td align="right" style="font-weight: bold;">Nama</td>
+                                    <td align="left"><?php echo($produk["nama"]);?></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><strong>Kategori : </strong></td>
-                                    <td><?php echo($produk["kategori"]);?></td>
+                                    <td align="right" style="font-weight: bold;">Berat</td>
+                                    <td align="left"><?php echo($produk["berat"]);?></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><strong>Deskripsi : </strong></td>
-                                    <td><?php echo($produk["deskripsi"]);?></td>
+                                    <td align="right" style="font-weight: bold;">Deskripsi</td>
+                                    <td align="left"><?php echo($produk["deskripsi"]);?></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><strong>Berat : </strong></td>
-                                    <td><?php echo($produk["berat"]);?></td>
+                                    <td align="right" style="font-weight: bold;">Tersedia</td>
+                                    <td align="left"><?php echo($produk["kuantitas"]);?></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><strong>Harga : </strong></td>
-                                    <td><?php echo($produk["harga"]);?></td>
-                                </tr>
-                                <tr>
-                                    <td align="right"><strong>Beli sebanyak : </strong></td>
-                                    <td>
-                                        <input type="hidden" name="no_produk" value="<?php echo $produk["no"]; ?>" />
-                                        <input type="text" name="kuantitas" value="1" size="4" />
+                                    <td align="right" style="font-weight: bold;">Harga</td>
+                                    <td align="left">
+                                        <span style="font-size: 20px;">
+                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td>
-                                        <input type="submit" name="submit" value="Tambahkan Ke Keranjang" />
-                                    </td>
+                                    <td align="right" style="font-weight: bold;">Kuantitas</td>
+                                    <td align="left"><input type="text" name="kuantitas" value="1" maxlength="2" size="2"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="right"></td>
+                                    <td align="left"><input type="submit" name="tambahkan_ke_keranjang" value="Tambahkan ke Keranjang"/></td>
                                 </tr>
                             </table>
                         </form>
                     </td>
-                <tr>
+                </tr>
             </table>
         </div>
         <?php

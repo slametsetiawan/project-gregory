@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="top-right-sheet">
-                        Search <input type="text"/>
+                        
                     </div>
                     <div class="clear"></div>
                 </div>

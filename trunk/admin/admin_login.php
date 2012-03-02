@@ -31,7 +31,7 @@ style="border-bottom: dashed; border-left: dashed; border-right: dashed; border-
         </td>
     </tr>
     <tr>
-        <td><a href="http://localhost/perdagangan_elektronik">Home</a></td>
+        <td><a href="../">Home</a></td>
         <td align="right">
             <label></label><input type="submit" name="button" id="button" value="Log In" />
         </td>

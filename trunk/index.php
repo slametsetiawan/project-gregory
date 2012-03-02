@@ -18,12 +18,12 @@ $sql = "
 $hasil_sql = mysql_query($sql);
 $tema = mysql_fetch_assoc($hasil_sql);
 
-$array_widget_filename = scandir("./widgets");
+$array_widget_filename = scandir("./widget");
 foreach($array_widget_filename as $widget_filename)
 {
-    if(is_file("./widgets/".$widget_filename))
+    if(is_file("./widget/".$widget_filename))
     {
-        require_once("./widgets/".$widget_filename);
+        require_once("./widget/".$widget_filename);
     }
 }
 

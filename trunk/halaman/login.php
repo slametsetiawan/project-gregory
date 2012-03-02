@@ -34,7 +34,7 @@ if(!isset($_SESSION["pengguna"]))
                 
                 if($pengguna==FALSE)
                 {
-                    ?><div class="warning">Akun tidak ditemukan.</div><?php
+                    ?><div style="padding: 5px; background-color: #FDB;">Akun tidak ditemukan.</div><?php
                 }
                 else
                 {

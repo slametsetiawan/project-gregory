@@ -1,114 +1,130 @@
 <?php
 
-$sql = "SELECT * 
-FROM  `produk` 
-ORDER BY  `produk`.`no` DESC 
-LIMIT 0 , 30 ";
-
-$sql2 = "SELECT * 
-FROM  `produk` 
-ORDER BY  `produk`.`harga` ASC 
-LIMIT 0 , 30";
-
-$tampilan_produk_terbaru = mysql_query($sql);
-$tampilan_produk_termurah = mysql_query($sql2);
+$sql = "
+    SELECT
+        *
+    FROM
+        produk
+    ORDER BY no DESC
+    LIMIT 0, 50";
+$sumber_data_produk_katalog = mysql_query($sql);
 ?>
-
-<div id="pageContent" style="border-bottom: dashed; border-left: dashed; border-right: dashed; border-top: dashed; float: left;" >
-	<h3>produk terbaru :<br /><br />
-	<?php while($baris_data = mysql_fetch_assoc($tampilan_produk_terbaru)): ?>
-    <form name="katalog_baru" method="get" action="http://localhost/perdagangan_elektronik/halaman/produk.php">
-    <table width="310px" border="0">
-        <tr>
-            <td>
-		      <img src="<?php echo(url_dasar());?>/images/produk/<?php echo"1";echo($baris_data["no"]);?>.jpg" width="77" height="102" border="1"/>
-	        </td>
-            <td>
-                <?php echo($baris_data["nama"]);?>
-            <br />
-                <?php echo($baris_data["harga"]);?>
-                <?php $id = $baris_data["no"]; ?>
-            </td>
-         </tr>
-         <tr>
-            <td>
-                STOK    :
-                <?php if ($baris_data["kuantitas"] <= 0)
-                        {
-                            echo $baris_data["kuantitas"];
-                            echo "<br/>";
-                            echo "BARANG HABIS! ";
-                        }
-                        else
-                        {
-                            echo $baris_data["kuantitas"];
-                            ?>
-                            <input type="hidden" value="" name="submit" />
-                <input type="hidden" value="<?php echo $id; ?>" name="id" />
-                <a href="<?php echo buat_url("produk", array("no"=>$baris_data["no"]))?>">
-                    <strong>Lihat Detail Produk</strong>
-                </a>
-                            <?php
-                        }; ?><br />
-            </td>
-         </tr>
-         <!--<tr>
-            <td>
-                <a href="<?php echo buat_url("produk", array("no"=>$baris_data["no"]))?>">
-                    <strong>Lihat Detail Produk</strong>
-                </a>
-            </td>
-        </tr>-->
-    </table>
-    </form>
-    <?php endwhile;?>
-	</h3>
-</div>
-
-<div id="pageContent" style="border-bottom: dashed; border-left: dashed; border-right: dashed; border-top: dashed; float: left;" >
-	<h3>produk termurah    :<br /><br />
-	<?php while($baris_data = mysql_fetch_assoc($tampilan_produk_termurah)): ?>
-		 <table width="310px" border="0">
-        <tr>
-            <td>
-		      <img src="<?php echo(url_dasar());?>/images/produk/<?php echo"1";echo($baris_data["no"]);?>.jpg" width="77" height="102" border="1"/>
-	        </td>
-            <td>
-                <?php echo($baris_data["nama"]);?>
-            <br />
-                <?php echo($baris_data["harga"]);?>
-            </td>
-         </tr>
-         <tr>
-            <td>
-                STOK    :
-                <?php if ($baris_data["kuantitas"] <= 0)
-                        {
-                            echo $baris_data["kuantitas"];
-                            echo "<br/>";
-                            echo "BARANG HABIS! ";
-                        }
-                        else
-                        {
-                            echo $baris_data["kuantitas"];
-                            ?>
-                            <input type="hidden" value="" name="submit" />
-                <input type="hidden" value="<?php echo $id; ?>" name="id" />
-                <a href="<?php echo buat_url("produk", array("no"=>$baris_data["no"]))?>">
-                    <strong>Lihat Detail Produk</strong>
-                </a>
-                            <?php
-                        }; ?><br />
-            </td>
-         </tr>
-         <!--<tr>
-            <td>
-                <a href="<?php echo buat_url("produk", array("no"=>$baris_data["no"]))?>">
-                    <strong>Lihat Detail Produk</strong>
-                </a>
-            </td>
-        </tr>-->
-    </table>
-    <?php endwhile;?>
-	</h3>
+<div class="halaman_katalog">
+    <h3>Produk Katalog</h3>
+    <div style="margin-bottom: 30px;">
+        <table>
+            <?php while($produk = mysql_fetch_assoc($sumber_data_produk_katalog)): ?>
+                <tr>
+                    <td valign="top">
+                        <a href="<?php echo buat_url("produk", array("no"=>$produk["no"]))?>">
+                            <img
+                                src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
+                                width="90"
+                                height="120"
+                                alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                            />
+                        </a>
+                    </td>
+                    <td valign="top">
+                        <form method="post" action="<?php echo(buat_url("tambahkan_ke_keranjang"));?>">
+                            <input type="hidden" name="no_produk" value="<?php echo($produk["no"]);?>"/>
+                            <table>
+                                <tr>
+                                    <td align="left" colspan="2">
+                                        <a href="<?php echo buat_url("produk", array("no"=>$produk["no"]))?>">
+                                            <?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Kode</td>
+                                    <td align="left"><?php echo($produk["kode"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Nama</td>
+                                    <td align="left"><?php echo($produk["nama"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Tersedia</td>
+                                    <td align="left"><?php echo($produk["kuantitas"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Harga</td>
+                                    <td align="left">
+                                        <span style="font-size: 16px;">
+                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Kuantitas</td>
+                                    <td align="left"><input type="text" name="kuantitas" value="1" maxlength="2" size="2"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" colspan="2"><input type="submit" name="tambahkan_ke_keranjang" value="Tambahkan ke Keranjang"/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                    <?php $produk = mysql_fetch_assoc($sumber_data_produk_katalog); // NEXTING RECORD ?>
+                    <?php if(!empty($produk["no"])):?>
+                        <td valign="top">
+                            <a href="<?php echo buat_url("produk", array("no"=>$produk["no"]))?>">
+                                <img
+                                    src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
+                                    width="90"
+                                    height="120"
+                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                />
+                            </a>
+                        </td>
+                        <td valign="top">
+                        <form method="post" action="<?php echo(buat_url("tambahkan_ke_keranjang"));?>">
+                            <input type="hidden" name="no_produk" value="<?php echo($produk["no"]);?>"/>
+                            <table>
+                                <tr>
+                                    <td align="left" colspan="2">
+                                        <a href="<?php echo buat_url("produk", array("no"=>$produk["no"]))?>">
+                                            <?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Kode</td>
+                                    <td align="left"><?php echo($produk["kode"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Nama</td>
+                                    <td align="left"><?php echo($produk["nama"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Tersedia</td>
+                                    <td align="left"><?php echo($produk["kuantitas"]);?></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Harga</td>
+                                    <td align="left">
+                                        <span style="font-size: 16px;">
+                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="font-weight: bold;">Kuantitas</td>
+                                    <td align="left"><input type="text" name="kuantitas" value="1" maxlength="2" size="2"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" colspan="2"><input type="submit" name="tambahkan_ke_keranjang" value="Tambahkan ke Keranjang"/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                    <?php else:?>
+                    <td></td>
+                    <td></td>
+                    <?php endif;?>
+                </tr>
+            <?php endwhile;?>
+        </table>
+    </div>
 </div>

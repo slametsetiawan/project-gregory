@@ -1,7 +1,7 @@
 <?php
 //echo "<pre>";
 //var_dump($_POST);
-if (isset($_POST["tambahkan_ke_keranjang"]))
+if (isset($_POST["ubah_kuantitas_produk_di_keranjang_belanja"]))
 {
     if(preg_match("/^[0-9]+$/i", $_POST["kuantitas"]) && $_POST["kuantitas"]>0)
     {
@@ -27,7 +27,7 @@ if (isset($_POST["tambahkan_ke_keranjang"]))
         {
             $nomer = $_POST["no_produk"];
             $kuantitas = $_POST["kuantitas"];
-            $_SESSION["keranjang_belanja"][$_POST["no_produk"]] += $_POST["kuantitas"]; 
+            $_SESSION["keranjang_belanja"][$_POST["no_produk"]] = $_POST["kuantitas"]; 
             //header("location: " . buat_url("keranjang_belanja", array("nomer"=>$nomer,"kuantitas"=>$kuantitas)));
             ?>
             <script language="javascript">

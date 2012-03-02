@@ -53,13 +53,13 @@ if(!isset($_SESSION["pengguna"]))
         <form method="post" action="<?php echo(buat_url("login", array("redirect"=>$redirect)));?>">
             <table>
                 <tr>
-                    <td align="right">Username : </td>
+                    <td align="right">Username</td>
                     <td>
                         <input type="text" name="kode" />
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">Kata Kunci : </td>
+                    <td align="right">Kata Kunci</td>
                     <td>
                         <input type="password" name="kata_kunci" />
                     </td>

@@ -238,6 +238,7 @@ if (isset($_POST["submit"]))
                 <td align="right">Kota : </td>
                 <td>
                     <select name="kota">
+                        <optgroup label="Jawa timur">
                         <?php
                         $sql = "
                             SELECT
@@ -249,13 +250,12 @@ if (isset($_POST["submit"]))
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <optgroup label="Jawa timur">
                                 <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
-                            </optgroup>
-                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>
+                        </optgroup>
+                        <optgroup label="Jabodetabek">
                         <?php
                         $sql = "
                             SELECT
@@ -267,13 +267,12 @@ if (isset($_POST["submit"]))
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <optgroup label="Jabodetabek">
                                 <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
-                            </optgroup>
-                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>
+                        </optgroup>
+                        <optgroup label="Jawa tengah">
                         <?php
                         $sql = "
                             SELECT
@@ -285,13 +284,13 @@ if (isset($_POST["submit"]))
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <optgroup label="Jawa tengah">
+                            
                                 <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
-                            </optgroup>
-                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>
+                        </optgroup>
+                        <optgroup label="Daerah Istimewa Yogjakarta">
                         <?php
                         $sql = "
                             SELECT
@@ -303,13 +302,13 @@ if (isset($_POST["submit"]))
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <optgroup label="Daerah Istimewa Yogjakarta">
+                            
                                 <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
-                            </optgroup>
-                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>
+                        </optgroup>
+                        <optgroup label="Jawa Barat">
                         <?php
                         $sql = "
                             SELECT
@@ -321,13 +320,12 @@ if (isset($_POST["submit"]))
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <optgroup label="Jawa Barat">
+                            
                                 <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
-                            </optgroup>
-                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>
+                        </optgroup>
                     </select>
                 </td>
             </tr>

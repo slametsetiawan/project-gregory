@@ -12,7 +12,7 @@ $GLOBALS["mengenai_situs"] = "Sejarah Berbaju sejarah berbaju terdapat disini se
 
 $GLOBALS["ym_cs"] = array(
     "leo.pradipta" => "Leo Pradipta",
-    "greyzher" => "Gregory Adrianto",
+    "glayzher" => "Gregory Adrianto",
 );
 
 ?>

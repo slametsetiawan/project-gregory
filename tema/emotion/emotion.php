@@ -74,7 +74,7 @@
 		    </div>
                     <div class="center-footer">
 			<div class="title">
-			    Deskripsi <?php echo($GLOBALS["nama_situs"]);?>
+			    <?php echo($GLOBALS["nama_situs"]);?>
 			</div>
 			<div class="content">
 			    <?php echo($GLOBALS["deskripsi_situs"]);?>
@@ -82,17 +82,17 @@
 		    </div>
                     <div class="right-footer">
 			<div class="title">
-			    Mengenai <?php echo($GLOBALS["nama_situs"]);?>
+			    Tentang kami
 			</div>
 			<div class="content">
-			    <?php echo($GLOBALS["mengenai_situs"]); ?>
+			    <?php echo($GLOBALS["tentang_situs"]); ?>
 			</div>
 		    </div>
                     <div class="clear"></div>
                 </div>
                 <div class="bottom-sheet">
                     Web template created by ddQ.<br/>
-                    Berbaju.Com &copy;2012 by TheRumondor.Com
+                    Berbaju.Com &copy;2012 by XvixProject.Com
                 </div>
             </div>
         </div>

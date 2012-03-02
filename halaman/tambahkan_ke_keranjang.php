@@ -1,54 +1,48 @@
 <?php
 //echo "<pre>";
 //var_dump($_POST);
-if (isset($_POST["submit"]))
+if (isset($_POST["tambahkan_ke_keranjang"]))
 {
-    if (!empty($_POST["kuantitas"]))
+    if(preg_match("/^[0-9]+$/i", $_POST["kuantitas"]) && $_POST["kuantitas"]>0)
     {
-        if (preg_match('|^[0-9]*$|', $_POST["kuantitas"]) )
+        $sumber_data_produk = mysql_query("
+            SELECT
+                *
+            FROM
+                produk
+            WHERE
+                no = '".$_POST["no_produk"]."'");
+        $produk = mysql_fetch_assoc($sumber_data_produk);
+        
+        if ($_POST["kuantitas"] > $produk["kuantitas"])
         {
-            $koman = mysql_query("SELECT * FROM produk WHERE no = '".$_POST["no_produk"]."'");
-            while ($row = mysql_fetch_assoc($koman))
-            {
-                $kuantitas = $row["kuantitas"];
-            }
-            if ($_POST["kuantitas"] > $kuantitas)
-            {
-                ?>
-                <script language="javascript">
-                    alert("Maaf Stock kami Tidak Mencukupi");
-                    location.href = "index.php?halaman=katalog"
-                </script>
-                <?php
-            }   
-            else
-            {
-            //block cek kuantitas
-            //block cek kuantitas
-            $nomer = $_POST["no_produk"];
-            $kuantitas = $_POST["kuantitas"];
-            $_SESSION["keranjang_belanja"][$_POST["no_produk"]] += $_POST["kuantitas"]; 
-            header("location: " . buat_url("keranjang_belanja", array("nomer"=>$nomer,"kuantitas"=>$kuantitas)));
-            }
+            ?>
+            <script language="javascript">
+                alert("Maaf persediaan tidak mencukupi untuk kuantitas yang anda minta.");
+                location.href = "<?php echo(buat_url("kalatog"));?>";
+            </script>
+            <?php
         }
         else
         {
+            $nomer = $_POST["no_produk"];
+            $kuantitas = $_POST["kuantitas"];
+            $_SESSION["keranjang_belanja"][$_POST["no_produk"]] += $_POST["kuantitas"]; 
+            //header("location: " . buat_url("keranjang_belanja", array("nomer"=>$nomer,"kuantitas"=>$kuantitas)));
             ?>
-        <script language="javascript">
-            alert("Nilai Yang Anda Bukan Berupa Angka")
-            location.href="index.php?halaman=katalog"
-        </script>
-        <?php
+            <script language="javascript">
+                location.href = "<?php echo(buat_url("keranjang_belanja"));?>";
+            </script>
+            <?php
         }
     }
     else
     {
         ?>
         <script language="javascript">
-            alert("Nilai Yang Anda masukkan Kosong")
+            alert("Kuantitas harus angka dan lebih besar dari nol.")
             location.href="index.php?halaman=katalog"
         </script>
         <?php
     }
 }
-?>

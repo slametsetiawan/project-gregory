@@ -243,13 +243,88 @@ if (isset($_POST["submit"]))
                             SELECT
                                 *
                             FROM
-                                kota";
+                                kota
+                            WHERE dipropinsi='1'";
                         $sumber_data = mysql_query($sql);
-                        
                         while($baris = mysql_fetch_assoc($sumber_data))
                         {
                             ?>
-                            <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            <optgroup label="Jawa timur">
+                                <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            </optgroup>
+                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        $sql = "
+                            SELECT
+                                *
+                            FROM
+                                kota
+                            WHERE dipropinsi='2'";
+                        $sumber_data = mysql_query($sql);
+                        while($baris = mysql_fetch_assoc($sumber_data))
+                        {
+                            ?>
+                            <optgroup label="Jabodetabek">
+                                <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            </optgroup>
+                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        $sql = "
+                            SELECT
+                                *
+                            FROM
+                                kota
+                            WHERE dipropinsi='3'";
+                        $sumber_data = mysql_query($sql);
+                        while($baris = mysql_fetch_assoc($sumber_data))
+                        {
+                            ?>
+                            <optgroup label="Jawa tengah">
+                                <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            </optgroup>
+                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        $sql = "
+                            SELECT
+                                *
+                            FROM
+                                kota
+                            WHERE dipropinsi='4'";
+                        $sumber_data = mysql_query($sql);
+                        while($baris = mysql_fetch_assoc($sumber_data))
+                        {
+                            ?>
+                            <optgroup label="Daerah Istimewa Yogjakarta">
+                                <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            </optgroup>
+                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        $sql = "
+                            SELECT
+                                *
+                            FROM
+                                kota
+                            WHERE dipropinsi='5'";
+                        $sumber_data = mysql_query($sql);
+                        while($baris = mysql_fetch_assoc($sumber_data))
+                        {
+                            ?>
+                            <optgroup label="Jawa Barat">
+                                <option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>
+                            </optgroup>
+                            <!--<option value="<?php echo($baris["no"]);?>"><?php echo($baris["nama"]);?></option>-->
                             <?php
                         }
                         ?>

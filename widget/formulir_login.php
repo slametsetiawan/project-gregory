@@ -2,7 +2,7 @@
 
 function widget_formulir_login()
 {
-    if(@$_GET["halaman"]!="login")
+    if(@$_GET["halaman"]!="login" && !isset($_SESSION["pengguna"]))
     {
         ?>
         <div class="widget_formulir_login">
@@ -24,12 +24,12 @@ function widget_formulir_login()
                         <td></td>
                         <td>
                             <input type="submit" name="login" value="Login"/>
+                            <a href="<?php echo(buat_url("pendaftaran"));?>">
+                                Pendaftaran
+                            </a>
                         </td>
                     </tr>
                 </table>
-                <a href="<?php echo(buat_url("pendaftaran"));?>">
-                    Pendaftaran
-                </a>
             </form>
         </div>
         <?php

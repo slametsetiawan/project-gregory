@@ -11,7 +11,7 @@ function widget_galeri_produk()
         LIMIT 0, 8");
     ?>
     <div class="widget_galeri_produk">
-        <table>
+        <table align="center">
             <?php while($produk = mysql_fetch_assoc($sumber_data_produk_acak)):?>
                 <tr>
                     <td>

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 01, 2012 at 06:52 
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Mar 03, 2012 at 03:46 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -147,11 +148,6 @@ CREATE TABLE IF NOT EXISTS `konfirmasi_pembayaran` (
   KEY `pemesanan` (`pemesanan`),
   KEY `metode_pembayaran` (`metode_pembayaran`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `konfirmasi_pembayaran`
---
-
 
 -- --------------------------------------------------------
 
@@ -461,16 +457,14 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `sebagai_default` enum('YA','TIDAK') NOT NULL DEFAULT 'TIDAK',
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
-(1, 'sederhana', 'tema default dari sistem ini yang jelas letak dari functionnya digunakan untuk kepentingan developer', 'TIDAK'),
-(2, 'social_net', 'tema kedua di sistem ini dengan tampilan cukup bagus dan paduan warna biru dan abu - abu', 'YA'),
-(3, 'it', 'template ketiga yang belum sempurna', 'TIDAK');
+(1, 'emotion', 'Web template created by ddQ.', 'YA');
 
 --
 -- Constraints for dumped tables
@@ -525,3 +519,7 @@ ALTER TABLE `produk`
 ALTER TABLE `tarif_pengiriman`
   ADD CONSTRAINT `tarif_pengiriman_ibfk_2` FOREIGN KEY (`ke_kota`) REFERENCES `kota` (`no`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tarif_pengiriman_ibfk_3` FOREIGN KEY (`oleh_pengirim`) REFERENCES `pengirim` (`no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

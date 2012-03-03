@@ -30,7 +30,7 @@ if (isset($_GET["no"]))
         ?>
         <div id="halaman_produk">
             <h3>Produk <?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?></h3>
-            <table align="center">
+            <table>
                 <tr>
                     <td valign="top" align="right">
                         <table>

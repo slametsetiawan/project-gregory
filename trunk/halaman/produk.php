@@ -32,45 +32,55 @@ if (isset($_GET["no"]))
             <h3>Produk <?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?></h3>
             <table align="center">
                 <tr>
-                    <td valign="top" align=left>
-                        <div>
-                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg" target="_blank">
-                                <img
-                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
-                                    width="90"
-                                    height="120"
-                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
-                                />
-                            </a>
-                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg" target="_blank">
-                                <img
-                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg"
-                                    width="90"
-                                    height="120"
-                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
-                                />
-                            </a>
-                        </div>
-                        <div>
-                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg" target="_blank">
-                                <img
-                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg"
-                                    width="90"
-                                    height="120"
-                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
-                                />
-                            </a>
-                            <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg" target="_blank">
-                                <img
-                                    src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg"
-                                    width="90"
-                                    height="120"
-                                    alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
-                                />
-                            </a>
-                        </div>
+                    <td valign="top" align="right">
+                        <table>
+                            <tr>
+                                <td valign="bottom" align="right">
+                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg" target="_blank">
+                                        <img
+                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
+                                            width="150"
+                                            height="200"
+                                            alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                        />
+                                    </a>
+                                </td>
+                                <td valign="bottom" align="left">
+                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg" target="_blank">
+                                        <img
+                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg"
+                                            width="120"
+                                            height="160"
+                                            alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                        />
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" align="right">
+                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg" target="_blank">
+                                        <img
+                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg"
+                                            width="105"
+                                            height="140"
+                                            alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                        />
+                                    </a>
+                                </td>
+                                <td valign="top" align="left">
+                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg" target="_blank">
+                                        <img
+                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg"
+                                            width="90"
+                                            height="120"
+                                            alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
+                                        />
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                    <td valign="top">
+                    <td valign="top" align="left">
                         <form method="post" action="<?php echo(buat_url("tambahkan_ke_keranjang"));?>">
                             <input type="hidden" name="no_produk" value="<?php echo($produk["no"]);?>"/>
                             <table>
@@ -98,7 +108,7 @@ if (isset($_GET["no"]))
                                     <td align="right" style="font-weight: bold;">Harga</td>
                                     <td align="left">
                                         <span style="font-size: 20px;">
-                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                            Rp.<?php echo(number_format($produk["harga"], 2, ",", "."));?>
                                         </span>
                                     </td>
                                 </tr>

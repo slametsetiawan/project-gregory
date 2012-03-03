@@ -52,7 +52,7 @@ $sumber_data_produk_katalog = mysql_query($sql);
                                     <td align="right" style="font-weight: bold;">Harga</td>
                                     <td align="left">
                                         <span style="font-size: 16px;">
-                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                            Rp.<?php echo(number_format($produk["harga"], 2, ",", "."));?>
                                         </span>
                                     </td>
                                 </tr>
@@ -105,7 +105,7 @@ $sumber_data_produk_katalog = mysql_query($sql);
                                     <td align="right" style="font-weight: bold;">Harga</td>
                                     <td align="left">
                                         <span style="font-size: 16px;">
-                                            Rp. <?php echo(number_format($produk["harga"], 2, ",", "."));?>
+                                            Rp.<?php echo(number_format($produk["harga"], 2, ",", "."));?>
                                         </span>
                                     </td>
                                 </tr>

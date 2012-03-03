@@ -10,7 +10,7 @@ function widget_pelayanan_pelanggan($jenis=0)
                     <a href="ymsgr:sendIM?<?php echo($ym_id);?>">
                         <img
                             src="http://opi.yahoo.com/online?u=<?php echo($ym_id);?>&t=<?php echo($jenis);?>"
-                            border="0"
+                            style="border: none;"
                             alt="<?php echo($ym_name);?>"
                         />
                         <div>

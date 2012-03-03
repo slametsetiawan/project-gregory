@@ -36,9 +36,9 @@ if (isset($_GET["no"]))
                         <table>
                             <tr>
                                 <td valign="bottom" align="right">
-                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg" target="_blank">
+                                    <a href="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/1.jpg" target="_blank">
                                         <img
-                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
+                                            src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/1.jpg"
                                             width="150"
                                             height="200"
                                             alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
@@ -46,9 +46,9 @@ if (isset($_GET["no"]))
                                     </a>
                                 </td>
                                 <td valign="bottom" align="left">
-                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg" target="_blank">
+                                    <a href="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/2.jpg" target="_blank">
                                         <img
-                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/2.jpg"
+                                            src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/2.jpg"
                                             width="120"
                                             height="160"
                                             alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
@@ -58,9 +58,9 @@ if (isset($_GET["no"]))
                             </tr>
                             <tr>
                                 <td valign="top" align="right">
-                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg" target="_blank">
+                                    <a href="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/3.jpg" target="_blank">
                                         <img
-                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/3.jpg"
+                                            src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/3.jpg"
                                             width="105"
                                             height="140"
                                             alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
@@ -68,9 +68,9 @@ if (isset($_GET["no"]))
                                     </a>
                                 </td>
                                 <td valign="top" align="left">
-                                    <a href="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg" target="_blank">
+                                    <a href="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/4.jpg" target="_blank">
                                         <img
-                                            src="<?php echo("url_dasar")?>/images/produk/<?php echo($produk["no"]);?>/4.jpg"
+                                            src="<?php echo(url_dasar());?>/images/produk/<?php echo($produk["no"]);?>/4.jpg"
                                             width="90"
                                             height="120"
                                             alt="<?php echo($produk["kode"]);?> | <?php echo($produk["nama"]);?>"
@@ -93,8 +93,12 @@ if (isset($_GET["no"]))
                                     <td align="left"><?php echo($produk["nama"]);?></td>
                                 </tr>
                                 <tr>
+                                    <td align="right" style="font-weight: bold;">Kategori</td>
+                                    <td align="left"><?php echo($produk["kategori"]);?></td>
+                                </tr>
+                                <tr>
                                     <td align="right" style="font-weight: bold;">Berat</td>
-                                    <td align="left"><?php echo($produk["berat"]);?></td>
+                                    <td align="left"><?php echo($produk["berat"]);?> Kg</td>
                                 </tr>
                                 <tr>
                                     <td align="right" style="font-weight: bold;">Deskripsi</td>

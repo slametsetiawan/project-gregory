@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 03, 2012 at 03:46 AM
+-- Generation Time: Mar 03, 2012 at 06:17 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -60,30 +60,11 @@ CREATE TABLE IF NOT EXISTS `detil_pemesanan` (
   `jumlah` int(10) unsigned NOT NULL DEFAULT '0',
   `berat` double NOT NULL DEFAULT '0',
   `harga` double NOT NULL DEFAULT '0',
-  `kode` varchar(31) NOT NULL,
+  `pada_pemesanan` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`no`),
   KEY `produk` (`produk`),
-  KEY `kode` (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
-
---
--- Dumping data for table `detil_pemesanan`
---
-
-INSERT INTO `detil_pemesanan` (`no`, `produk`, `jumlah`, `berat`, `harga`, `kode`) VALUES
-(12, 22, 1, 1, 150000, 'jhHGcq6xE2hHDrH'),
-(13, 22, 1, 1, 150000, 'xs9zSD12MmnA3BO'),
-(14, 22, 20, 1, 150000, 'ZhSPyODnmzRZ9f8'),
-(15, 22, 50, 1, 150000, 'fCfX51YTXCbMMrf'),
-(16, 2, 1, 1, 150000, 'Y5jN3CEk8gKpSCg'),
-(17, 29, 50, 1, 150000, 'RahrTwk5ORqmNF8'),
-(18, 31, 1, 1, 150000, 'M1ASqwcr9GSBNre'),
-(19, 30, 1, 1, 150000, 'M1ASqwcr9GSBNre'),
-(20, 31, 1, 1, 150000, 'AraGsX7Cxe3SyHp'),
-(21, 30, 1, 1, 150000, 'AraGsX7Cxe3SyHp'),
-(22, 31, 1, 1, 150000, '5H7YyxygrkPH1eM'),
-(23, 22, 12, 1, 150000, '8s27PngEbRmb4BE'),
-(24, 30, 35, 1, 150000, 'y48hOQ57Kry1hMA');
+  KEY `kode` (`pada_pemesanan`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -114,20 +95,21 @@ INSERT INTO `jenis_pengguna` (`no`, `kode`, `deskripsi`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `kategori_produk` (
-  `no` bigint(20) unsigned NOT NULL,
+  `no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(31) NOT NULL,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `kategori_produk`
 --
 
 INSERT INTO `kategori_produk` (`no`, `nama`) VALUES
-(1, 'celana'),
-(2, 'jaket'),
-(3, 'lainnya'),
-(4, 'Kemeja');
+(1, 'BURBERRY'),
+(2, 'GUESS'),
+(3, 'HERMES'),
+(4, 'ICEBERG'),
+(5, 'LACOSTE');
 
 -- --------------------------------------------------------
 
@@ -174,8 +156,8 @@ INSERT INTO `kota` (`no`, `kode`, `nama`, `deskripsi`, `dipropinsi`) VALUES
 (1, 'SBY', 'Surabaya', '', 1),
 (2, 'JKT', 'Jakarta', '', 2),
 (3, 'BDG', 'Bandung', '', 5),
-(4, 'SMG', 'semarang', '', 3),
-(5, 'DIY', 'yogjakarta', '', 4);
+(4, 'SMG', 'Semarang', '', 3),
+(5, 'DIY', 'Yogjakarta', '', 4);
 
 -- --------------------------------------------------------
 
@@ -254,24 +236,7 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   KEY `status_pemesanan` (`status_pemesanan`),
   KEY `tarif_pengiriman` (`tarif_pengiriman`),
   KEY `kota_pengiriman` (`kota_pengiriman`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
-
---
--- Dumping data for table `pemesanan`
---
-
-INSERT INTO `pemesanan` (`no`, `kode`, `tanggal_disisipkan`, `oleh_pengguna`, `alamat_pengiriman`, `kota_pengiriman`, `telepon`, `berat_keseluruhan`, `tarif_pengiriman`, `biaya_pengiriman`, `harga_keseluruhan`, `metode_pembayaran`, `status_pemesanan`, `pesan`) VALUES
-(19, 'jhHGcq6xE2hHDrH', '2012-02-23 23:46:04', 6, '                    Jagiran 3/45                      ', 1, '                    08133122402', 1, 1, 50000, 181563, 2, 1, ''),
-(20, 'xs9zSD12MmnA3BO', '2012-02-23 23:47:32', 6, 'Jagiran 3/45                      ', 1, '081331224022                   ', 1, 1, 50000, 178955, 1, 1, ''),
-(21, 'ZhSPyODnmzRZ9f8', '2012-02-25 17:50:23', 2, '                    Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 2556114, 1, 1, ''),
-(22, 'fCfX51YTXCbMMrf', '2012-02-25 23:22:17', 2, '                    Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 6301531, 1, 5, 'dari ie 8'),
-(24, 'Y5jN3CEk8gKpSCg', '2012-02-25 23:47:35', 6, '                    Jagiran 3/45                      ', 1, '                    08133122402', 1, 1, 50000, 1555704, 1, 3, ''),
-(25, 'RahrTwk5ORqmNF8', '2012-02-27 16:26:54', 2, '                    Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 557819, 1, 1, 'gtrrrr'),
-(26, 'M1ASqwcr9GSBNre', '2012-02-27 17:27:56', 2, '                    Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 357775, 1, 1, 'wew'),
-(27, 'AraGsX7Cxe3SyHp', '2012-02-27 17:29:14', 6, '                    Jagiran 3/45                      ', 1, '                    08133122402', 1, 1, 50000, 357341, 1, 1, '4444444444444'),
-(28, '5H7YyxygrkPH1eM', '2012-02-27 17:30:12', 2, '                    Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 207853, 1, 1, ''),
-(29, '8s27PngEbRmb4BE', '2012-02-27 21:31:35', 9, 'Jalan Kenjeran no 31                                            ', 1, '03151500745                    ', 1, 1, 50000, 1551857, 1, 1, ''),
-(30, 'y48hOQ57Kry1hMA', '2012-02-28 14:18:05', 2, 'Jalan Kenjeran no 31                      ', 1, '                    03151500745', 1, 1, 50000, 5305251, 1, 1, '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -350,21 +315,19 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`no`, `kode`, `nama`, `kategori_produk`, `deskripsi`, `berat`, `harga`, `kuantitas`) VALUES
-(2, 'PX025906', 'Jaket', 2, 'deskripsikan', 0.5, 1500006, 100),
-(16, 'CELANA', 'Celana', 1, 'celana keren yang kudu dibeli', 1, 152000, 100),
-(22, 'CLKN', 'Celana Kain ', 1, 'Celana Kain yang Trendi', 0.5, 125000, 88),
-(23, 'HITAM', 'Kemeja Hitam', 4, 'Kemeja IRENG', 0.5, 899999, 80),
-(27, 'KKTB2', 'Kemeja keren terbaru', 4, 'kemeja testing', 1, 155000, 100),
-(29, 'TESTEST', 'test ae', 1, 'deskripsikan', 0.5, 10000, 100),
-(30, 'PRODUKsore', 'produk sore', 4, 'sore sore', 1, 150000, 100),
-(31, 'PROKU', 'pro ku', 4, 'wew', 1, 150000, 0);
+(1, 'PBP457', 'NEW POLO BURBERRY IMPORT', 1, 'Tersedia ukuran M, L, XL', 0.2, 160000, 18),
+(2, 'JBB2', 'JEANS BURBERRY', 1, 'Tersedia Ukuran 29-38', 0.3, 340000, 37),
+(3, 'JG001', 'JEANS GUESS PREMIUM', 2, 'Tersedia ukuran 30-24', 0.35, 320000, 67),
+(4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.18, 230000, 41),
+(5, 'PGS3', 'POLO SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.22, 160000, 38),
+(6, 'TGS3', 'T-SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.2, 135000, 47);
 
 -- --------------------------------------------------------
 
@@ -403,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `status_pemesanan` (
   `deskripsi` text NOT NULL,
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `status_pemesanan`
@@ -411,8 +374,8 @@ CREATE TABLE IF NOT EXISTS `status_pemesanan` (
 
 INSERT INTO `status_pemesanan` (`no`, `kode`, `deskripsi`) VALUES
 (1, 'MENUNGGU_PEMBAYARAN', 'Pemesanan diterima sistem dan menunggu pembayaran untuk langkah selanjutnya. Diharapkan mengkonfirmasi pembayaran agar langsung diproses sistem.'),
-(3, 'DIPROSES', ''),
-(5, 'SELESAI', '');
+(2, 'DIPROSES', ''),
+(3, 'SELESAI', '');
 
 -- --------------------------------------------------------
 
@@ -457,14 +420,15 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `sebagai_default` enum('YA','TIDAK') NOT NULL DEFAULT 'TIDAK',
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
-(1, 'emotion', 'Web template created by ddQ.', 'YA');
+(1, 'emotion', 'Web template created by ddQ.', 'YA'),
+(2, 'berbaju', 'Web template created by ddQ.	', 'TIDAK');
 
 --
 -- Constraints for dumped tables
@@ -474,8 +438,8 @@ INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
 -- Constraints for table `detil_pemesanan`
 --
 ALTER TABLE `detil_pemesanan`
-  ADD CONSTRAINT `detil_pemesanan_ibfk_2` FOREIGN KEY (`produk`) REFERENCES `produk` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `detil_pemesanan_ibfk_3` FOREIGN KEY (`kode`) REFERENCES `pemesanan` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `detil_pemesanan_ibfk_2` FOREIGN KEY (`pada_pemesanan`) REFERENCES `pemesanan` (`no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detil_pemesanan_ibfk_1` FOREIGN KEY (`produk`) REFERENCES `produk` (`no`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `konfirmasi_pembayaran`
@@ -494,11 +458,11 @@ ALTER TABLE `kota`
 -- Constraints for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  ADD CONSTRAINT `pemesanan_ibfk_5` FOREIGN KEY (`oleh_pengguna`) REFERENCES `pengguna` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_6` FOREIGN KEY (`metode_pembayaran`) REFERENCES `metode_pembayaran` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_7` FOREIGN KEY (`status_pemesanan`) REFERENCES `status_pemesanan` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_8` FOREIGN KEY (`kota_pengiriman`) REFERENCES `kota` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_9` FOREIGN KEY (`tarif_pengiriman`) REFERENCES `tarif_pengiriman` (`no`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `pemesanan_ibfk_15` FOREIGN KEY (`oleh_pengguna`) REFERENCES `pengguna` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_16` FOREIGN KEY (`kota_pengiriman`) REFERENCES `kota` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_17` FOREIGN KEY (`tarif_pengiriman`) REFERENCES `tarif_pengiriman` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_18` FOREIGN KEY (`metode_pembayaran`) REFERENCES `metode_pembayaran` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_19` FOREIGN KEY (`status_pemesanan`) REFERENCES `status_pemesanan` (`no`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pengguna`

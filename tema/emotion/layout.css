@@ -15,6 +15,10 @@ div.clear
     float: none;
     clear: both;
 }
+img
+{
+    border: solid 1px #BCD;
+}
 body
 {
     margin: 0;

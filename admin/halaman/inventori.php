@@ -117,28 +117,10 @@ if (!isset($_SESSION["administrator"]))
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Inventory List</title>
-<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-<a href="index.php?halaman=index">kembali ke menu utama</a>
-</head>
 
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=inventori&inventoryForm">+ Add New Inventory Item</a></div>
-<div align="left" style="margin-left:24px;">
-      <h2>Inventory list</h2>
-      <?php
-
-    echo $product_list;
-
-?>
-    </div>
-    <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr; Add New Inventory Item Form &darr;
@@ -245,10 +227,16 @@ if (!isset($_SESSION["administrator"]))
   <br />
   </div>
 </div>
-</body>
-</html>
+<div align="left" style="margin-left:24px;">
+      <h2>Inventory list</h2>
+    </div>
+    <hr />
+<title>Inventory List</title>
 <?
 
+    echo $product_list;
 }
 
 ?>
+</body>
+</html>

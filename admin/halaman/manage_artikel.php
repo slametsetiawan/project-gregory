@@ -75,11 +75,6 @@ else
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
     <div align="right" style="margin-right:32px;"><a href="index.php?halaman=manage_artikel#inventoryForm">+ Tambah Berita Baru</a></div>
-        <div align="left" style="margin-left:24px;">
-          <h2>list artikel</h2>
-          <?php echo $product_list; ?>
-        </div>
-    <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr; Form Berita &darr;
@@ -118,6 +113,11 @@ else
 </div>
 </body>
 </html>
+        <div align="left" style="margin-left:24px;">
+          <h2>list artikel</h2>
+          <?php echo $product_list; ?>
+        </div>
+    <hr />
 
 <?php
 

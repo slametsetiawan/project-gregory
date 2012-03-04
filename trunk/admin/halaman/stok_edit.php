@@ -1,17 +1,13 @@
 <?php
-
-session_start();
 if (!isset($_SESSION["administrator"]))
 {
-    header("location: index.php?halaman=index");
-    exit();
+    ?>
+    <script>
+        alert("harap Login Dahulu");
+        location.hre="index.php?halaman=index";
+    </script>
+    <?php
 }
-$konek = mysql_connect("localhost", "root", "");
-mysql_selectdb("perdagangan_elektronik", $konek);
-//echo "(<pre>)";
-//var_dump($_GET);
-
-
 ?>
 <?php
 
@@ -97,8 +93,7 @@ if ($productCount > 0)
         $price = $row["harga"];
         $kuantitas = $row["kuantitas"];
         $product_list .= "Product ID: $id - <strong>$product_name</strong> - $price - $kode_unik -<br/>  JUMLAH SAAT INI :$kuantitas > &nbsp; &nbsp; &nbsp; 
-             <a href='http://localhost/perdagangan_elektronik/admin/halaman/stok_edit.php?pid=$id'>edit</a> &bull; 
-             <br />
+             <a href='index.php?halaman=stok_edit&pid=$id'>edit Stoknya</a> &bull;
              <br />";
     }
 } else
@@ -107,12 +102,10 @@ if ($productCount > 0)
 }
 
 ?>
-
-<a href="../index.php">kembali ke menu utama</a>
 <body>
 <div align="center" id="mainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="inventori.php#inventoryForm">+ Add New Inventory Item</a></div>
+    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=inventori#inventoryForm">+ Add New Inventory Item</a></div>
 <div align="left" style="margin-left:24px;">
       <h2>Inventory list</h2>
       <?php echo $product_list; ?>
@@ -122,7 +115,7 @@ if ($productCount > 0)
     <h3>
     &darr; Pilih Salah Satu Agar Muncul Di Edit form &darr;
     </h3>
-    <form action="stok_edit.php" name="myForm" id="myform" method="post">
+    <form action="index.php?halaman=stok_edit" name="myForm" id="myform" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
         <td width="20%" align="right">Nama Produk</td>

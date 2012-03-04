@@ -1,47 +1,25 @@
 <?php
 
-if (isset($_SESSION["administrator"]))
+if (!isset($_SESSION["administrator"]))
 {
-?>
-<script language="javascript">
-    alert("login dulu");
-    location.href("../admin_login.php");
-</script>
-<?
+    ?>
+    <script language="javascript">
+        alert("login dulu");
+        location.href("../admin_login.php");
+    </script>
+    <?php
 } 
 else
 {
-    //NOTIF CEK PEMESANAN
-    $konek = mysql_connect("localhost", "root", "");
-    mysql_selectdb("perdagangan_elektronik", $konek);
-    $perintah = "SELECT * FROM konfirmasi_pembayaran";
-    $laku = mysql_query($perintah);
-    $hitung = mysql_num_rows($laku);
-    echo "Cek Pemesanan INI :";
-    echo "<br/>";
-    if ($hitung > 0)
-    {
-        while ($row = mysql_fetch_assoc($laku))
-        {
-            $tampil = $row["pemesanan"];
-            $tampil_nama = $row["atas_nama"];
-            echo "No Transaksi  :";
-            echo $tampil;
-            echo "<br/>";
-            echo "Pemesan   :";
-            echo $tampil_nama;
-            echo "<br/>";
-            echo "<br/>";
-        }
-    }
+    
 ?>
 <?php
     //delete transaksi
     if (isset($_GET['deleteid']))
     {
         echo 'Yakin Menghapus Item ini ' . $_GET['deleteid'] . '? 
-        <a href="inventori.php?yesdelete=' . $_GET['deleteid'] . '">Yes
-        </a> | <a href="inventori.php">No</a>';
+        <a href="index.php?halaman=transaksi&yesdelete=' . $_GET['deleteid'] . '">Yes
+        </a> | <a href="index.php?halaman=transaksi">No</a>';
         exit();
     }
     if (isset($_GET['yesdelete']))
@@ -57,15 +35,13 @@ else
         ?>
         <script language="javascript">
             alert("Transaksi Dibatalkan");
-            location.href("transaksi.php");
+            location.href("index.php?halaman=transaksi");
         </script>
         <?php
     }
 ?>
 <?php
     //list transaksi
-$konek = mysql_connect("localhost", "root", "");
-mysql_select_db("perdagangan_elektronik", $konek);
 $product_list = "";
 $sql = mysql_query("SELECT * FROM pemesanan ORDER BY tanggal_disisipkan ASC limit 20");
 $productCount = mysql_num_rows($sql);
@@ -75,11 +51,6 @@ if ($productCount > 0)
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <title>Transaksi</title>
                 <link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-            <a href="../index.php">
-                <h2>
-                kembali ke menu utama
-                </h2>
-            </a>
     </head>
         <table align="center" style="border: dashed; color: maroon;" width="660px">
             <tr>
@@ -95,7 +66,7 @@ if ($productCount > 0)
         </table> <br />
 <?php
         while ($row = mysql_fetch_array($sql)): ?>
-        <table style="float: left;" width="500px" border="5" >
+        <table style="float: left;" width="50%" border="5" >
             <tr>
                 <td>
                     <h3>No transaksi : <?php echo $no = $row["no"] ?></h3>
@@ -143,12 +114,12 @@ if ($productCount > 0)
             </tr>
             <tr>
                 <td>
-                <form action="transaksi_edit.php" method="get">
+                <form action="index.php?halaman=transaksi_edit" method="post">
                      <!--<a href="transaksi_edit.php?ID=<?php echo $no ?> "> Ubah Status </a>--> &bull;
                      <input type="hidden" value="<?php echo $kode4; ?>" name="kode" />
                      <input type="hidden" value="<?php echo $no ?>" name="ID" />
                      <input type="submit" name="submit" value="Ubah Statusnya" /> &bull;
-                     <a href="transaksi.php?deleteid=<?php echo $no ?>"> Batalkan   </a><br />
+                     <a href="index.php?halaman=transaksi&deleteid=<?php echo $no ?>"> Batalkan</a><br />
                 </form>
                 </td>
             </tr>

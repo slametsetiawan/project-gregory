@@ -1,21 +1,16 @@
 <?php
-session_start();
+//session_start();
 if(isset($_SESSION['administrator']))
 {
-//echo $_SESSION['administrator'];
-$konek = mysql_connect("localhost","root","");
-mysql_selectdb("perdagangan_elektronik",$konek);
 ?>
 
 <?php 
 //delete
 if (isset($_GET['deleteid'])) 
 {
-	echo "<pre>";
-	echo var_dump($_GET);
-	echo 'Do you really want to delete product with ID of ' . $_GET['deleteid'] . '? 
-    <a href="http://localhost/perdagangan_elektronik/admin/halaman/manage_artikel.php?yesdelete=' . $_GET['deleteid'] . '">Yes
-    </a> | <a href="http://localhost/perdagangan_elektronik/admin/halaman/manage_artikel.php">No</a>';
+	echo 'Yakin Menghapus FaQ Nomor ini ' . $_GET['deleteid'] . '? 
+    <a href="index.php?halaman=manage_artikel&yesdelete=' . $_GET['deleteid'] . '">Yes
+    </a> | <a href="index.php?halaman=manage_artikel">No</a>';
 	exit();
 }
 if (isset($_GET['yesdelete'])) 
@@ -23,19 +18,17 @@ if (isset($_GET['yesdelete']))
 	$id_to_delete = $_GET['yesdelete'];
 	mysql_query("DELETE FROM berita WHERE no_berita='$id_to_delete' LIMIT 1") or die (mysql_error());
 	?>
-<script language="javascript">alert('redirect ke manage artikel')
-location.href="http://localhost/perdagangan_elektronik/admin/halaman/manage_artikel.php"
-</script>
-<?php
+    <script language="javascript">alert('redirect ke manage artikel')
+    location.href="index.php?halaman=manage_artikel"
+    </script>
+    <?php
 }
-
 ?>
 
 <?php
 //insert artikel 
 if (isset($_POST['judul'])) 
-{
-	
+{	
     $judul = mysql_real_escape_string($_POST['judul']);
 	$penulis = mysql_real_escape_string($_POST['penulis']);
 	$isi_berita = mysql_real_escape_string($_POST['isi_berita']);
@@ -43,13 +36,11 @@ if (isset($_POST['judul']))
 	$productMatch = mysql_num_rows($sql);
     if ($productMatch > 0) 
         {
-		echo 'Sorry you tried to place a duplicate "Judul" into the system, <a href="manage_artikel.php">click here</a>';
-		exit();
+    		echo 'Sorry you tried to place a duplicate "Judul" into the system, <a href="index.php?halaman=manage_artikel">click here</a>';
+    		exit();
         }
 	mysql_query("INSERT INTO berita (no_berita, judul, penulis, isi_berita, date_added) 
         VALUES('','$judul','$penulis','$isi_berita',now())") or die (mysql_error());
-	//header("location: index.php?halaman=manage_artikel.php"); 
-    //exit();
 }
 
 ?>
@@ -69,8 +60,8 @@ if ($productCount > 0)
              $isi_berita = $row["isi_berita"];
 			 $date_added = strftime("%b %d, %Y", strtotime($row["date_added"]));
 			 $product_list .= "No Berita: $no_berita - <strong>Judul : $judul</strong> - Penulis :$penulis - <em>Added $date_added</em> &nbsp; &nbsp; &nbsp; 
-             <a href='http://localhost/perdagangan_elektronik/admin/halaman/berita_edit.php?pid=$no_berita'>edit</a> &bull; 
-             <a href='http://localhost/perdagangan_elektronik/admin/halaman/manage_artikel.php?deleteid=$no_berita'>delete</a><br />";
+             <a href='index.php?halaman=berita_edit&pid=$no_berita'>edit</a> &bull; 
+             <a href='index.php?halaman=manage_artikel&deleteid=$no_berita'>delete</a><br />";
         }
 } 
 else 
@@ -79,24 +70,15 @@ else
 }
 
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<a href="../index.php"> Kembali Ke Halaman Utama</a>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>List Artikel</title>
-<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-</head>
-
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
     <div align="right" style="margin-right:32px;"><a href="index.php?halaman=manage_artikel#inventoryForm">+ Tambah Berita Baru</a></div>
-<div align="left" style="margin-left:24px;">
-      <h2>list artikel</h2>
-      <?php echo $product_list; ?>
-    </div>
+        <div align="left" style="margin-left:24px;">
+          <h2>list artikel</h2>
+          <?php echo $product_list; ?>
+        </div>
     <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
@@ -142,6 +124,11 @@ else
 }
 else
 {
-    echo "login dulu!";
+    ?>
+    <script>
+        alert("Harap login dahulu");
+        location.href="index.php?halaman=index";
+    </script>
+    <?php
 }
 ?>

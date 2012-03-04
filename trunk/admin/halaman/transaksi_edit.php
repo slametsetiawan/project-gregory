@@ -1,19 +1,17 @@
 <?php
-
-session_start();
+//echo @$_POST["ID"];
 if (!isset($_SESSION["administrator"]))
 {
     header("location: index.php?halaman=index");
     exit();
 }
-$konek = mysql_connect("localhost", "root", "");
-mysql_selectdb("perdagangan_elektronik", $konek);
+
 ?>
 <?php
 //block merubah kuantitas produk
     $kode_kuantitas = "";
     $jumlah_kuantitas = "";
-    @$data = $_GET["kode"];
+    @$data = $_POST["kode"];
     $sql5 = "SELECT * FROM detil_pemesanan WHERE kode ='" . $data . "' ";
     $hitung =  mysql_query($sql5);
     while ($row = mysql_fetch_assoc($hitung))
@@ -22,23 +20,25 @@ mysql_selectdb("perdagangan_elektronik", $konek);
         $kode_kuantitas = $row["produk"];
         
     }
-    echo $jumlah_kuantitas;
-    echo $kode_kuantitas;
+    //echo $jumlah_kuantitas;
+//    echo $kode_kuantitas;
 ?>
 
 <?php
 //  BLOCK MERUBAH STATUS PEMESANAN
 if (isset($_POST['proses']))
 {
-    @$id = $_GET['ID'];
+    @$id = $_POST['ID'];
+    echo $id;
     $sql = "UPDATE 
-    `perdagangan_elektronik`.`pemesanan` 
+    pemesanan 
     SET 
-    `status_pemesanan` = '3' 
+    status_pemesanan = '3'
     WHERE 
-    `pemesanan`.`no` = ". $id. "
+    no = '$id'
     ";
     mysql_query($sql);
+    //echo htmlspecialchars (mysql_error ());
     ?>
     <script language="javascript">
         alert("Transaksi Telah Di Ubah");
@@ -48,7 +48,7 @@ if (isset($_POST['proses']))
 } 
 elseif (isset($_POST["terkirim"]))
 {
-    @$id = $_GET["ID"];
+    @$id = $_POST["ID"];
     @$beta = $_POST["kode_k"];
     @$gamma = $_POST["jumlah_k"];
     $sql = "UPDATE
@@ -59,9 +59,10 @@ elseif (isset($_POST["terkirim"]))
     `pemesanan`.`no` = ". $id. "
     ";
     mysql_query($sql);
+    echo htmlspecialchars (mysql_error ());
     //block merubah kuantitas
     //block pengurangan kuantitas
-            $comand = "SELECT * FROM produk WHERE no = '".$beta."' ";
+            $comand = " SELECT * FROM produk WHERE no = '$beta' ";
             $v = mysql_query($comand);
             while ($row = mysql_fetch_assoc($v))
             {
@@ -76,13 +77,13 @@ elseif (isset($_POST["terkirim"]))
             $mysql = "UPDATE 
             produk 
             SET 
-            kuantitas = '".$akhir."' 
+            kuantitas = '$akhir' 
             WHERE 
-            no = '".$beta."'
+            no = '$beta'
             ";
             mysql_query($mysql);
             //pakai $beta buat mengambil nama produk dari tabel produk
-            $malas = "SELECT * FROM produk WHERE no = '$beta'";
+            $malas = "SELECT * FROM produk WHERE no = '$beta' ";
             $muales = mysql_query($malas);
             echo $malas;           
             while ($row = mysql_fetch_assoc($muales))
@@ -119,7 +120,7 @@ elseif (isset($_POST["terkirim"]))
 elseif (isset($_POST['menunggu']))
 {
     /** kerjakan disini perubahan detail pemesanan */
-    $id = $_GET["ID"];
+    @$id = $_POST["ID"];
     $sql = "UPDATE 
     `perdagangan_elektronik`.`pemesanan` 
     SET 
@@ -140,10 +141,10 @@ elseif (isset($_POST['menunggu']))
 
 <?php
 
-if (isset($_GET['ID']))
+if (isset($_POST['ID']))
 {
     //echo ("sukses");
-    $dapat = $_GET['ID'];
+    $dapat = $_POST['ID'];
     $sqlku = mysql_query("SELECT * FROM pemesanan WHERE no=" . $dapat . " LIMIT 1");
     $productCount = mysql_num_rows($sqlku);
     if ($productCount > 0)
@@ -172,7 +173,7 @@ if (isset($_GET['ID']))
 
 ?>
 <?php
-@$id = $_GET['ID'];
+@$id = $_POST['ID'];
 $product_list = "";
 $sql = mysql_query("SELECT * FROM pemesanan WHERE no= '.$id.'");
 $productCount = mysql_num_rows($sql);
@@ -188,7 +189,7 @@ if ($productCount > 0)
         kode : <?php echo $row["kode"]; ?> <br/>
         Status Saat INI     : <?php echo $row["status_pemesanan"]; ?> <br/>
         </strong>
-        <form action="transaksi_edit.php" method="post">
+        <form action="index.php?halaman=transaksi_edit" method="post">
             <table>
                 <tr>
                     <td>
@@ -199,6 +200,7 @@ if ($productCount > 0)
                         <?php echo $kode_kuantitas; ?>
                         <input type="hidden" value="<?php echo $jumlah_kuantitas; ?>" name="jumlah_k" />
                         <input type="hidden" value="<?php echo $kode_kuantitas; ?>" name="kode_k" />
+                        <input type="hidden" value="<?php echo $_POST["ID"]; ?>" name="ID" />
                         <input type="submit" value="terkirim(5)" name="terkirim"  />
                         <input type="submit" value="Menunggu_Pembayaran(1)" name="menunggu"  />
                         <input type="submit" value="Diproses(3)" name="proses"  />
@@ -213,18 +215,11 @@ if ($productCount > 0)
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Transaksi</title>
-<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-    <a href="transaksi.php">
+    <a href="index.php?halaman=transaksi">
         <h2>
         kembali ke daftar Transaksi
         </h2>
     </a>
-</head>
 <br />
 <div id="content_top" align="center" style="border: dashed; color: maroon;">
     <table align="center">

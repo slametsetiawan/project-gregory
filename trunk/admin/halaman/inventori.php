@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION["administrator"]))
+if (!isset($_SESSION["administrator"]))
 {
 
 ?>
@@ -22,8 +22,8 @@ if (isset($_SESSION["administrator"]))
     if (isset($_GET['delete_p']))
     {
         echo 'Yakin Menghapus Item ini ' . $_GET['delete_p'] . '? 
-    <a href="inventori.php?yesdelete=' . $_GET['delete_p'] . '">Yes
-    </a> | <a href="inventori.php">No</a>';
+    <a href="index.php?halaman=inventori&yesdelete=' . $_GET['delete_p'] . '">Yes
+    </a> | <a href="index.php?halaman=inventori">No</a>';
         exit();
     }
     if (isset($_GET['yesdelete']))
@@ -68,7 +68,7 @@ if (isset($_SESSION["administrator"]))
         $productMatch = mysql_num_rows($sql);
         if ($productMatch > 0)
         {
-            echo 'Sorry you tried to place a duplicate "Product Name" into the system, <a href="http://localhost/perdagangan_elektronik/admin/halaman/inventori.php">click here</a>';
+            echo 'Sorry you tried to place a duplicate "Product Name" into the system, <a href="index.php?halaman=inventori">click here</a>';
             exit();
         }
         $sql = mysql_query("INSERT INTO produk (no, kode, nama, kategori_produk, deskripsi, berat, harga, kuantitas) 
@@ -106,9 +106,9 @@ if (isset($_SESSION["administrator"]))
             $product_name = $row["nama"];
             $price = $row["harga"];
             $deskripsi = $row["deskripsi"];
-            $product_list .= "Product ID: $id - <strong>$product_name</strong> - $$price -  &nbsp; &nbsp; &nbsp; 
-             <a href='inventori_edit.php?pid=$id'>edit</a> &bull;
-             <a href='inventori.php?deleteid=$id'>delete</a><br />";
+            $product_list .= "Product ID: $id - <strong>$product_name</strong> - RP$price -  &nbsp; &nbsp; &nbsp; 
+             <a href='index.php?halaman=inventori_edit&edit_P=$id'>edit</a> &bull;
+             <a href='index.php?halaman=inventori&delete_p=$id'>delete</a><br />";
         }
     } else
     {
@@ -123,13 +123,13 @@ if (isset($_SESSION["administrator"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Inventory List</title>
 <link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-<a href="../index.php">kembali ke menu utama</a>
+<a href="index.php?halaman=index">kembali ke menu utama</a>
 </head>
 
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="inventori.php#inventoryForm">+ Add New Inventory Item</a></div>
+    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=inventori&inventoryForm">+ Add New Inventory Item</a></div>
 <div align="left" style="margin-left:24px;">
       <h2>Inventory list</h2>
       <?php

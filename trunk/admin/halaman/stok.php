@@ -1,32 +1,22 @@
-
-<head>
-    <h1>
-        <center>
-            Halaman Manage Stok 
-        </center>
-    </h1>
-</head>
+<h1>
+    <center>
+        Halaman Manage Stok 
+    </center>
+</h1>
 <?php
 
-if (isset($_SESSION["administrator"]))
+if (!isset($_SESSION["administrator"]))
 {
-
-?>
-<script language="javascript">
-    alert("login dulu");
-    location.href("../admin_login.php");
-</script>
-<?
-
-} else
+    ?>
+    <script language="javascript">
+        alert("login dulu");
+        location.href("../admin_login.php");
+    </script>
+    <?
+} 
+else
 {
-    $konek = mysql_connect("localhost", "root", "");
-    mysql_selectdb("perdagangan_elektronik", $konek);
-?>
-
-
-<?php
-
+    //delete stok
     if (isset($_GET['deleteid']))
     {
         echo 'Yakin Menghapus Item ini ' . $_GET['deleteid'] . '? 
@@ -43,18 +33,14 @@ if (isset($_SESSION["administrator"]))
         {
             unlink($pictodelete);
         }
-
-?>
-<script language="javascript">
-    alert("item telah terhapus");
-    location.href("inventori.php");
-</script>
-<?php
-
+        ?>
+        <script language="javascript">
+            alert("item telah terhapus");
+            location.href("inventori.php");
+        </script>
+        <?php
     }
-
 ?>
-
 <?php
 
     if (isset($_POST['nama_produk']))
@@ -81,11 +67,11 @@ if (isset($_SESSION["administrator"]))
         move_uploaded_file($_FILES['fileField']['tmp_name'], "../../images/produk/$newname");
         //header("location: index.php?halaman=index");
         ?>
-<script language="javascript">
-    alert("item telah Ditambahkan");
-    location.href("inventori.php");
-</script>
-<?php
+        <script language="javascript">
+            alert("item telah Ditambahkan");
+            location.href("inventori.php");
+        </script>
+        <?php
     }
 
 ?>
@@ -105,9 +91,8 @@ if (isset($_SESSION["administrator"]))
             $deskripsi = $row["deskripsi"];
             $kuantitas = $row["kuantitas"];
             $product_list .= "Product ID: $id - <strong>$product_name</strong> - $$price - Kuantitasnya : $kuantitas  &nbsp; &nbsp; &nbsp; 
-             <a href='stok_edit.php?pid=$id'>edit</a>;
-             <br />
-            <br />";
+             <a href='index.php?halaman=stok_edit&pid=$id'>edit</a>;
+             <br />";
         }
     } else
     {
@@ -115,26 +100,11 @@ if (isset($_SESSION["administrator"]))
     }
 
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Inventory List</title>
-<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-<a href="../index.php">kembali ke menu utama</a>
-</head>
-
+<title>Edit Stok</title>
 <body>
-<div align="center" id="ContentmainWrapper">
-  <div id="pageContent"><br />
     <div align="right" style="margin-right:32px;"><a href="stok.php#stokform">Form Stock</a></div>
-<div align="center" style="margin-left:24px;">
-      <h2>List Yang bisa Di edit Stocknya</h2>
+     <h2>List Yang bisa Di edit Stocknya</h2>
       <?php
-
     echo $product_list;
-
 }
-
 ?>

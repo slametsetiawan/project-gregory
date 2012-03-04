@@ -41,7 +41,7 @@ else
         </td>
     </tr>
     <tr>
-        <td><a href="http://localhost/perdagangan_elektronik">Home</a></td>
+        <td><a href="../">Home</a></td>
         <td align="right">
             <label></label><input name="login" type="submit" value="Login" />
         </td>

@@ -1,17 +1,13 @@
 <?php
 
-session_start();
 if (!isset($_SESSION["administrator"]))
 {
     header("location: index.php?halaman=index");
     exit();
 }
-$konek = mysql_connect("localhost", "root", "");
-mysql_selectdb("perdagangan_elektronik", $konek);
-//echo "(<pre>)";
-//var_dump($_GET);
 
-
+else
+{
 ?>
 <?php
 
@@ -72,7 +68,7 @@ if (isset($_GET["edit_P"]))
 {
     //echo ("sukses");
     $dapat = $_GET["edit_P"];
-    echo $dapat;
+    //echo $dapat;
     $sqlku = mysql_query("SELECT * FROM produk WHERE no=" . $dapat . " LIMIT 1");
     $productCount = mysql_num_rows($sqlku);
     if ($productCount > 0)
@@ -100,16 +96,16 @@ if (isset($_GET["edit_P"]))
 $product_list = "";
 $sql = mysql_query("SELECT * FROM produk ORDER BY no ASC");
 $productCount = mysql_num_rows($sql);?>
-<a href="../index.php">kembali ke menu utama</a><br /><br />
+<a href="index.php?halaman=index">kembali ke menu utama</a><br /><br />
 <?php
 if ($productCount > 0)
 {
     while ($row = mysql_fetch_array($sql)):?>
         Product ID: <?php echo $row["no"]; ?> - <strong><?php echo $row["nama"]; ?></strong> - <?php echo $row["harga"]; ?> 
         - <?php echo $row["kode"]; ?> - <?php echo $row["deskripsi"]; ?> 
-        <table border="0">
+        <!--<table border="0">
             <tr>
-                <form action="inventori_edit.php" method="get" name="pengubah">
+                <form action="index.php?halaman=inventori_edit" method="get" name="pengubah">
                     <input type="hidden" value="<?php echo $row["no"] ?>" name="edit_P" />
                     <input type="submit" name="edit" value="edit" />
                 </form>
@@ -119,10 +115,10 @@ if ($productCount > 0)
                     <input type="submit" name="delete" value="delete" />
                 </form>
             </tr>
-        </table> 
+        </table>--> 
         
-             <!--<a href="http://localhost/perdagangan_elektronik/admin/halaman/inventori_edit.php?pid=$id">edit</a>  
-             <a href="http://localhost/perdagangan_elektronik/admin/halaman/inventori.php?deleteid=$id">delete</a>-->
+             <a href="index.php?halaman=inventori_edit&edit_P=<?php echo $row["no"] ?>">edit</a>  
+             <a href="index.php?halaman=inventori&delete_p=<?php echo $row["no"] ?>">delete</a><br />
     <?php endwhile;
 } else
 {
@@ -135,16 +131,17 @@ if ($productCount > 0)
 <body>
 <div align="center" id="mainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="inventori.php#inventoryForm">+ Add New Inventory Item</a></div>
-<div align="left" style="margin-left:24px;">
+    <div align="right" style="margin-right:32px;">
+        <a href="index.php?halaman=inventori&inventoryForm">+ Add New Inventory Item</a></div>
+            <div align="left" style="margin-left:24px;">
       <h2>Inventory list</h2>
-    </div>
+            </div>
     <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr; Edit form &darr;
     </h3>
-    <form action="inventori_edit.php" enctype="multipart/form-data" name="myForm" id="myform" method="post">
+    <form action="index.php?halaman=inventori_edit" enctype="multipart/form-data" name="myForm" id="myform" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
         <td width="20%" align="right">Nama Produk</td>
@@ -228,3 +225,6 @@ if ($productCount > 0)
 </div>
 </body>
 </html>
+<?php
+}
+?>

@@ -1,33 +1,37 @@
 <?php 
-/*
+
 if (!isset($_SESSION["administrator"])) 
     { 
-    exit();
+    ?>
+    <script>
+        alert("Login dahulu");
+        location.href "index.php?halaman=index"
+    </script>
+    <?php
     }
-*/
-$konek = mysql_connect("localhost","root","");
-mysql_selectdb("perdagangan_elektronik",$konek);
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-echo "<pre>";
-var_dump($_POST);
+
+//$konek = mysql_connect("localhost","root","");
+//mysql_selectdb("perdagangan_elektronik",$konek);
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
+//echo "<pre>";
+//var_dump($_POST);
 ?>
 
 <?php 
 //edit data
 if (isset($_POST['no_berita']))
 {
-        $no_berita = mysql_real_escape_string($_POST['no_berita']);
-	$judul = mysql_real_escape_string($_POST['judul']);
-	$penulis = mysql_real_escape_string($_POST['penulis']);
-	$isi_berita = mysql_real_escape_string($_POST['isi_berita']);
-	mysql_query("UPDATE berita SET no_berita='$no_berita', judul='$judul', penulis='$penulis', isi_berita='$isi_berita' WHERE no_berita='$no_berita'");
-?>
-<script language="javascript">alert('redirect ke manage artikel')
-location.href="manage_artikel.php"
-</script>
-
-<?php
+    $no_berita = mysql_real_escape_string($_POST['no_berita']);
+    $judul = mysql_real_escape_string($_POST['judul']);
+    $penulis = mysql_real_escape_string($_POST['penulis']);
+    $isi_berita = mysql_real_escape_string($_POST['isi_berita']);
+    mysql_query("UPDATE berita SET no_berita='$no_berita', judul='$judul', penulis='$penulis', isi_berita='$isi_berita' WHERE no_berita='$no_berita'");
+    ?>
+    <script language="javascript">alert('redirect ke manage artikel')
+    location.href="index.php?halaman=manage_artikel"
+    </script>
+    <?php
     exit();
 }
 ?>
@@ -39,7 +43,8 @@ if (isset($_GET['pid']))
     $sql = mysql_query("SELECT * FROM berita WHERE no_berita='$targetID' LIMIT 1");
     $productCount = mysql_num_rows($sql);
     if ($productCount > 0) {
-	    while($row = mysql_fetch_array($sql)){ 
+	    while($row = mysql_fetch_array($sql))
+        { 
              
 			 $no_berita = $row["no_berita"];
 			 $judul = $row["judul"];
@@ -67,9 +72,9 @@ if ($productCount > 0)
 			 $penulis = $row["penulis"];
 			 $isi_berita = $row["isi_berita"];
 			 $date_added = strftime("%b %d, %Y", strtotime($row["date_added"]));
-			 $product_list .= "Product ID: $id - <strong>$no_berita</strong> - $judul - <em>Added $date_added</em> &nbsp; &nbsp; &nbsp; 
-             <a href='http://localhost/perdagangan_elektronik/admin/halaman/berita_edit.php?pid=$id'>edit</a> &bull; 
-             <a href='http://localhost/perdagangan_elektronik/admin/halaman/berita_edit.php?deleteid=$id'>delete</a><br />";
+			 $product_list .= "ID: $id - $judul - <em>Added $date_added</em> &nbsp; &nbsp; &nbsp; 
+             <a href='index.php?halaman=berita_edit&pid=$id'>edit</a> &bull; 
+             <a href='index.php?halaman=manage_artikel&deleteid=$id'>delete</a><br />";
         }
 } 
 else 
@@ -78,30 +83,21 @@ else
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Inventory List</title>
-<link rel="stylesheet" href="../style/style.css" type="text/css" media="screen" />
-</head>
-
+<a href="index.php?halaman=index"> Kembali Ke Halaman Utama</a>
 <body>
 <div align="center" id="mainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="inventory_list.php#inventoryForm">+ Add New Inventory Item</a></div>
+    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=berita_edit&inventoryForm">+ Add New Artikel Item</a></div>
 <div align="left" style="margin-left:24px;">
-        <center>
       <h2>List Artikel</h2>
       <?php echo $product_list; ?>
-      </center>
     </div>
     <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr;edit Berita &darr;
     </h3>
-    <form action="" enctype="multipart/form-data" name="myForm" id="myform" method="post">
+    <form action="<?php echo buat_url("berita_edit") ?>" enctype="multipart/form-data" name="myForm" id="myform" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
         <td width="20%" align="right">NO Berita</td>

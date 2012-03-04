@@ -658,10 +658,10 @@ if(isset($_SESSION["pengguna_cari"]))
     
 }
 
-//$koneksi=mysql_connect($GLOBALS["dbhost"],$GLOBALS["dbuser"],$GLOBALS["dbpass"]);
-//mysql_select_db($GLOBALS["dbname"],$koneksi);
-$koneksi = mysql_connect("localhost","root","");
-mysql_select_db("perdagangan_elektronik",$koneksi);
+$koneksi=mysql_connect($GLOBALS["dbhost"],$GLOBALS["dbuser"],$GLOBALS["dbpass"]);
+mysql_select_db($GLOBALS["dbname"],$koneksi);
+//$koneksi = mysql_connect("localhost","root","");
+//mysql_select_db("perdagangan_elektronik",$koneksi);
 
 /**
  * untuk dropdown jenis pengguna.
@@ -820,7 +820,6 @@ mysql_close();
 ?>
 
 <div>
-    <a href="../index.php"><h4>Kembali ke halaman awal.</h4></a>
     <?php echo (isset($_SESSION["pengguna_ubah"])) ? "<a href='index.php?halaman=pengguna'><h4>Tambah Pengguna</h4></a>" : "";?>
 </div>
 

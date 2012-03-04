@@ -2,7 +2,7 @@
 <br />
 <br />
 kategori akan muncul saat anda memasukkan item baru
-<table>
+<table bgcolor="grey" border="0">
 <form action="index.php?halaman=kategori_tambah" name="form_tambah_kategori" method="post">
     <tr>
         <td align="right">
@@ -27,7 +27,8 @@ if (isset($_POST["submit"]))
     {
         $kategori_baru = $_POST["kategori"];
         $periksa = mysql_query("SELECT nama FROM kategori_produk WHERE nama = '$kategori_baru' ");
-        if ($periksa = 1)
+        echo htmlspecialchars (mysql_error ());
+        if ($periksa == 1)
         {
             ?>
             <script language="javascript">

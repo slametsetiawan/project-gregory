@@ -62,7 +62,8 @@ if (isset($_SESSION["administrator"]))
                 <li><a href="index.php?halaman=pengirim_tambah">pengaturan pengirim</a></li>
                 <li><a href="index.php?halaman=kategori_tambah">tambah kota</a></li>
                 <li><a href="index.php?halaman=kategori_tambah">tambah provinsi</a></li>
-                <li><a href="index.php?halaman=">tambah </a></li>
+                <li><a href="index.php?halaman=">tambah </a></li> &nbsp;
+                <li><a href="index.php?halaman=report">REPORT </a></li> &nbsp;
                 <a href="index.php?halaman=pengguna"><li>Mengatur Pengguna</li></a>
                 <a href="index.php?halaman=inventori"><li>Mengatur Inventori</li></a>
                 <a href="index.php?halaman=manage_artikel"><li>Mengatur artikel</li></a>

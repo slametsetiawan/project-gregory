@@ -1,0 +1,5 @@
+website referensi e-commerce masuk ke bagian admin nya:
+
+http://jogjacamp.org/demo/jcommercestandarnew/index.php
+
+aku sediakan halaman report.php buat kreasi anda.

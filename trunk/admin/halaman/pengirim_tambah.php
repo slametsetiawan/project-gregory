@@ -5,7 +5,7 @@
     
     <body>
         <table bgcolor="white" border="1" width="660px">
-            <form action="index.php?halaman=ketegori_tambah" name="form_tambah_kategori" method="post">
+            <form action="index.php?halaman=pengirim_tambah" name="form_tambah_pengirim" method="post">
                 <tr>
                     <td align="right">
                        Nama Jasa pengiriman baru   : 
@@ -37,8 +37,8 @@ if (isset($_POST["submit"]))
 {
     $kategori_baru = $_POST["nama"];
     $deskripsi = $_POST["deskripsi"];
-    $periksa = mysql_query("SELECT nama FROM kategori_produk WHERE nama='$kategori_baru' LIMIT 1");
-    if ($periksa >= 1)
+    $periksa = mysql_query("SELECT kode FROM kategori_produk WHERE kode='$kategori_baru' LIMIT 1");
+    if ($periksa == 1)
     {
         ?>
         <script language="javascript">
@@ -48,8 +48,20 @@ if (isset($_POST["submit"]))
     }
     else
     {
-        $sql = "INSERT INTO pengirim (no, kode, deskripsi ) VALUES ('', '$kategori_baru', '')";
+        $sql = "INSERT INTO pengirim (no, kode, deskripsi ) VALUES ('', '$kategori_baru', '$deskripsi')";
         $jalan = mysql_query($sql) or die(mysql_error());
+        $sql2 = "INSERT 
+        INTO 
+        tarif_pengiriman 
+        (no, 
+        kode, 
+        nama, 
+        tarif, 
+        ) 
+        VALUES 
+        ('',
+        '$kategori_baru', 
+        '$deskripsi')";
         ?>
         <script language="javascript">
             alert("Anda berhasil memasukkan Pengirim baru");

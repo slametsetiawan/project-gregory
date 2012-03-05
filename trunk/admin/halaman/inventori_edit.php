@@ -96,48 +96,12 @@ if (isset($_GET["edit_P"]))
 $product_list = "";
 $sql = mysql_query("SELECT * FROM produk ORDER BY no ASC");
 $productCount = mysql_num_rows($sql);?>
-<a href="index.php?halaman=index">kembali ke menu utama</a><br /><br />
-<?php
-if ($productCount > 0)
-{
-    while ($row = mysql_fetch_array($sql)):?>
-        Product ID: <?php echo $row["no"]; ?> - <strong><?php echo $row["nama"]; ?></strong> - <?php echo $row["harga"]; ?> 
-        - <?php echo $row["kode"]; ?> - <?php echo $row["deskripsi"]; ?> 
-        <!--<table border="0">
-            <tr>
-                <form action="index.php?halaman=inventori_edit" method="get" name="pengubah">
-                    <input type="hidden" value="<?php echo $row["no"] ?>" name="edit_P" />
-                    <input type="submit" name="edit" value="edit" />
-                </form>
-                <form action="inventori.php" method="get" name="penghapus">
-                    <input type="hidden" value="<?php echo $row["no"] ?>" name="delete_p" />
-                    <input type="hidden" value="<?php echo $row["nama"] ?>" />
-                    <input type="submit" name="delete" value="delete" />
-                </form>
-            </tr>
-        </table>--> 
-        
-             <a href="index.php?halaman=inventori_edit&edit_P=<?php echo $row["no"] ?>">edit</a>  
-             <a href="index.php?halaman=inventori&delete_p=<?php echo $row["no"] ?>">delete</a><br />
-    <?php endwhile;
-} else
-{
-    $product_list = "You have no products listed in your store yet";
-}
-
-?>
-
 
 <body>
 <div align="center" id="mainWrapper">
   <div id="pageContent"><br />
     <div align="right" style="margin-right:32px;">
         <a href="index.php?halaman=inventori&inventoryForm">+ Add New Inventory Item</a></div>
-            <div align="left" style="margin-left:24px;">
-      <h2>Inventory list</h2>
-            </div>
-    <hr />
-    <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr; Edit form &darr;
     </h3>
@@ -200,6 +164,18 @@ if ($productCount > 0)
         <td><label>
           <input type="file" name="gambar" id="fileField" />
         </label></td>
+      </tr>
+      <tr>
+        <td align="right">Product Image 2</td>
+        <td><label>
+          <input type="file" name="gambar2" id="fileField" />
+        </label></td>
+      </tr>
+      <tr>
+        <td align="right">Product Image 3</td>
+        <td><label>
+          <input type="file" name="gambar3" id="fileField" />
+        </label></td>
       </tr> 
       <tr>
         <td align="right">
@@ -224,6 +200,39 @@ if ($productCount > 0)
   </div>
 </div>
 </body>
+
+    <div align="left" style="margin-left:24px;">
+      <h2>Inventory list</h2>
+            </div>
+    <hr />
+<?php
+if ($productCount > 0)
+{
+    while ($row = mysql_fetch_array($sql)):?>
+        Product ID: <?php echo $row["no"]; ?> - <strong><?php echo $row["nama"]; ?></strong> - <?php echo $row["harga"]; ?> 
+        - <?php echo $row["kode"]; ?> - <?php echo $row["deskripsi"]; ?> 
+        <!--<table border="0">
+            <tr>
+                <form action="index.php?halaman=inventori_edit" method="get" name="pengubah">
+                    <input type="hidden" value="<?php echo $row["no"] ?>" name="edit_P" />
+                    <input type="submit" name="edit" value="edit" />
+                </form>
+                <form action="inventori.php" method="get" name="penghapus">
+                    <input type="hidden" value="<?php echo $row["no"] ?>" name="delete_p" />
+                    <input type="hidden" value="<?php echo $row["nama"] ?>" />
+                    <input type="submit" name="delete" value="delete" />
+                </form>
+            </tr>
+        </table>--> &nbsp; &nbsp; &nbsp; &nbsp; 
+             <a href="index.php?halaman=inventori_edit&edit_P=<?php echo $row["no"] ?>">edit</a>&nbsp;   
+             <a href="index.php?halaman=inventori&delete_p=<?php echo $row["no"] ?>">delete</a><br />
+    <?php endwhile;
+} else
+{
+    $product_list = "You have no products listed in your store yet";
+}
+
+?>
 </html>
 <?php
 }

@@ -13,13 +13,6 @@ else
 ?>
 
 <html>
-<table>
-    <tr>
-        <td>
-            <a href="index.php?halaman=index">Kembali ke menu awal</a>
-        </td>
-    </tr>
-</table>
 <?php 
 //echo url_dasar();
 echo "<br>";
@@ -35,7 +28,7 @@ $productCount = mysql_num_rows($sql);
              <table width="660px" border="1" cellspacing="0" cellpadding="6" align="center">
                 <tr>
                     <td width="80px" valign="top" align="center">
-                        <img style="border:#666 1px solid;" src="..<?php echo url_dasar() ?>"  width="200" height="300" border="1" />
+                        <img style="border:#666 1px solid;" src="../img/<?php echo $row["no"] ?>.jpg"  width="200" height="300" border="1" />
                     </td>
                     <td width="250px" valign="top"><h3><b>NO :<?php echo $row["no"]?></b></h3><br />
                         Keterangan :<?php echo $row["deskripsi"] ?><br />

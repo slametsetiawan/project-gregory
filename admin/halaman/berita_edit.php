@@ -83,16 +83,10 @@ else
 }
 
 ?>
-<a href="index.php?halaman=index"> Kembali Ke Halaman Utama</a>
 <body>
 <div align="center" id="mainWrapper">
   <div id="pageContent"><br />
     <div align="right" style="margin-right:32px;"><a href="index.php?halaman=berita_edit&inventoryForm">+ Add New Artikel Item</a></div>
-<div align="left" style="margin-left:24px;">
-      <h2>List Artikel</h2>
-      <?php echo $product_list; ?>
-    </div>
-    <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
     &darr;edit Berita &darr;
@@ -137,5 +131,10 @@ else
   <br />
   </div>
 </div>
+<div align="left" style="margin-left:24px;">
+      <h2>List Artikel</h2>
+      <?php echo $product_list; ?>
+    </div>
+    <hr />
 </body>
 </html>

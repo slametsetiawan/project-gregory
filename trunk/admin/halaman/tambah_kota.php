@@ -5,7 +5,7 @@
     
     <body>
         <table bgcolor="white" border="0" width="660px">
-            <form action="index.php?halaman=pengirim_tambah" name="form_tambah_pengirim" method="post">
+            <form action="index.php?halaman=tambah_kota" name="tambah_kota" method="post">
                 <tr>
                     <td align="right">
                         Kode Kota Baru  :
@@ -41,7 +41,7 @@
                         while($row = mysql_fetch_assoc($jalan))
                         {
                             ?>
-                            <option value="<?php echo $row["nama"]; ?>"><?php echo $row["nama"]; ?></option>
+                            <option value="<?php echo $row["no"]; ?>"><?php echo $row["nama"]; ?></option>
                             <?php 
                         } ?>"
                         </select>
@@ -75,7 +75,8 @@ if (isset($_POST["submit"]))
     }
     else
     {
-        $sql = "INSERT INTO kota (no, kode, nama, deskripsi, dipropinsi ) VALUES ('', '', '')";
+        $sql = "INSERT INTO kota (no, kode, nama, deskripsi, dipropinsi ) 
+        VALUES ('', '$kodek', '$kategori_baru', '$deskripsi', '$prop')";
         $jalan = mysql_query($sql) or die(mysql_error());
         $sql2 = "INSERT 
         INTO 

@@ -44,15 +44,9 @@
 		if(!$error) :
 			$sambung = mysql_connect("localhost","root","");
 			mysql_select_db("perdagangan_elektronik",$sambung);
-			$sql = "SELECT P.tanggal_disisipkan,P.harga_keseluruhan
+			$sql = "SELECT P.no,P.tanggal_disisipkan,P.harga_keseluruhan,PE.nama
 						FROM pemesanan P
-						INNER JOIN detil_pemesanan DP ON DP.kode = P.kode
-						INNER JOIN produk PR ON PR.no = DP.produk
 						INNER JOIN pengguna PE ON PE.no = P.oleh_pengguna
-						INNER JOIN tarif_pengiriman TP ON TP.no = P.tarif_pengiriman
-						INNER JOIN kota K ON K.no = P.kota_pengiriman
-						INNER JOIN metode_pembayaran MP ON MP.no = P.metode_pembayaran
-						INNER JOIN status_pemesanan SP ON SP.no = P.status_pemesanan
 						WHERE
 							P.tanggal_disisipkan BETWEEN '$date1' AND '$date2'
 							AND P.status_pemesanan > 1";
@@ -61,28 +55,79 @@
 			<table cellpadding="3">
 			<thead>
 				<tr>
-					<th colspan="3"><?php echo "$date1 - $date2"; ?></th>
+					<th colspan="5"><?php echo "$date1 - $date2"; ?></th>
 				</tr>
 				<tr>
 					<th>No</th>
 					<th>Tanggal</th>
+					<th>Pembeli</th>
+					<th>Produk</th>
 					<th>Pendapatan</th>
 				</tr>
 			</thead>
 			<?php $i = 1; ?>
 			<?php $total = 0; ?>
+			<?php $produk = array(); ?>
 			<?php while($result = mysql_fetch_assoc($query)) : ?>
+				<?php
+					$sql = "SELECT PR.nama,DP.jumlah
+						FROM pemesanan P
+						INNER JOIN detil_pemesanan DP ON DP.kode = P.kode
+						INNER JOIN produk PR ON PR.no = DP.produk
+						WHERE
+							P.no = {$result["no"]}";
+					$innerquery = mysql_query($sql);
+				?>
 				<tr>
 					<td><?php echo $i++; ?></td>
 					<td><?php echo $result["tanggal_disisipkan"]; ?></td>
+					<td><?php echo $result["nama"]; ?></td>
+					<td>
+						<ul style="margin:0 0 0 15px; padding:0;">
+							<?php while($innerresult = mysql_fetch_assoc($innerquery)) : ?>
+								<li><?php echo "{$innerresult["nama"]}({$innerresult["jumlah"]} buah)"; ?></li>
+								<?php
+									if(isset($produk[$innerresult["nama"]]))
+										$produk[$innerresult["nama"]] += $innerresult["jumlah"];
+									else
+										$produk[$innerresult["nama"]] = $innerresult["jumlah"];
+								?>
+							<?php endwhile; ?>
+						</ul>
+					</td>
 					<td><?php echo "Rp.{$result["harga_keseluruhan"]}"; $total += $result["harga_keseluruhan"]; ?></td>
 				</tr>
 			<?php endwhile; ?>
 				<tr>
-					<td></td>
+					<td colspan="3"></td>
 					<td align="right">Total : </td>
 					<td><?php echo "Rp.$total"; ?></td>
 				</tr>
+			</table>
+			<table cellpadding="3">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Produk</th>
+					<th>Jumlah</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $i = 1; ?>
+				<?php $total = 0; ?>
+				<?php foreach($produk as $key => $value) : ?>
+				<tr>
+					<td><?php echo $i++; ?></td>
+					<td><?php echo $key; ?></td>
+					<td><?php echo "$value buah"; $total += $value; ?></td>
+				</tr>
+				<?php endforeach; ?>
+				<tr>
+					<td></td>
+					<td align="right">Total : </td>
+					<td><?php echo "$total buah"; ?></td>
+				</tr>
+			</tbody>
 			</table>
 		<?
 		else :

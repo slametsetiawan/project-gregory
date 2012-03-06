@@ -71,10 +71,6 @@ if (isset($_POST["submit"]))
 }
 else
 {
-    ?>
-    <script language="javascript">
-        alert("halaman ini untuk memasukkan keterangan jasa")
-    </script>
-    <?php
+
 }
 ?>

@@ -46,10 +46,18 @@ if (isset($_POST["submit"]))
             if (preg_match('|^[0-9]*$|', $_POST["awal"] , $_POST["akhir"]) )
             {
                 echo "Pencarian dari tanggal    :";
-                echo $tanggal;
+                echo substr($tanggal, 0, 4);
+                echo "-";
+                echo substr($tanggal, 4, -2);
+                echo "-";
+                echo substr($tanggal, 6, 7);
                 echo "<br/>";
                 echo "sampai    :";
-                echo $coba;
+                echo substr($coba, 0, 4);
+                echo "-";
+                echo substr($coba, 4, -2);
+                echo "-";
+                echo substr($coba, 6, 7);
                 echo "<br/>";
                 echo "<br/>";
                 $sambung = mysql_connect("localhost","root","");
@@ -61,7 +69,8 @@ if (isset($_POST["submit"]))
                 pemesanan.kode, 
                 pemesanan.tanggal_disisipkan,
                 detil_pemesanan.produk,
-                detil_pemesanan.jumlah
+                detil_pemesanan.jumlah,
+                detil_pemesanan.harga
                 FROM 
                 pemesanan
                 LEFT JOIN
@@ -116,6 +125,14 @@ if (isset($_POST["submit"]))
                         </td>
                         <td>
                             <?php echo $row["jumlah"]; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Harga Satuan :
+                        </td>
+                        <td>
+                            <?php echo $row["harga"]; ?>
                         </td>
                     </tr>
                     <?php

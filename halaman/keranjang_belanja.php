@@ -2,7 +2,7 @@
 div.halaman_keranjang_belanja table tr th,
 div.halaman_keranjang_belanja table tr td
 {
-    padding: 2px 3px;
+    padding: 1px 2px;
 }
 div.halaman_keranjang_belanja table tr th
 {
@@ -22,11 +22,13 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
     <table width="100%">
         <tr>
             <th>No.</th>
-            <th>Kode Produk</th>
-            <th>Nama Produk</th>
+            <th>Kode<br/>Produk</th>
+            <th>Nama<br/>Produk</th>
             <th>Kuantitas</th>
-            <th>Harga per Item</th>
-            <th>Harga Total</th>
+            <th>Berat<br/>per<br/>Satuan</th>
+            <th>Berat<br/>Total</th>
+            <th>Harga<br/>per<br/>Satuan</th>
+            <th>Harga<br/>Total</th>
             <th>Hapus</th>
         </tr>
         <?php
@@ -37,7 +39,8 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
             if(count($_SESSION["keranjang_belanja"])>0)
             {
                 $no_urut = 1;
-                $total_keseluruhan = 0;
+                $berat_total_keseluruhan = 0;
+                $harga_total_keseluruhan = 0;
                 foreach($_SESSION["keranjang_belanja"] as $no_produk=>$kuantitas_produk)
                 {
                     $sql = "
@@ -52,7 +55,8 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
                     
                     if($produk!=FALSE)
                     {
-                        $total_keseluruhan = $total_keseluruhan + ($produk["harga"]*$kuantitas_produk);
+                        $berat_total_keseluruhan = $berat_total_keseluruhan + ($produk["berat"]*$kuantitas_produk);
+                        $harga_total_keseluruhan = $harga_total_keseluruhan + ($produk["harga"]*$kuantitas_produk);
                         ?>
                         <tr>
                             <td align="right"><?php echo($no_urut++);?></td>
@@ -65,6 +69,8 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
                                     <input type="submit" name="ubah_kuantitas_produk_di_keranjang_belanja" value="Ubah" />
                                 </form>
                             </td>
+                            <td align="right"><?php echo(number_format($produk["berat"], 2, ",", "."));?>Kg</td>
+                            <td align="right"><?php echo(number_format(($produk["berat"]*$kuantitas_produk), 2, ",", "."));?>Kg</td>
                             <td align="right">Rp.<?php echo(number_format($produk["harga"], 2, ",", "."));?></td>
                             <td align="right">Rp.<?php echo(number_format(($produk["harga"]*$kuantitas_produk), 2, ",", "."));?></td>
                             <td align="center">
@@ -79,8 +85,10 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
         ?>
         <tr>
             <td colspan="4"></td>
-            <td align="left" style="font-weight: bold;">Total Keseluruhan</td>
-            <td align="right">Rp.<?php echo(number_format(@$total_keseluruhan, 2, ",", "."));?></td>
+            <td align="left" style="font-weight: bold;">Berat<br/>Total<br/>Keseluruhan</td>
+            <td align="right"><?php echo(number_format(@$berat_total_keseluruhan, 2, ",", "."));?>Kg</td>
+            <td align="left" style="font-weight: bold;">Harga<br/>Total<br/>Keseluruhan</td>
+            <td align="right">Rp.<?php echo(number_format(@$harga_total_keseluruhan, 2, ",", "."));?></td>
             <td></td>
         </tr>
     </table>
@@ -89,7 +97,7 @@ div.halaman_keranjang_belanja table tr:nth-child(even)
             <center>
                 <a href="<?php echo(buat_url("katalog"));?>">&lt;&lt; Kembali ke Katalog</a></a>
                 <?php if(isset($_SESSION["keranjang_belanja"]) && count($_SESSION["keranjang_belanja"])>0):?>
-                    | <a href="<?php echo(buat_url("login", array("redirect"=>"pengiriman")));?>">Selesaikan Belanja &gt;&gt;</a>
+                    | <a href="<?php echo(buat_url("login", array("redirect"=>"selesaikan_belanja_langkah_1a")));?>">Selesaikan Belanja &gt;&gt;</a>
                 <?php endif;?>
             </center>
         </strong>

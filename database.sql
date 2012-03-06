@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2012 at 09:34 AM
+-- Generation Time: Mar 06, 2012 at 05:04 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -208,9 +208,10 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   `kode` varchar(31) NOT NULL,
   `tanggal_disisipkan` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `oleh_pengguna` bigint(20) unsigned NOT NULL,
+  `nama_penerima` varchar(63) NOT NULL DEFAULT '',
   `alamat_pengiriman` text NOT NULL,
   `kota_pengiriman` bigint(20) unsigned NOT NULL,
-  `telepon` varchar(31) NOT NULL DEFAULT '',
+  `telepon_penerima` varchar(31) NOT NULL DEFAULT '',
   `berat_keseluruhan` double NOT NULL DEFAULT '0',
   `tarif_pengiriman` bigint(20) unsigned NOT NULL,
   `biaya_pengiriman` double NOT NULL DEFAULT '0',
@@ -275,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `pengirim` (
   `deskripsi` text NOT NULL,
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `pengirim`
@@ -306,21 +307,19 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`no`, `kode`, `nama`, `kategori_produk`, `deskripsi`, `berat`, `harga`, `kuantitas`) VALUES
-(2, 'PX025906', 'Jaket', 2, 'deskripsikan saja', 0.5, 1500001, 100),
-(16, 'CELANA', 'Celana', 1, 'celana keren yang kudu dibeli', 1, 152000, 100),
-(22, 'CLKN', 'Celana Kain ', 1, 'Celana Kain yang Trendi', 0.5, 125000, 81),
-(23, 'HITAM', 'Kemeja Hitam', 4, 'Kemeja IRENG', 0.5, 899999, 80),
-(27, 'KKTB2', 'Kemeja keren terbaru', 4, 'kemeja testing', 1, 155000, 100),
-(29, 'TESTEST', 'test ae', 1, 'deskripsikan', 0.5, 10000, 100),
-(30, 'PRODUKsore', 'produk sore', 4, 'sore sore', 1, 150000, 100),
-(31, 'PROKU', 'pro ku', 4, 'wew', 1, 150000, 0);
+(1, 'PBP457', 'NEW POLO BURBERRY IMPORT', 1, 'Tersedia ukuran M, L, XL', 0.2, 160000, 18),
+(2, 'JBB2', 'JEANS BURBERRY', 1, 'Tersedia Ukuran 29-38', 0.3, 340000, 37),
+(3, 'JG001', 'JEANS GUESS PREMIUM', 2, 'Tersedia ukuran 30-24', 0.35, 320000, 67),
+(4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.18, 230000, 41),
+(5, 'PGS3', 'POLO SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.22, 160000, 38),
+(6, 'TGS3', 'T-SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.2, 135000, 47);
 
 -- --------------------------------------------------------
 
@@ -456,8 +455,8 @@ INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
 -- Constraints for table `detil_pemesanan`
 --
 ALTER TABLE `detil_pemesanan`
-  ADD CONSTRAINT `detil_pemesanan_ibfk_2` FOREIGN KEY (`pada_pemesanan`) REFERENCES `pemesanan` (`no`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detil_pemesanan_ibfk_1` FOREIGN KEY (`produk`) REFERENCES `produk` (`no`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `detil_pemesanan_ibfk_1` FOREIGN KEY (`produk`) REFERENCES `produk` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `detil_pemesanan_ibfk_2` FOREIGN KEY (`pada_pemesanan`) REFERENCES `pemesanan` (`no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `konfirmasi_pembayaran`

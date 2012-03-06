@@ -81,7 +81,7 @@ else
     //header("location:".buat_url($redirect));
     ?>
     <script>
-        alert("Anda sudah login, <?php echo($_SESSION["pengguna"]["nama"]);?>.");
+        //alert("Anda sudah login, <?php echo($_SESSION["pengguna"]["nama"]);?>.");
         location.href = "<?php echo(buat_url($redirect));?>";
     </script>
     <?php

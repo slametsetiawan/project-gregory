@@ -6,7 +6,7 @@
         </h3>
     </head>
     <body>
-        <form method="post" action="berdasar_tanggal.php">
+        <form method="post" action="index.php?halaman=berdasar_tanggal">
             <table border="0" bgcolor="silver" align="center">
                 <tr>
                     <td>

@@ -2,7 +2,7 @@
 <br />
 <br />
 kategori akan muncul saat anda memasukkan item baru
-<table bgcolor="grey" border="0">
+<table bgcolor="white" border="0">
 <form action="index.php?halaman=kategori_tambah" name="form_tambah_kategori" method="post">
     <tr>
         <td align="right">

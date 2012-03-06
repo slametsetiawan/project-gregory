@@ -58,10 +58,6 @@ if (isset($_POST["submit"]))
 }
 else
 {
-    ?>
-    <script language="javascript">
-        alert("Masukkan kategori baru Jika Ingin menjual tipe barang baru pada website ini")
-    </script>
-    <?php
+
 }
 ?>

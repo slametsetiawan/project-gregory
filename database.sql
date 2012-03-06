@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 03, 2012 at 06:17 AM
+-- Generation Time: Mar 06, 2012 at 09:34 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -25,32 +25,6 @@ USE `perdagangan_elektronik`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `berita`
---
-
-CREATE TABLE IF NOT EXISTS `berita` (
-  `no_berita` int(5) NOT NULL AUTO_INCREMENT,
-  `judul` varchar(31) NOT NULL,
-  `penulis` varchar(31) NOT NULL,
-  `isi_berita` varchar(255) NOT NULL,
-  `date_added` datetime NOT NULL,
-  PRIMARY KEY (`no_berita`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `berita`
---
-
-INSERT INTO `berita` (`no_berita`, `judul`, `penulis`, `isi_berita`, `date_added`) VALUES
-(4, 'tahun baru', 'gregory', 'selamat menempuh tahun naga air sukses untuk semuanya', '2012-02-03 00:34:45'),
-(5, 'tahun baru', 'gregory', 'selamat menempuh tahun naga air sukses untuk semuanya', '2012-02-03 00:59:16'),
-(6, 'Tahun 2012', 'gregory', 'tahun yang penuh keceriaan', '2012-02-09 19:30:23'),
-(7, 'GRAND TESTER', 'gregory', 'SAPA AJA DEH', '2012-02-22 19:32:05'),
-(8, 'GRAND TESTER 2', 'gregory', 'lagi lagi', '2012-02-22 19:39:36');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `detil_pemesanan`
 --
 
@@ -63,7 +37,21 @@ CREATE TABLE IF NOT EXISTS `detil_pemesanan` (
   `pada_pemesanan` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`no`),
   KEY `produk` (`produk`),
-  KEY `kode` (`pada_pemesanan`)
+  KEY `pada_pemesanan` (`pada_pemesanan`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE IF NOT EXISTS `faq` (
+  `no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pertanyaan` varchar(63) NOT NULL DEFAULT '',
+  `jawaban` text NOT NULL,
+  PRIMARY KEY (`no`),
+  UNIQUE KEY `pertanyaan` (`pertanyaan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -98,18 +86,19 @@ CREATE TABLE IF NOT EXISTS `kategori_produk` (
   `no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(31) NOT NULL,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `kategori_produk`
 --
 
 INSERT INTO `kategori_produk` (`no`, `nama`) VALUES
-(1, 'BURBERRY'),
-(2, 'GUESS'),
-(3, 'HERMES'),
-(4, 'ICEBERG'),
-(5, 'LACOSTE');
+(1, 'celana'),
+(2, 'jaket'),
+(3, 'lainnya'),
+(4, 'Kemeja'),
+(5, 'celana pendek'),
+(6, 'celana panjang');
 
 -- --------------------------------------------------------
 
@@ -122,9 +111,8 @@ CREATE TABLE IF NOT EXISTS `konfirmasi_pembayaran` (
   `pemesanan` bigint(20) unsigned NOT NULL,
   `metode_pembayaran` bigint(20) unsigned NOT NULL,
   `atas_nama` varchar(63) NOT NULL,
-  `no_akun` varchar(31) NOT NULL,
+  `no_akun_bank` varchar(16) NOT NULL,
   `sejumlah` double NOT NULL,
-  `status_pemesanan` int(5) NOT NULL,
   `tanggal_disisipkan` datetime NOT NULL,
   PRIMARY KEY (`no`),
   KEY `pemesanan` (`pemesanan`),
@@ -146,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `kota` (
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`),
   KEY `dipropinsi` (`dipropinsi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `kota`
@@ -157,7 +145,8 @@ INSERT INTO `kota` (`no`, `kode`, `nama`, `deskripsi`, `dipropinsi`) VALUES
 (2, 'JKT', 'Jakarta', '', 2),
 (3, 'BDG', 'Bandung', '', 5),
 (4, 'SMG', 'Semarang', '', 3),
-(5, 'DIY', 'Yogjakarta', '', 4);
+(5, 'DIY', 'Yogjakarta', '', 4),
+(10, 'MLG', 'Malang', '', 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +173,7 @@ INSERT INTO `laporan_produk` (`no`, `nama`, `kuantitas`) VALUES
 (5, 'Kemeja Hitam', 0),
 (6, 'Jaket', 0),
 (7, 'Celana', 0),
-(8, 'Celana Kain', 0),
+(8, 'Celana Kain', 7),
 (9, 'Kemeja keren terbaru	', 0);
 
 -- --------------------------------------------------------
@@ -286,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `pengirim` (
   `deskripsi` text NOT NULL,
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `pengirim`
@@ -294,7 +283,9 @@ CREATE TABLE IF NOT EXISTS `pengirim` (
 
 INSERT INTO `pengirim` (`no`, `kode`, `deskripsi`) VALUES
 (1, 'TOKO', ''),
-(2, 'TIKI', '');
+(2, 'TIKI', ''),
+(3, 'JNE', ''),
+(4, 'PT POS INDONESIA', '');
 
 -- --------------------------------------------------------
 
@@ -315,19 +306,21 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`no`, `kode`, `nama`, `kategori_produk`, `deskripsi`, `berat`, `harga`, `kuantitas`) VALUES
-(1, 'PBP457', 'NEW POLO BURBERRY IMPORT', 1, 'Tersedia ukuran M, L, XL', 0.2, 160000, 18),
-(2, 'JBB2', 'JEANS BURBERRY', 1, 'Tersedia Ukuran 29-38', 0.3, 340000, 37),
-(3, 'JG001', 'JEANS GUESS PREMIUM', 2, 'Tersedia ukuran 30-24', 0.35, 320000, 67),
-(4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.18, 230000, 41),
-(5, 'PGS3', 'POLO SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.22, 160000, 38),
-(6, 'TGS3', 'T-SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.2, 135000, 47);
+(2, 'PX025906', 'Jaket', 2, 'deskripsikan saja', 0.5, 1500001, 100),
+(16, 'CELANA', 'Celana', 1, 'celana keren yang kudu dibeli', 1, 152000, 100),
+(22, 'CLKN', 'Celana Kain ', 1, 'Celana Kain yang Trendi', 0.5, 125000, 81),
+(23, 'HITAM', 'Kemeja Hitam', 4, 'Kemeja IRENG', 0.5, 899999, 80),
+(27, 'KKTB2', 'Kemeja keren terbaru', 4, 'kemeja testing', 1, 155000, 100),
+(29, 'TESTEST', 'test ae', 1, 'deskripsikan', 0.5, 10000, 100),
+(30, 'PRODUKsore', 'produk sore', 4, 'sore sore', 1, 150000, 100),
+(31, 'PROKU', 'pro ku', 4, 'wew', 1, 150000, 0);
 
 -- --------------------------------------------------------
 
@@ -341,18 +334,46 @@ CREATE TABLE IF NOT EXISTS `propinsi` (
   `nama` varchar(63) NOT NULL DEFAULT '',
   `deskripsi` text NOT NULL,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `propinsi`
 --
 
 INSERT INTO `propinsi` (`no`, `kode`, `nama`, `deskripsi`) VALUES
-(1, 'JATIM', 'Jawa Timur', ''),
-(2, 'JKT', 'Jakarta', ''),
-(3, 'JATENG', 'Jawa Tengah', ''),
-(4, 'DIY', 'Daerah Istimewa Yogjakarta', ''),
-(5, 'JABAR', 'Jawa Barat', '');
+(1, 'ID-JI', 'Jawa Timur', ''),
+(2, 'ID-JK', 'Jakarta', ''),
+(3, 'ID-JT', 'Jawa Tengah', ''),
+(4, 'ID-YO', 'Daerah Istimewa Yogjakarta', ''),
+(5, 'ID-JB', 'Jawa Barat', ''),
+(6, 'ID-AC', 'Aceh', ''),
+(7, 'ID-SU', 'Sumatera Utara', ''),
+(8, 'ID-SB', 'Sumatera Barat', ''),
+(9, 'ID-RI', 'Riau', ''),
+(10, 'ID-JA', 'jambi', ''),
+(11, 'ID-SS', 'Sumatera Selatan', ''),
+(12, 'ID-BE', 'Bengkulu', ''),
+(13, 'ID-LA', 'Lampung', ''),
+(14, 'ID-BB', 'Kepulauan Bangka Belitung', ''),
+(15, 'ID-KR', 'Kepulauan Riau', ''),
+(16, 'ID-BT', 'Banten', ''),
+(17, 'ID-BA', 'Bali', ''),
+(18, 'ID-NB', 'Nusa Tenggara Barat', ''),
+(19, 'ID-NT', 'Nusa Tenggara Timur', ''),
+(20, 'ID-KB', 'Kalimantan Barat', ''),
+(21, 'ID-KT', 'Kalimantan Tengah', ''),
+(22, 'ID-KS', 'Kalimantan Selatan', ''),
+(23, 'ID-KI', 'Kalimantan Timur', ''),
+(24, 'ID-SA', 'Sulawesi Utara', ''),
+(25, 'ID-ST', 'Sulawesi Tengah', ''),
+(26, 'ID-SN', 'Sulawesi Selatan', ''),
+(27, 'ID-SG', 'Sulawesi Tenggara', ''),
+(28, 'ID-GO', 'Gorontalo', ''),
+(29, 'ID-SR', 'Sulawesi Barat', ''),
+(30, 'ID-MA', 'Maluku', ''),
+(31, 'ID-MU', 'Maluku Utara', ''),
+(32, 'ID-PB', 'Papua Barat', ''),
+(33, 'ID-PA', 'Papua', '');
 
 -- --------------------------------------------------------
 
@@ -385,27 +406,25 @@ INSERT INTO `status_pemesanan` (`no`, `kode`, `deskripsi`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tarif_pengiriman` (
   `no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `kode` varchar(31) NOT NULL DEFAULT '',
   `nama` varchar(63) NOT NULL DEFAULT '',
   `deskripsi` text NOT NULL,
-  `kisaran_berat_dari` double NOT NULL DEFAULT '0',
-  `kisaran_berat_ke` double NOT NULL DEFAULT '0',
   `tarif` double NOT NULL DEFAULT '0',
   `oleh_pengirim` bigint(20) unsigned NOT NULL,
   `ke_kota` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`no`),
-  UNIQUE KEY `kode` (`kode`),
   KEY `oleh_pengirim` (`oleh_pengirim`),
   KEY `ke_kota` (`ke_kota`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tarif_pengiriman`
 --
 
-INSERT INTO `tarif_pengiriman` (`no`, `kode`, `nama`, `deskripsi`, `kisaran_berat_dari`, `kisaran_berat_ke`, `tarif`, `oleh_pengirim`, `ke_kota`) VALUES
-(1, 'TIKIYESSBY', 'TIKIYESSBY', '', 0, 10, 50000, 1, 1),
-(2, 'TOKO', 'TOKO BERBAJU', '', 0, 1, 50000, 2, 2);
+INSERT INTO `tarif_pengiriman` (`no`, `nama`, `deskripsi`, `tarif`, `oleh_pengirim`, `ke_kota`) VALUES
+(1, 'YES', 'Yakin Esok Sampai', 11000, 3, 1),
+(2, 'ONS', 'One Night Service', 9000, 2, 1),
+(3, 'REGULAR', '', 3500, 3, 1),
+(4, 'REGULAR', '', 5000, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -420,15 +439,14 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `sebagai_default` enum('YA','TIDAK') NOT NULL DEFAULT 'TIDAK',
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
-(1, 'emotion', 'Web template created by ddQ.', 'YA'),
-(2, 'berbaju', 'Web template created by ddQ.	', 'TIDAK');
+(1, 'emotion', 'Web template created by ddQ.', 'YA');
 
 --
 -- Constraints for dumped tables
@@ -458,11 +476,11 @@ ALTER TABLE `kota`
 -- Constraints for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  ADD CONSTRAINT `pemesanan_ibfk_15` FOREIGN KEY (`oleh_pengguna`) REFERENCES `pengguna` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_16` FOREIGN KEY (`kota_pengiriman`) REFERENCES `kota` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_17` FOREIGN KEY (`tarif_pengiriman`) REFERENCES `tarif_pengiriman` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_18` FOREIGN KEY (`metode_pembayaran`) REFERENCES `metode_pembayaran` (`no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_ibfk_19` FOREIGN KEY (`status_pemesanan`) REFERENCES `status_pemesanan` (`no`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `pemesanan_ibfk_5` FOREIGN KEY (`oleh_pengguna`) REFERENCES `pengguna` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_6` FOREIGN KEY (`metode_pembayaran`) REFERENCES `metode_pembayaran` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_7` FOREIGN KEY (`status_pemesanan`) REFERENCES `status_pemesanan` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_8` FOREIGN KEY (`kota_pengiriman`) REFERENCES `kota` (`no`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_ibfk_9` FOREIGN KEY (`tarif_pengiriman`) REFERENCES `tarif_pengiriman` (`no`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pengguna`

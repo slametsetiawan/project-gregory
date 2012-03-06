@@ -1,9 +1,5 @@
-<a href="../index.php" >Kembali</a>
+
 <?php
-require_once("../../konfigurasi.php");
-require_once("../../referensi/fungsi.php");
-$sambung = mysql_connect("localhost","root","");
-mysql_select_db("perdagangan_elektronik",$sambung);
 $sql = "
     SELECT
 	P.*,

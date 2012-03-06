@@ -25,8 +25,9 @@ if (isset($_SESSION["administrator"]))
     <table border="1" bgcolor="silver" width="100%" align="center">
         <tr>
             <td colspan="3" align="center" height="100px">
-                Cpanel Design By Greyzher 2012
-                <?php ?>
+                <h3>· Administrator Cpanel ·</h3>
+                <?php echo $_SESSION["administrator"]?><br />
+                <a href="index.php?halaman=logout">Logout</a>
             </td>
         </tr>
         <tr>
@@ -60,22 +61,23 @@ if (isset($_SESSION["administrator"]))
                 <h3>Side menu</h3>
                 <li><a href="index.php?halaman=kategori_tambah">tambah Kategori barang</a></li>
                 <li><a href="index.php?halaman=pengirim_tambah">pengaturan pengirim</a></li>
-                <li><a href="index.php?halaman=kategori_tambah">tambah kota</a></li>
+                <li><a href="index.php?halaman=tambah_kota">tambah kota</a></li>
                 <li><a href="index.php?halaman=kategori_tambah">tambah provinsi</a></li>
                 <li><a href="index.php?halaman=">tambah </a></li> &nbsp;
                 <li><a href="index.php?halaman=report">REPORT </a></li> &nbsp;
+                <li><a href="index.php?halaman=template">Tampilan Website </a></li>
                 <a href="index.php?halaman=pengguna"><li>Mengatur Pengguna</li></a>
                 <a href="index.php?halaman=inventori"><li>Mengatur Inventori</li></a>
                 <a href="index.php?halaman=manage_artikel"><li>Mengatur artikel</li></a>
                 <a href="index.php?halaman=stok"><li>Mengatur stok</li></a>
                 <a href="index.php?halaman=transaksi"><li>Mengatur transaksi</li></a>
                 <br />
-                <a href="index.php?halaman=logout"><li>Logout</li></a>
             </td>
             <td valign="top">
                 <?php konten();?>
             </td>
         </tr>
+        <div></div>
         <tr>
             <td colspan="3" align="center">
                 Copyrights 2012 <a target="_blank" href="http://www.greyzher.com">Greyzher</a>

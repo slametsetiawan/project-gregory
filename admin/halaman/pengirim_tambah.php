@@ -1,3 +1,44 @@
+<?php
+//edit
+if (isset($_GET["edit"]))
+{
+    $a = $_GET["edit"];
+    $sqlku = mysql_query("SELECT * FROM pengirim WHERE no='$a' LIMIT 1");
+    $productCount = mysql_num_rows($sqlku);
+    if ($productCount > 0)
+    {
+        while ($row = mysql_fetch_assoc($sqlku))
+        {
+            $n1 = $row["no"];
+            $n2 = $row["kode"];
+            $n3 = $row["deskripsi"];
+        }
+    } 
+    else
+    {
+        echo "Sorry dude that crap dont exist.";
+        exit();
+    }
+    
+}
+elseif (isset($_GET["hapus"]))
+{
+    echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
+    <a href="index.php?halaman=kategori_tambah&yesdelete=' . $_GET["hapus"] . '">Yes
+    </a> | <a href="index.php?halaman=kategori_tambah">No</a>';
+    exit();
+}
+elseif (isset($_GET["yesdelete"]))
+{
+    $id_to_delete = $_GET['yesdelete'];
+    mysql_query("DELETE FROM pengirim WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error());
+    ?>
+    <script language="javascript">
+        alert("Kategori telah terhapus");
+    </script>
+    <?php
+}
+?>
 <html>
     <head>
         Penambahan Pengirim
@@ -11,7 +52,7 @@
                        Nama Jasa pengiriman baru   : 
                     </td>
                     <td align="left">
-                        <input name="nama" type="text" maxlength="35" size="20" />
+                        <input name="nama" type="text" maxlength="35" size="20" value="<?php echo @$n2 ?>" />
                     </td>
                 </tr>
                 <tr>
@@ -19,7 +60,7 @@
                         Deskripsinya    :
                     </td>
                     <td>
-                        <input type="text" name="deskripsi" size="30" maxlength="200" />
+                        <input type="text" name="deskripsi" size="30" maxlength="200" value="<?php echo @$n3 ?>" />
                     </td>
                 </tr>
                 <tr>
@@ -91,10 +132,10 @@ while ($row = mysql_fetch_assoc($road)):
                 <?php echo $row["deskripsi"] ?>
             </td>
             <td>
-                <a href="index.php?halaman=pengirim_tambah">edit</a>
+                <a href="index.php?halaman=pengirim_tambah&edit=<?php echo $row["no"] ?>">edit</a>
             </td>
             <td>
-                <a href="index.php?halaman=pengirim_tambah">Hapus</a>
+                <a href="index.php?halaman=pengirim_tambah&hapus=<?php echo $row["no"] ?>">Hapus</a>
             </td>
         </tr>
     </table>

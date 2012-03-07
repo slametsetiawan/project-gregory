@@ -77,13 +77,13 @@
                                 }
                             }
                             ?>
-                            <input type="text" name="berat_total_keseluruhan" value="<?php echo($berat_total_keseluruhan);?>" disabled="disabled" size="4"/>Kg
+                            <input type="text" name="berat_total_keseluruhan" value="<?php echo(number_format($berat_total_keseluruhan, 2, ",", "."));?>" disabled="disabled" size="4"/>Kg
                             ~>
-                            <input type="text" value="<?php echo(ceil($berat_total_keseluruhan));?>" disabled="disabled" size="4"/>Kg
+                            <input type="text" value="<?php echo(number_format(ceil($berat_total_keseluruhan), 2, ",", "."));?>" disabled="disabled" size="4"/>Kg
                         </td>
                     </tr>
                     <tr>
-                        <td align="right">Tarif Pengiriman</td>
+                        <td align="right">Biaya Pengiriman</td>
                         <td align="left">
                             <?php
                             $sql = "

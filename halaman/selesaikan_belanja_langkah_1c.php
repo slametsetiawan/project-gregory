@@ -39,7 +39,7 @@
                 $sumber_data_tarif_pengiriman = mysql_query($sql);
                 ?>
                 <?php if(mysql_num_rows($sumber_data_tarif_pengiriman)>0):?>
-                    <table>
+                    <table width="100%">
                         <tr>
                             <th></th>
                             <th>Nama</th>

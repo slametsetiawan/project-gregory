@@ -27,9 +27,7 @@
                 <input type="hidden" name="kota" value="<?php echo($_POST["kota"]);?>"/>
                 <input type="hidden" name="telepon_penerima" value="<?php echo($_POST["telepon_penerima"]);?>"/>
                 <input type="hidden" name="pengirim" value="<?php echo($_POST["pengirim"]);?>"/>
-                <input type="hidden" name="berat_total_keseluruhan" value="<?php echo($_POST["berat_total_keseluruhan"]);?>"/>
                 <input type="hidden" name="tarif_pengiriman" value="<?php echo($_POST["tarif_pengiriman"]);?>"/>
-                <input type="hidden" name="biaya_pengiriman" value="<?php echo($_POST["biaya_pengiriman"]);?>"/>
                 <?php
                 $sql = "
                     SELECT
@@ -38,7 +36,7 @@
                         metode_pembayaran";
                 $sumber_data_metode_pembayaran = mysql_query($sql);
                 ?>
-                <table>
+                <table width="100%">
                     <tr>
                         <th></th>
                         <th>Kode</th>

@@ -20,7 +20,17 @@ if (isset($_SESSION["administrator"]))
     
     //echo $_SESSION["administrator"];
     ?>
-    
+    <style>
+        body
+        {
+            margin: 0px;
+            padding: 0px;
+        }
+        body, table, input
+        {
+            font: 12px "tahoma";
+        }
+    </style>
     <div class="main-body">
     <table border="1" bgcolor="silver" width="100%" align="center">
         <tr>

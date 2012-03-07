@@ -27,7 +27,7 @@ if (isset($_POST["tambahkan_ke_keranjang"]))
         {
             $nomer = $_POST["no_produk"];
             $kuantitas = $_POST["kuantitas"];
-            $_SESSION["keranjang_belanja"][$_POST["no_produk"]] += $_POST["kuantitas"]; 
+            @$_SESSION["keranjang_belanja"][$_POST["no_produk"]] += $_POST["kuantitas"]; 
             //header("location: " . buat_url("keranjang_belanja", array("nomer"=>$nomer,"kuantitas"=>$kuantitas)));
             ?>
             <script language="javascript">

@@ -1,3 +1,34 @@
+<?php
+
+if (isset($_GET["edit"]))
+{
+    $dapat = $_GET["edit"];
+    $kueri = "SELECT * FROM kategori_produk WHERE no = '$dapat'";
+    $count = mysql_query($kueri);
+    while ($row = mysql_fetch_assoc($count))
+    {
+        $namaku = $row["no"];
+        $kodeku = $row["nama"];
+    }
+}
+elseif (isset($_GET["hapus"]))
+{
+    echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
+    <a href="index.php?halaman=kategori_tambah&yesdelete=' . $_GET["hapus"] . '">Yes
+    </a> | <a href="index.php?halaman=kategori_tambah">No</a>';
+    exit();
+}
+elseif (isset($_GET["yesdelete"]))
+{
+    $id_to_delete = $_GET['yesdelete'];
+    mysql_query("DELETE FROM kategori_produk WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error());
+    ?>
+    <script language="javascript">
+        alert("Kategori telah terhapus");
+    </script>
+    <?php
+}
+?>
 <b>Penambahan kategori</b>
 <br />
 <br />
@@ -86,32 +117,4 @@ while ($row=mysql_fetch_assoc($jalan)):
 <?php
 endwhile;
 
-if (isset($_GET["edit"]))
-{
-    $dapat = $_GET["edit"];
-    $kueri = "SELECT * FROM kategori_produk WHERE no = '$dapat'";
-    $count = mysql_query($kueri);
-    while ($row_count=mysql_fetch_assoc($count))
-    {
-        $namaku = $row["no"];
-        $kodeku = $row["nama"];
-    }
-}
-elseif (isset($_GET["hapus"]))
-{
-    echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
-    <a href="index.php?halaman=kategori_tambah&yesdelete=' . $_GET["hapus"] . '">Yes
-    </a> | <a href="index.php?halaman=kategori_tambah">No</a>';
-    exit();
-}
-elseif (isset($_GET["yesdelete"]))
-{
-    $id_to_delete = $_GET['yesdelete'];
-    mysql_query("DELETE FROM kategori_produk WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error());
-    ?>
-    <script language="javascript">
-        alert("Kategori telah terhapus");
-    </script>
-    <?php
-}
 ?>

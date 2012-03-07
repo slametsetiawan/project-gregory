@@ -1,3 +1,32 @@
+<?php
+
+if (isset($_GET["edit"]))
+{
+    $a = $_GET["edit"];
+    $sqlku = mysql_query("SELECT * FROM kota WHERE no='$a' LIMIT 1");
+    $productCount = mysql_num_rows($sqlku);
+    if ($productCount > 0)
+    {
+        while ($row = mysql_fetch_assoc($sqlku))
+        {
+            $n1 = $row["no"];
+            $n2 = $row["kode"];
+            $n3 = $row["nama"];
+            $n4 = $row["deskripsi"];
+        }
+    } 
+    else
+    {
+        echo "Sorry dude that crap dont exist.";
+        exit();
+    }
+    
+}
+elseif (isset($_GET["hapus"]))
+{
+    
+}
+?>
 <html>
     <head>
         Penambahan Pengirim
@@ -11,7 +40,7 @@
                         Kode Kota Baru  :
                     </td>
                     <td>
-                        <input type="text" name="kode_kota" maxlength="35" size="20" />
+                        <input type="text" name="kode_kota" maxlength="35" size="20" value="<?php echo @$n2;  ?>" />
                     </td>
                 </tr>
                 <tr>
@@ -19,7 +48,7 @@
                        Nama Kota Baru  : 
                     </td>
                     <td align="left">
-                        <input name="nama" type="text" maxlength="35" size="20" />
+                        <input name="nama" type="text" maxlength="35" size="20" value="<?php echo @$n3;  ?>" />
                     </td>
                 </tr>
                 <tr>
@@ -27,7 +56,7 @@
                         Deskripsinya    :
                     </td>
                     <td>
-                        <input type="text" name="deskripsi" size="50" maxlength="200" />
+                        <input type="text" name="deskripsi" size="50" maxlength="200" value="<?php echo @$n4; ?>" />
                     </td>
                 </tr>
                 <tr>
@@ -36,6 +65,7 @@
                     </td>
                     <td>
                         <select name="kota">
+                        <option value="<?php  ?>"></option>
                         <?php $kue = "SELECT * FROM propinsi";
                         $jalan = mysql_query($kue);
                         while($row = mysql_fetch_assoc($jalan))
@@ -102,3 +132,32 @@ else
 
 }
 ?>
+<h3>List Kota</h3>
+<?php
+$kue = "SELECT * FROM kota";
+$jalun = mysql_query($kue);
+while ($cek = mysql_fetch_assoc($jalun)):
+?>
+<form>
+    <table border="0">
+        <tr>
+            <td width="20px">
+                <?php echo $cek["no"] ?>
+            </td>
+            <td width="100px">
+                <?php echo $cek["kode"] ?>
+            </td>
+            <td width="100px">
+                <?php echo $cek["nama"] ?>
+            </td>
+            <td>
+                <a href="index.php?halaman=tambah_kota&edit=<?php echo($cek["no"]) ?>">edit</a>
+            </td>
+            <td>
+                <a href="index.php?halaman=tambah_kota&hapus=<?php echo($cek["no"]) ?>">delete</a>
+            </td>
+        </tr>
+    </table>
+</form>
+<?php
+endwhile;

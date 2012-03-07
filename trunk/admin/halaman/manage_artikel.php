@@ -16,7 +16,7 @@ if (isset($_GET['deleteid']))
 if (isset($_GET['yesdelete'])) 
 {
 	$id_to_delete = $_GET['yesdelete'];
-	mysql_query("DELETE FROM berita WHERE no_berita='$id_to_delete' LIMIT 1") or die (mysql_error());
+	mysql_query("DELETE FROM faq WHERE no_berita='$id_to_delete' LIMIT 1") or die (mysql_error());
 	?>
     <script language="javascript">alert('redirect ke manage artikel')
     location.href="index.php?halaman=manage_artikel"
@@ -32,14 +32,14 @@ if (isset($_POST['judul']))
     $judul = mysql_real_escape_string($_POST['judul']);
 	$penulis = mysql_real_escape_string($_POST['penulis']);
 	$isi_berita = mysql_real_escape_string($_POST['isi_berita']);
-	$sql = mysql_query("SELECT judul FROM berita WHERE '$judul'=judul LIMIT 1");
+	$sql = mysql_query("SELECT judul FROM faq WHERE '$judul'=judul LIMIT 1");
 	$productMatch = mysql_num_rows($sql);
     if ($productMatch > 0) 
         {
     		echo 'Sorry you tried to place a duplicate "Judul" into the system, <a href="index.php?halaman=manage_artikel">click here</a>';
     		exit();
         }
-	mysql_query("INSERT INTO berita (no_berita, judul, penulis, isi_berita, date_added) 
+	mysql_query("INSERT INTO faq (no_berita, judul, penulis, isi_berita, date_added) 
         VALUES('','$judul','$penulis','$isi_berita',now())") or die (mysql_error());
 }
 
@@ -48,7 +48,7 @@ if (isset($_POST['judul']))
 <?php 
 //list berita
 $product_list = "";
-$sql = mysql_query("SELECT * FROM berita ORDER BY no_berita ASC");
+$sql = mysql_query("SELECT * FROM faq ORDER BY no ASC");
 $productCount = mysql_num_rows($sql);
 if ($productCount > 0) 
 {
@@ -66,7 +66,7 @@ if ($productCount > 0)
 } 
 else 
 {
-	$product_list = "tabel berita kosong";
+	$product_list = "tabel faq kosong";
 }
 
 ?>

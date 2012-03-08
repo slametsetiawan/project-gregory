@@ -33,7 +33,7 @@ if (isset($_POST['proses']))
     $sql = "UPDATE 
     pemesanan 
     SET 
-    status_pemesanan = '3'
+    status_pemesanan = '2'
     WHERE 
     no = '$id'
     ";
@@ -54,7 +54,7 @@ elseif (isset($_POST["terkirim"]))
     $sql = "UPDATE
     `perdagangan_elektronik`.`pemesanan` 
     SET 
-    `status_pemesanan` = '5' 
+    `status_pemesanan` = '3' 
     WHERE 
     `pemesanan`.`no` = ". $id. "
     ";
@@ -87,12 +87,7 @@ elseif (isset($_POST["terkirim"]))
             $muales = mysql_query($malas);
             echo $malas;           
             while ($row = mysql_fetch_assoc($muales))
-            {
-                   ?>
-                    <script>
-                    alert("sblm while");
-                    </script>
-                    <? 
+            { 
                 $nama = $row["nama"];
                 $gatel = mysql_query("SELECT * FROM laporan_produk WHERE nama = '$nama' ");
                 while ($row = mysql_fetch_assoc($gatel))
@@ -100,12 +95,7 @@ elseif (isset($_POST["terkirim"]))
                     $nomor_e = $row["no"];
                     $saatini = $row["kuantitas"];
                     $yang_dimasukkan = $saatini + $gamma;
-                    $update = mysql_query("UPDATE  laporan_produk SET  kuantitas =  '$yang_dimasukkan' WHERE  nama='$nama'");
-                    ?>
-                    <script>
-                    alert("test");
-                    </script>
-                    <?                       
+                    $update = mysql_query("UPDATE  laporan_produk SET  kuantitas =  '$yang_dimasukkan' WHERE  nama='$nama'");                       
                 }
                     
             }

@@ -74,27 +74,21 @@ else
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
-    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=manage_artikel#inventoryForm">+ Tambah Berita Baru</a></div>
+    <div align="right" style="margin-right:32px;"><a href="index.php?halaman=manage_artikel#inventoryForm">+ Tambah FAQ</a></div>
     <a name="inventoryForm" id="inventoryForm"></a>
     <h3>
-    &darr; Form Berita &darr;
+    &darr; Form FaQ &darr;
     </h3>
     <form action="" enctype="multipart/form-data" name="myForm" id="myform" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
-        <td width="20%" align="right">Judul</td>
+        <td width="20%" align="right">Pertanyaan</td>
         <td width="80%"><label>
           <input name="judul" type="text" id="judul" size="64" />
         </label></td>
       </tr>
       <tr>
-        <td align="right">Penulis</td>
-        <td><label>
-          <input name="penulis" type="text" id="penulis" size="12" />
-        </label></td>
-      </tr>
-      <tr>
-        <td align="right">ISI berita</td>
+        <td align="right">Jawaban</td>
         <td><label>
           <textarea name="isi_berita" id="isi_berita" cols="64" rows="5"></textarea>
         </label></td>

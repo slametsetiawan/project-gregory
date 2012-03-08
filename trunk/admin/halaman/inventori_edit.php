@@ -46,18 +46,20 @@ if (isset($_POST['button']))
     if ($_FILES['gambar']['tmp_name'] != "")
     {
         $newname = "$pid.jpg";
-        move_uploaded_file($_FILES['gambar']['tmp_name'], "../../images/produk/$newname");
+        move_uploaded_file($_FILES['gambar']['tmp_name'], "../../images/produk/$pid/1$newname");
+        move_uploaded_file($_FILES['gambar2']['tmp_name'], "../../images/produk/$pid/2$newname");
+        move_uploaded_file($_FILES['gambar3']['tmp_name'], "../../images/produk/$pid/3$newname");
+        move_uploaded_file($_FILES['gambar4']['tmp_name'], "../../images/produk/$pid/4$newname");
     } else
     {
         echo "Gambar KOsong";
     }
-
-?>
-<script>
-    alert("item telah di edit");
-    location.href("inventori.php");
-</script>
-<?
+    ?>
+    <script>
+        alert("item telah di edit");
+        location.href("inventori.php");
+    </script>
+    <?
 
 }
 
@@ -176,7 +178,13 @@ $productCount = mysql_num_rows($sql);?>
         <td><label>
           <input type="file" name="gambar3" id="fileField" />
         </label></td>
-      </tr> 
+      </tr>
+      <tr>
+        <td align="right">Product Image 4</td>
+        <td><label>
+          <input type="file" name="gambar4" id="fileField" />
+        </label></td>
+      </tr>  
       <tr>
         <td align="right">
             Kuantitas Produknya :
@@ -209,23 +217,22 @@ $productCount = mysql_num_rows($sql);?>
 if ($productCount > 0)
 {
     while ($row = mysql_fetch_array($sql)):?>
-        Product ID: <?php echo $row["no"]; ?> - <strong><?php echo $row["nama"]; ?></strong> - <?php echo $row["harga"]; ?> 
-        - <?php echo $row["kode"]; ?> - <?php echo $row["deskripsi"]; ?> 
-        <!--<table border="0">
-            <tr>
-                <form action="index.php?halaman=inventori_edit" method="get" name="pengubah">
-                    <input type="hidden" value="<?php echo $row["no"] ?>" name="edit_P" />
-                    <input type="submit" name="edit" value="edit" />
-                </form>
-                <form action="inventori.php" method="get" name="penghapus">
-                    <input type="hidden" value="<?php echo $row["no"] ?>" name="delete_p" />
-                    <input type="hidden" value="<?php echo $row["nama"] ?>" />
-                    <input type="submit" name="delete" value="delete" />
-                </form>
-            </tr>
-        </table>--> &nbsp; &nbsp; &nbsp; &nbsp; 
-             <a href="index.php?halaman=inventori_edit&edit_P=<?php echo $row["no"] ?>">edit</a>&nbsp;   
-             <a href="index.php?halaman=inventori&delete_p=<?php echo $row["no"] ?>">delete</a><br />
+        <form action="index.php?halaman=inventori" method="get">
+            <table>
+                <tr>
+                    <td>
+                        <?php echo $id = $row["no"]; ?>
+                    </td>
+                    <td width="500px">
+                        Nama Produk : <?php echo $product_name = $row["nama"]; ?>
+                    </td>
+                    <td>
+                        <a href='index.php?halaman=inventori_edit&edit_P=<?php echo $id ?>'>edit</a> &bull;
+                        <a href='index.php?halaman=inventori&delete_p=<?php echo $id ?>&nama=<?php echo $product_name ?>'>delete</a><br />
+                    </td>
+                </tr>
+            </table>
+        </form>
     <?php endwhile;
 } else
 {

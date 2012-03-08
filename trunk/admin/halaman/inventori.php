@@ -22,7 +22,7 @@ if (!isset($_SESSION["administrator"]))
     if (isset($_GET['delete_p']))
     {
         echo 'Yakin Menghapus Item ini ' . $_GET['delete_p'] . '? 
-    <a href="index.php?halaman=inventori&yesdelete=' . $_GET['delete_p'] . '">Yes
+    <a href="index.php?halaman=inventori&yesdelete=' . $_GET['delete_p'] . '&nama='. $_GET["nama"] .'">Yes
     </a> | <a href="index.php?halaman=inventori">No</a>';
         exit();
     }
@@ -33,7 +33,7 @@ if (!isset($_SESSION["administrator"]))
         mysql_query("DELETE FROM
                     laporan_produk
                     WHERE
-                    nama='".$_POST["nama"]."'
+                    nama='".$_GET["nama"]."'
                     ");
         $pictodelete = ("../../images/produk/$id_to_delete.jpg");
         if (file_exists($pictodelete))
@@ -80,9 +80,10 @@ if (!isset($_SESSION["administrator"]))
                     ");
         $pid = mysql_insert_id();
         $newname = "$pid.jpg";
-        move_uploaded_file($_FILES['fileField']['tmp_name'], "../../images/produk/3$newname");
-        move_uploaded_file($_FILES['fileField2']['tmp_name'], "../../images/produk/2$newname");
-        move_uploaded_file($_FILES['fileField3']['tmp_name'], "../../images/produk/1$newname");
+        move_uploaded_file($_FILES['fileField']['tmp_name'], "../../images/produk/$pid/1$newname");
+        move_uploaded_file($_FILES['fileField2']['tmp_name'], "../../images/produk/$pid/2$newname");
+        move_uploaded_file($_FILES['fileField3']['tmp_name'], "../../images/produk/$pid/3$newname");
+        move_uploaded_file($_FILES['fileField4']['tmp_name'], "../../images/produk/$pid/4$newname");
         ?>
 <script language="javascript">
     alert("item telah Ditambahkan");
@@ -92,32 +93,6 @@ if (!isset($_SESSION["administrator"]))
     }
 
 ?>
-
-<?php
-
-    $product_list = "";
-    $sql = mysql_query("SELECT * FROM produk ORDER BY no ASC");
-    $productCount = mysql_num_rows($sql);
-    if ($productCount > 0)
-    {
-        while ($row = mysql_fetch_array($sql))
-        {
-            $id = $row["no"];
-            $product_name = $row["nama"];
-            $price = $row["harga"];
-            $deskripsi = $row["deskripsi"];
-            $product_list .= "Product ID: $id - <strong>$product_name</strong> - RP$price -  &nbsp; &nbsp; &nbsp; 
-             <a href='index.php?halaman=inventori_edit&edit_P=$id'>edit</a> &bull;
-             <a href='index.php?halaman=inventori&delete_p=$id'>delete</a><br />";
-        }
-    } else
-    {
-        $product_list = "You have no products listed in your store yet";
-    }
-
-?>
-
-
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
@@ -125,7 +100,7 @@ if (!isset($_SESSION["administrator"]))
     <h3>
     &darr; Add New Inventory Item Form &darr;
     </h3>
-    <form action="inventori.php" enctype="multipart/form-data" name="myForm" id="myform" method="post">
+    <form action="index.php?halaman=inventori" enctype="multipart/form-data" name="myForm" id="myform" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
         <td width="20%" align="right">Nama Produk</td>
@@ -160,15 +135,6 @@ if (!isset($_SESSION["administrator"]))
           </select>
         </label></td>
       </tr>
-      <!--<tr>
-        <td align="right">Subcategory</td>
-        <td><select name="subcategory" id="subcategory">
-        <option value=""></option>
-          <option value="Atasan">Atasan</option>
-          <option value="Pakaian">Pakaian</option>
-          <option value="Bawahan">Bawahan</option>
-          </select></td>
-      </tr>-->
       <tr>
         <td align="right">Deskripsi</td>
         <td><label>
@@ -206,6 +172,12 @@ if (!isset($_SESSION["administrator"]))
         </label></td>
       </tr>
       <tr>
+        <td align="right">Product Image 4</td>
+        <td><label>
+          <input type="file" name="fileField4" id="fileField3" />
+        </label></td>
+      </tr>
+      <tr>
         <td align="right">
             Kuantitas Produknya :
         </td>
@@ -232,9 +204,35 @@ if (!isset($_SESSION["administrator"]))
     </div>
     <hr />
 <title>Inventory List</title>
-<?
-
-    echo $product_list;
+<?php 
+//list
+    $product_list = "";
+    $sql = mysql_query("SELECT * FROM produk ORDER BY no ASC");
+    $productCount = mysql_num_rows($sql);
+    if ($productCount > 0)
+    {
+        while ($row = mysql_fetch_array($sql)):?>
+        <form action="index.php?halaman=inventori" method="get">
+            <table>
+                <tr>
+                    <td>
+                        <?php $id = $row["no"]; echo $id; ?> -
+                    </td>
+                    <td width="500px">
+                        Nama Produk : <?php $product_name = $row["nama"]; echo $product_name; ?>
+                    </td>
+                    <td>
+                        <a href='index.php?halaman=inventori_edit&edit_P=<?php echo $id ?>'>edit</a> &bull;
+                        <a href='index.php?halaman=inventori&delete_p=<?php echo $id ?>&nama=<?php echo $product_name ?>'>delete</a><br />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    <?php endwhile;
+    } else
+    {
+        $product_list = "You have no products listed in your store yet";
+    }
 }
 
 ?>

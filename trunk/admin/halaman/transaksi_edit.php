@@ -11,8 +11,8 @@ if (!isset($_SESSION["administrator"]))
 //block merubah kuantitas produk
     $kode_kuantitas = "";
     $jumlah_kuantitas = "";
-    @$data = $_POST["kode"];
-    $sql5 = "SELECT * FROM detil_pemesanan WHERE kode ='" . $data . "' ";
+    @$data = $_POST["ID"];
+    $sql5 = "SELECT * FROM detil_pemesanan WHERE pada_pemesanan ='" . $data . "' ";
     $hitung =  mysql_query($sql5);
     while ($row = mysql_fetch_assoc($hitung))
     {
@@ -20,7 +20,7 @@ if (!isset($_SESSION["administrator"]))
         $kode_kuantitas = $row["produk"];
         
     }
-    //echo $jumlah_kuantitas;
+//    echo $jumlah_kuantitas;
 //    echo $kode_kuantitas;
 ?>
 
@@ -196,8 +196,8 @@ if ($productCount > 0)
                         Ubah Statusnya  : 
                     </td>
                     <td>
-                        <?php echo $jumlah_kuantitas; ?>
-                        <?php echo $kode_kuantitas; ?>
+                        <?php /*echo $jumlah_kuantitas; ?>
+                        <?php echo $kode_kuantitas; */?>
                         <input type="hidden" value="<?php echo $jumlah_kuantitas; ?>" name="jumlah_k" />
                         <input type="hidden" value="<?php echo $kode_kuantitas; ?>" name="kode_k" />
                         <input type="hidden" value="<?php echo $_POST["ID"]; ?>" name="ID" />

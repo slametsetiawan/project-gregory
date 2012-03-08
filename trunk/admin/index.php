@@ -80,6 +80,7 @@ if (isset($_SESSION["administrator"]))
                 <a href="index.php?halaman=manage_artikel"><li>Mengatur artikel</li></a>
                 <a href="index.php?halaman=stok"><li>Mengatur stok</li></a>
                 <a href="index.php?halaman=transaksi"><li>Mengatur transaksi</li></a>
+                <a href="index.php?halaman=cek_belum_bayar"><li>informasi pemesanan yang terjadi</li></a>
                 <br />
             </td>
             <td valign="top">

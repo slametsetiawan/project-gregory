@@ -84,9 +84,10 @@ if (isset($_POST["submit"]))
                         $kode = $row['kode'];
                         $tanggal = $row['tanggal_disisipkan'];
                         $oleh = $row['oleh_pengguna'];
+                        $namap = $row['nama_penerima'];
                         $alamatp = $row['alamat_pengiriman'];
                         $kota = $row['kota_pengiriman'];
-                        $telepon = $row['telepon'];
+                        $telepon = $row['telepon_penerima'];
                         $berat = $row['berat_keseluruhan'];
                         $tarif = $row['tarif_pengiriman'];
                         $biaya = $row['biaya_pengiriman'];
@@ -193,7 +194,7 @@ if (isset($_POST["submit"]))
                 <input type="hidden" value="<?php echo $no ?>" name="nomer_pesanan"/>
                 <input type="hidden" value="<?php echo $method ?>" name="metode_pembayaran"/>
                 <input type="hidden" value="<?php echo $_SESSION["pengguna"] ?>" name="atas_nama"/>
-                <input type="hidden" value="<?php echo $hargatota ?>" name="sejumlah"/>
+                <input type="hidden" value="<?php echo $hargatotal ?>" name="sejumlah"/>
                 <input type="hidden" value="" name="tanggal"/>
                     <?php
                     if ($status == 1)

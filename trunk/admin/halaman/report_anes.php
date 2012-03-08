@@ -72,7 +72,7 @@
 				<?php
 					$sql = "SELECT PR.nama,DP.jumlah
 						FROM pemesanan P
-						INNER JOIN detil_pemesanan DP ON DP.kode = P.kode
+						INNER JOIN detil_pemesanan DP ON DP.pada_pemesanan = P.no
 						INNER JOIN produk PR ON PR.no = DP.produk
 						WHERE
 							P.no = {$result["no"]}";

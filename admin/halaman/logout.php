@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($_POST["logout"]))
 {
     session_start();
@@ -10,9 +11,15 @@ if (isset($_POST["logout"]))
         location.href("../index.php");
     </script>
     <?php
-}
-session_start();
+}*/
+$nama = $_SESSION["administrator"]["kode"];
+//session_start();
+//session_destroy("administrator");
+//session_unset("administrator");
+unset($_SESSION['administrator']);
 session_destroy("administrator");
-session_unset("administrator");
-header("location:../admin/admin_login.php");
 ?>
+<script>
+    alert("Terima kasih, <?php echo($nama);?>.");
+    location.href = "<?php echo(buat_url());?>";
+</script>

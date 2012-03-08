@@ -25,13 +25,8 @@ else
     if (isset($_GET['yesdelete']))
     {
         $id_to_delete = $_GET['yesdelete'];
-        mysql_query("DELETE FROM produk WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error
+        mysql_query("DELETE FROM pemesanan WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error
             ());
-        $pictodelete = ("../../inventory_image/$id_to_delete.jpg");
-        if (file_exists($pictodelete))
-        {
-            unlink($pictodelete);
-        }
         ?>
         <script language="javascript">
             alert("Transaksi Dibatalkan");
@@ -87,7 +82,37 @@ if ($productCount > 0)
             </tr>
             <tr>
                 <td>
-                    Pemesan: <?php echo $row["oleh_pengguna"] ?>
+                    ID Pemesan: <?php $user = $row["oleh_pengguna"];
+                                        $sql55 = mysql_query("SELECT * FROM pengguna WHERE no='$user'");
+                                        while ($row56 = mysql_fetch_assoc($sql55))
+                                        {
+                                            echo $row56["kode"];
+                                        } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Penerima : <?php echo $row["nama_penerima"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Alamat Penerima : <?php echo $row["alamat_pengiriman"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Kota Pengiriman : <?php $a = $row["kota_pengiriman"];
+                                            $kota = mysql_query("SELECT * FROM kota WHERE no='$a' ");
+                                            while ($kow = mysql_fetch_assoc($kota))
+                                            {
+                                                echo $kow["nama"];
+                                            }  ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telepon Penerima : <?php echo $row["telepon_penerima"] ?>
                 </td>
             </tr>
             <tr>
@@ -128,7 +153,7 @@ if ($productCount > 0)
     }
     else
     {
-        $product_list = "Belum Ada Pemesanan";
+        echo "Belum Ada Pemesanan";
     }
 
 }

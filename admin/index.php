@@ -69,6 +69,7 @@ if (isset($_SESSION["administrator"]))
                     } 
                 ?>
                 <h3>Side menu</h3>
+                <li><a href="index.php?halaman=index">Index</a></li>
                 <li><a href="index.php?halaman=kategori_tambah">tambah Kategori barang</a></li>
                 <li><a href="index.php?halaman=pengirim_tambah">pengaturan pengirim</a></li>
                 <li><a href="index.php?halaman=tambah_kota">tambah kota</a></li>

@@ -16,7 +16,7 @@ if (isset($_GET['deleteid']))
 if (isset($_GET['yesdelete'])) 
 {
 	$id_to_delete = $_GET['yesdelete'];
-	mysql_query("DELETE FROM faq WHERE no_berita='$id_to_delete' LIMIT 1") or die (mysql_error());
+	mysql_query("DELETE FROM faq WHERE no='$id_to_delete' LIMIT 1") or die (mysql_error());
 	?>
     <script language="javascript">alert('redirect ke manage artikel')
     location.href="index.php?halaman=manage_artikel"
@@ -30,17 +30,28 @@ if (isset($_GET['yesdelete']))
 if (isset($_POST['judul'])) 
 {	
     $judul = mysql_real_escape_string($_POST['judul']);
-	$penulis = mysql_real_escape_string($_POST['penulis']);
 	$isi_berita = mysql_real_escape_string($_POST['isi_berita']);
-	$sql = mysql_query("SELECT judul FROM faq WHERE '$judul'=judul LIMIT 1");
+	$sql = mysql_query(" SELECT * FROM faq WHERE pertanyaan = '$judul' ");
 	$productMatch = mysql_num_rows($sql);
     if ($productMatch > 0) 
         {
     		echo 'Sorry you tried to place a duplicate "Judul" into the system, <a href="index.php?halaman=manage_artikel">click here</a>';
     		exit();
         }
-	mysql_query("INSERT INTO faq (no_berita, judul, penulis, isi_berita, date_added) 
-        VALUES('','$judul','$penulis','$isi_berita',now())") or die (mysql_error());
+	mysql_query("
+    INSERT 
+    INTO 
+    faq 
+    (no, 
+    pertanyaan, 
+    jawaban) 
+    VALUES
+    ('',
+    '$judul',
+    '$isi_berita'
+    ") or die 
+    (mysql_error());
+    //INSERT INTO faq (no, pertanyaan, jawaban) VALUES (NULL, 'wew', 'wew');
 }
 
 ?>
@@ -54,12 +65,10 @@ if ($productCount > 0)
 {
 	while($row = mysql_fetch_array($sql))
         { 
-             $no_berita = $row["no_berita"];
+             $no_berita = $row["no"];
 			 $judul = $row["judul"];
-			 $penulis = $row["penulis"];
              $isi_berita = $row["isi_berita"];
-			 $date_added = strftime("%b %d, %Y", strtotime($row["date_added"]));
-			 $product_list .= "No Berita: $no_berita - <strong>Judul : $judul</strong> - Penulis :$penulis - <em>Added $date_added</em> &nbsp; &nbsp; &nbsp; 
+			 $product_list .= "No Berita: $no_berita  - $judul - $isi_berita &nbsp; &nbsp; &nbsp; 
              <a href='index.php?halaman=berita_edit&pid=$no_berita'>edit</a> &bull; 
              <a href='index.php?halaman=manage_artikel&deleteid=$no_berita'>delete</a><br />";
         }

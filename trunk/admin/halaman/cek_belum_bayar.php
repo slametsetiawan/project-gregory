@@ -1,16 +1,22 @@
+<form method="post" action="index.php?halaman=cek_belum_bayar">
+    <table>
+    <h3>
+        Pemesanan Yang Ada Dalam Database
+    </h3>
+        Periksa Menurut :
+        <tr>
+            <td>
+                <input type="button" value="menunggu_pembayaran" name="cek" />
+                <input type="button" value="Diproses" name="cek" />
+                <input type="button" value="Selesai" name="cek" />
+                <input type="button" value="Semua" name="cek" />
+            </td>
+        </tr>
+    </table>
+</form>
+
 <?php
-/*
-$sql = "SELECT * FROM konfirmasi_pembayaran";
-$jalan = mysql_query($sql);
-echo "Pemesanan Yang Sudah Dikonfirmasi Oleh pengguna";
-while ($row = mysql_fetch_assoc($jalan))
-{
-    echo "<br>";
-    $pemesanan = $row["pemesanan"];
-    echo $pemesanan;
-    echo "<br>";
-} */
-//list transaksi
+//list yang sedang diproses
 $sql = mysql_query("SELECT * FROM pemesanan WHERE status_pemesanan = '2'");
 $productCount = mysql_num_rows($sql);
 if ($productCount > 0)
@@ -164,7 +170,7 @@ if ($productCount > 0)
         echo "Belum Ada Pemesanan";
     }
 
-//list ke 3
+//list masih menunggu pembayaran
 $sql = mysql_query("SELECT * FROM pemesanan WHERE status_pemesanan = '1'");
 $productCount = mysql_num_rows($sql);
 if ($productCount > 0)

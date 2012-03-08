@@ -32,7 +32,7 @@ if (isset($_SESSION["pengguna"]))
      * keluarkan data pengguna dan kasi pilihanmau kirim kemana?
      * isi data baru ta pake yang udah ada?
      */
-     $total = $_GET["total"];
+     @$total = $_GET["total"];
 	 ?>
 	 <div>
     <form action="<?php echo buat_url("tambah_data_pengirim", array("total"=>$total,"kode_unik"=>$acak));?>"  method="post" name="reg" id="reg">

@@ -49,33 +49,8 @@ if (isset($_POST['judul']))
     ('',
     '$judul',
     '$isi_berita'
-    ") or die 
+    )") or die 
     (mysql_error());
-    //INSERT INTO faq (no, pertanyaan, jawaban) VALUES (NULL, 'wew', 'wew');
-}
-
-?>
-
-<?php 
-//list berita
-$product_list = "";
-$sql = mysql_query("SELECT * FROM faq ORDER BY no ASC");
-$productCount = mysql_num_rows($sql);
-if ($productCount > 0) 
-{
-	while($row = mysql_fetch_array($sql))
-        { 
-             $no_berita = $row["no"];
-			 $judul = $row["judul"];
-             $isi_berita = $row["isi_berita"];
-			 $product_list .= "No Berita: $no_berita  - $judul - $isi_berita &nbsp; &nbsp; &nbsp; 
-             <a href='index.php?halaman=berita_edit&pid=$no_berita'>edit</a> &bull; 
-             <a href='index.php?halaman=manage_artikel&deleteid=$no_berita'>delete</a><br />";
-        }
-} 
-else 
-{
-	$product_list = "tabel faq kosong";
 }
 
 ?>
@@ -88,7 +63,7 @@ else
     <h3>
     &darr; Form FaQ &darr;
     </h3>
-    <form action="" enctype="multipart/form-data" name="myForm" id="myform" method="post">
+    <form action="index.php?halaman=manage_artikel" method="post">
     <table width="90%" border="0" cellspacing="0" cellpadding="6">
       <tr>
         <td width="20%" align="right">Pertanyaan</td>
@@ -118,9 +93,43 @@ else
 </html>
         <div align="left" style="margin-left:24px;">
           <h2>list artikel</h2>
-          <?php echo $product_list; ?>
+              <hr />
+          <?php 
+//list berita
+$sql = mysql_query("SELECT * FROM faq ORDER BY no ASC");
+$productCount = mysql_num_rows($sql);
+if ($productCount > 0) 
+{
+	while($row = mysql_fetch_assoc($sql)):?>
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <?php echo $row["no"] ?>
+                </td>
+                <td>
+                    Pertanyaan   : <?php echo $pertanyaan = $row["pertanyaan"]; ?>
+                </td>
+                <td>
+                    Jawaban      : <?php echo $jawaban = $row["jawaban"]; ?>
+                </td>
+                <td>
+                    <a href="index.php?halaman=berita_edit&pid=<?php echo $row["no"] ?>">edit</a>
+                    <a href="index.php?halaman=manage_artikel&deleteid=<?php echo $row["no"] ?>">delete</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <?php endwhile;
+} 
+else 
+{
+	echo  "tabel faq kosong";
+}
+
+?>
         </div>
-    <hr />
+
 
 <?php
 

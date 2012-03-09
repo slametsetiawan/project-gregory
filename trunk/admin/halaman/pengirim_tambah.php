@@ -24,8 +24,8 @@ if (isset($_GET["edit"]))
 elseif (isset($_GET["hapus"]))
 {
     echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
-    <a href="index.php?halaman=kategori_tambah&yesdelete=' . $_GET["hapus"] . '">Yes
-    </a> | <a href="index.php?halaman=kategori_tambah">No</a>';
+    <a href="index.php?halaman=pengirim_tambah&yesdelete=' . $_GET["hapus"] . '">Yes
+    </a> | <a href="index.php?halaman=pengirim_tambah">No</a>';
     exit();
 }
 elseif (isset($_GET["yesdelete"]))
@@ -34,7 +34,7 @@ elseif (isset($_GET["yesdelete"]))
     mysql_query("DELETE FROM pengirim WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error());
     ?>
     <script language="javascript">
-        alert("Kategori telah terhapus");
+        alert("Pengirim telah terhapus");
     </script>
     <?php
 }

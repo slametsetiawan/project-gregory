@@ -79,11 +79,14 @@ if (!isset($_SESSION["administrator"]))
                     ('', '$nama_produk', '')
                     ");
         $pid = mysql_insert_id();
-        $newname = "$pid.jpg";
-        move_uploaded_file($_FILES['fileField']['tmp_name'], "../../images/produk/$pid/1$newname");
-        move_uploaded_file($_FILES['fileField2']['tmp_name'], "../../images/produk/$pid/2$newname");
-        move_uploaded_file($_FILES['fileField3']['tmp_name'], "../../images/produk/$pid/3$newname");
-        move_uploaded_file($_FILES['fileField4']['tmp_name'], "../../images/produk/$pid/4$newname");
+        $newname = "1.jpg";
+        $newname2 = "2.jpg";
+        $newname3 = "3.jpg";
+        $newname4 = "4.jpg";
+        move_uploaded_file($_FILES['fileField']['tmp_name'], "../images/produk/$pid/$newname");
+        move_uploaded_file($_FILES['fileField2']['tmp_name'], "../images/produk/$pid/$newname2");
+        move_uploaded_file($_FILES['fileField3']['tmp_name'], "../images/produk/$pid/$newname3");
+        move_uploaded_file($_FILES['fileField4']['tmp_name'], "../images/produk/$pid/$newname4");
         ?>
 <script language="javascript">
     alert("item telah Ditambahkan");

@@ -1,16 +1,39 @@
 <?php
 
+//$sql = "
+//    SELECT
+//	P.*,
+//	SUM(DP.jumlah) AS dipesan
+//    FROM
+//	produk AS P
+//	LEFT OUTER JOIN detil_pemesanan AS DP ON
+//	    DP.produk=P.no
+//    GROUP BY P.no
+//    ORDER BY dipesan DESC
+//    LIMIT 0, 4";
+
+$month = date("m");
 $sql = "
-    SELECT
-	P.*,
-	SUM(DP.jumlah) AS dipesan
+     SELECT
+ P.*,
+ SUM(DP.jumlah) AS dipesan
     FROM
-	produk AS P
-	LEFT OUTER JOIN detil_pemesanan AS DP ON
-	    DP.produk=P.no
+ produk AS P
+ LEFT OUTER JOIN detil_pemesanan AS DP ON
+     DP.produk=P.no AND
+     DP.pada_pemesanan IN
+     (
+  SELECT
+      PE.no
+  FROM
+      Pemesanan AS PE
+  WHERE
+      PE.tanggal_disisipkan LIKE CONCAT(SUBSTRING(NOW(),0,8), '%')
+     )
     GROUP BY P.no
     ORDER BY dipesan DESC
-    LIMIT 0, 4";
+    LIMIT 0, 4
+    ";
 $sumber_data_produk_terlaris = mysql_query($sql);
 
 $sql = "

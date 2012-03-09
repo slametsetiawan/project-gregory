@@ -69,18 +69,19 @@ if (isset($_SESSION["administrator"]))
                     } 
                 ?>
                 <h3>Side menu</h3>
-                <li><a href="index.php?halaman=index">Index</a></li>
-                <li><a href="index.php?halaman=kategori_tambah">tambah Kategori barang</a></li>
-                <li><a href="index.php?halaman=pengirim_tambah">pengaturan pengirim</a></li>
-                <li><a href="index.php?halaman=tambah_kota">tambah kota</a></li>
-                <li><a href="index.php?halaman=report_anes">Laporan Penjualan </a></li>
-                <li><a href="index.php?halaman=template">Tampilan Website </a></li>
-                <a href="index.php?halaman=pengguna"><li>Mengatur Pengguna</li></a>
-                <a href="index.php?halaman=inventori"><li>Mengatur Inventori</li></a>
-                <a href="index.php?halaman=manage_artikel"><li>Mengatur artikel</li></a>
-                <a href="index.php?halaman=stok"><li>Mengatur stok</li></a>
-                <a href="index.php?halaman=transaksi"><li>Mengatur transaksi</li></a>
-                <a href="index.php?halaman=cek_belum_bayar"><li>informasi pemesanan yang terjadi</li></a>
+                <li><a href="index.php?halaman=index">Index</a></li><br />
+                <li><a href="index.php?halaman=kategori_tambah">tambah Kategori barang</a></li><br />
+                <li><a href="index.php?halaman=pengirim_tambah">pengaturan pengirim</a></li><br />
+                <li><a href="index.php?halaman=tarif_pengirim">Tarif pengirim</a></li><br />
+                <li><a href="index.php?halaman=tambah_kota">tambah kota</a></li><br />
+                <li><a href="index.php?halaman=reportku">Laporan Penjualan </a></li><br />
+                <li><a href="index.php?halaman=template">Tampilan Website </a></li><br />
+                <a href="index.php?halaman=pengguna"><li>Mengatur Pengguna</li></a><br />
+                <a href="index.php?halaman=inventori"><li>Mengatur Inventori</li></a><br />
+                <a href="index.php?halaman=manage_artikel"><li>Mengatur artikel</li></a><br />
+                <a href="index.php?halaman=stok"><li>Mengatur stok</li></a><br />
+                <a href="index.php?halaman=transaksi"><li>Mengatur transaksi</li></a><br />
+                <a href="index.php?halaman=report"><li>Pemesanan Yang terjadi</li></a><br />
                 <br />
             </td>
             <td valign="top">

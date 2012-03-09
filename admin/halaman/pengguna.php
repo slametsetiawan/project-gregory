@@ -1,20 +1,5 @@
 <?php 
 
-/**
- * penjelasan awal fitur2 yang ada di dalam halaman ini:
- * -terdapat fungsi search pada semua field.
- * -terdapat fungsi sorting pada semua field.
- * -selama admin belum logout semua search dan sorting yang dilakukan masih tersimpan,
- *  untuk mereset sehingga kembali ke default tekan tombol reset.
- * nb : -greg yang php di dalam html dan bagian-bagian yang sama g tak kasih dokumentasi.
- *      -kurang paging aja manage ini jadi lengkap, kalo mau ditambah silakan, tapi tambah sendiri ya.
- *      -kalo bingung tentang fungsi php yang ada disini tinggal buka aja phpmanual, liat contohnya dan dipelajari.
- */
-
-/**
- * cek apakah terdapat aksi dari administrator atau tidak.
- */
-
 if(isset($_GET["aksi"]))
 {
     
@@ -1017,76 +1002,76 @@ else
 <form action="index.php?halaman=pengguna&aksi=cari" method="post">
 <h3>Mengatur Pengguna</h3>
 <hr />
-<table cellpadding="5">
+<table  width="800px">
 <tbody>
     <tr bgcolor="gray">
-        <th width="85">
+        <th width="1%">
             No
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&username=<?php echo (!isset($_SESSION["pengguna_sortir"]["username"]) || (isset($_SESSION["pengguna_sortir"]["username"]) && $_SESSION["pengguna_sortir"]["username"] == "desc")) ? "asc" : "desc"; ?>">
             Username
             <?php echo (!isset($_SESSION["pengguna_sortir"]["username"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["username"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&nama=<?php echo (!isset($_SESSION["pengguna_sortir"]["nama"]) || (isset($_SESSION["pengguna_sortir"]["nama"]) && $_SESSION["pengguna_sortir"]["nama"] == "desc")) ? "asc" : "desc"; ?>">
             Nama
             <?php echo (!isset($_SESSION["pengguna_sortir"]["nama"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["nama"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&alamat=<?php echo (!isset($_SESSION["pengguna_sortir"]["alamat"]) || (isset($_SESSION["pengguna_sortir"]["alamat"]) && $_SESSION["pengguna_sortir"]["alamat"] == "desc")) ? "asc" : "desc"; ?>">
             Alamat
             <?php echo (!isset($_SESSION["pengguna_sortir"]["alamat"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["alamat"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&kota=<?php echo (!isset($_SESSION["pengguna_sortir"]["kota"]) || (isset($_SESSION["pengguna_sortir"]["kota"]) && $_SESSION["pengguna_sortir"]["kota"] == "desc")) ? "asc" : "desc"; ?>">
             Kota
             <?php echo (!isset($_SESSION["pengguna_sortir"]["kota"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["kota"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&propinsi=<?php echo (!isset($_SESSION["pengguna_sortir"]["propinsi"]) || (isset($_SESSION["pengguna_sortir"]["propinsi"]) && $_SESSION["pengguna_sortir"]["propinsi"] == "desc")) ? "asc" : "desc"; ?>">
             Propinsi
             <?php echo (!isset($_SESSION["pengguna_sortir"]["propinsi"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["propinsi"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&telepon=<?php echo (!isset($_SESSION["pengguna_sortir"]["telepon"]) || (isset($_SESSION["pengguna_sortir"]["telepon"]) && $_SESSION["pengguna_sortir"]["telepon"] == "desc")) ? "asc" : "desc"; ?>">
             Telepon
             <?php echo (!isset($_SESSION["pengguna_sortir"]["telepon"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["telepon"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&email=<?php echo (!isset($_SESSION["pengguna_sortir"]["email"]) || (isset($_SESSION["pengguna_sortir"]["email"]) && $_SESSION["pengguna_sortir"]["email"] == "desc")) ? "asc" : "desc"; ?>">
             Email
             <?php echo (!isset($_SESSION["pengguna_sortir"]["email"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["email"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="150">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&tanggal=<?php echo (!isset($_SESSION["pengguna_sortir"]["tanggal"]) || (isset($_SESSION["pengguna_sortir"]["tanggal"]) && $_SESSION["pengguna_sortir"]["tanggal"] == "desc")) ? "asc" : "desc"; ?>">
             Tanggal Disisipkan
             <?php echo (!isset($_SESSION["pengguna_sortir"]["tanggal"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["tanggal"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&jenis=<?php echo (!isset($_SESSION["pengguna_sortir"]["jenis"]) || (isset($_SESSION["pengguna_sortir"]["jenis"]) && $_SESSION["pengguna_sortir"]["jenis"] == "desc")) ? "asc" : "desc"; ?>">
             Jenis
             <?php echo (!isset($_SESSION["pengguna_sortir"]["jenis"])) ? "" : 
             ((($_SESSION["pengguna_sortir"]["jenis"] == "asc")) ? "<img src='../img/asc.png' width='16' style='vertical-align: middle;' />" : "<img src='../img/desc.png' width='16' style='vertical-align: middle;' />"); ?>
             </a>
         </th>
-        <th width="90">
+        <th width="10%">
             <a href="index.php?halaman=pengguna&aksi=sortir&status=<?php echo (!isset($_SESSION["pengguna_sortir"]["status"]) || (isset($_SESSION["pengguna_sortir"]["status"]) && $_SESSION["pengguna_sortir"]["status"] == "desc")) ? "asc" : "desc"; ?>">
             Status
             <?php echo (!isset($_SESSION["pengguna_sortir"]["status"])) ? "" : 
@@ -1112,7 +1097,7 @@ else
             <label>Ke : <input type="text" name="ke_tanggal" style="width: 80px;" value="<?php echo (isset($_SESSION["pengguna_cari"]["ke_tanggal"])) ? $_SESSION["pengguna_cari"]["ke_tanggal"] : ""; ?>" /></label>
         </th>
         <th>
-            <select name="jenis" style="width: 80px;">
+            <select name="jenis" style="width: 10%;">
                 <option value="all">All</option>
                 <?php 
                 

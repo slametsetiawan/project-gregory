@@ -2,28 +2,23 @@
 
 if (!isset($_SESSION["administrator"]))
 {
-
-?>
-<script language="javascript">
-    alert("login dulu");
-    location.href("../admin_login.php");
-</script>
-<?
-
-} else
+    ?>
+    <script language="javascript">
+        alert("login dulu");
+        location.href("../admin_login.php");
+    </script>
+    <?
+} 
+else
 {
     $konek = mysql_connect("localhost", "root", "");
     mysql_selectdb("perdagangan_elektronik", $konek);
-?>
-
-
-<?php
-
+    //delete
     if (isset($_GET['delete_p']))
     {
         echo 'Yakin Menghapus Item ini ' . $_GET['delete_p'] . '? 
-    <a href="index.php?halaman=inventori&yesdelete=' . $_GET['delete_p'] . '&nama='. $_GET["nama"] .'">Yes
-    </a> | <a href="index.php?halaman=inventori">No</a>';
+        <a href="index.php?halaman=inventori&yesdelete=' . $_GET['delete_p'] . '&nama='. $_GET["nama"] .'">Yes
+        </a> | <a href="index.php?halaman=inventori">No</a>';
         exit();
     }
     if (isset($_GET['yesdelete']))
@@ -40,19 +35,17 @@ if (!isset($_SESSION["administrator"]))
         {
             unlink($pictodelete);
         }
-
-?>
-<script language="javascript">
-    alert("item telah terhapus");
-    location.href("inventori.php");
-</script>
-<?php
-
+        ?>
+        <script language="javascript">
+            alert("item telah terhapus");
+            location.href("inventori.php");
+        </script>
+        <?php
     }
 
-?>
-
-<?php
+    ?>
+    
+    <?php
 
     if (isset($_POST['nama_produk']))
     {
@@ -88,14 +81,14 @@ if (!isset($_SESSION["administrator"]))
         move_uploaded_file($_FILES['fileField3']['tmp_name'], "../images/produk/$pid/$newname3");
         move_uploaded_file($_FILES['fileField4']['tmp_name'], "../images/produk/$pid/$newname4");
         ?>
-<script language="javascript">
-    alert("item telah Ditambahkan");
-    location.href("inventori.php");
-</script>
-<?php
+        <script language="javascript">
+            alert("item telah Ditambahkan");
+            location.href("inventori.php");
+        </script>
+        <?php
     }
 
-?>
+        ?>
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
@@ -232,7 +225,8 @@ if (!isset($_SESSION["administrator"]))
             </table>
         </form>
     <?php endwhile;
-    } else
+    } 
+    else
     {
         $product_list = "You have no products listed in your store yet";
     }

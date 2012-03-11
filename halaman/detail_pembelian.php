@@ -1,104 +1,96 @@
 <?php
-echo "<h3>";
-//var_dump($_POST);
-//var_dump($_SESSION);
-////$kode_unik = $_GET["kode_unik"];
-////echo $kode_unik;
-//var_dump($_GET);
-echo "Kode detail Pembelian anda :";
-$ilmu = $_GET["kode_unik"];
-echo $ilmu;
-echo "<br/>";
-echo "<br/>";
-echo "total belanja + ongkos Kirim(50.000) + harga unik(tambahan harga untuk membantu admin mensortir transaksi anda dengan cepat)";
-echo $_GET["harga_unik"];
-echo "<br/>";
-echo "<br/>";
-echo "Total Yang Anda harus Transfer (Dengan Ongkir) : RP,      ";
-$grand_totalku = $_GET["total"] + 50000;
-echo $grand_totalku;
-echo "<br/>";
-echo "<br/>";
-echo "ID Anda Saat ini :";
-$id_anda = $_SESSION["pengguna"]["kode"];
-echo $id_anda;
-echo "<br/>";
-echo "<br/>";
-echo "Pilihan Rekening Tujuan Anda :";
-echo "<br/>";
-echo "<br/>";
-if ($_GET["metode"] == 1)
-{
-    $data_bank = $_GET["metode"];
-    echo "BCA REK: 1010648226 A/N: ADMIN BERBAJU";
-}
-else
-{
-    $data_bank = $_GET["metode"];
-    echo "Mandiri REK: 1010648226 A/N: ADMIN BERBAJU";
-}
-echo "<br/>";
-echo "<br/>";
-
-    $kode_unik = $_GET["kode_unik"];
-    $assocArr=$_SESSION["keranjang_belanja"];
-    foreach($assocArr as $key=>$value)
-    {
-        $sql = "
-        SELECT * 
-        FROM
-        `produk` 
-        WHERE 
-        (no = $key)";
-       $sumber_data = mysql_query($sql);
-        $produk = mysql_fetch_assoc($sumber_data);
-
-        if ($produk==FALSE)
-        {
-        echo("Produk tidak ditemukan.");
-    }
-    else
-    {
-        echo "Produk yang Anda Beli         :";
-        echo "<br/>";
-        echo $produk["kode"];
-        echo "<br/>";
-        echo "Rp    :";
-        echo $produk["harga"];
-        echo "<br/>";
-        $produk_harga = $produk["harga"];
-        $produk_kode = $produk["kode"];
-        
-    }
-    }
-echo "</h3>";
-//echo $ilmu;
-//echo buat_url("buat_pdf");
-?>
-<form action="http://localhost/perdagangan_elektronik/halaman/buat_pdf.php" method="post">
-    <table>
-        <input type="hidden" name="kode_unik" value="<?php echo $ilmu; ?>" />
-        <input type="hidden" name="harga_total" value="<?php echo $grand_totalku; ?>" />
-        <input type="hidden" name="id" value="<?php echo $id_anda; ?>" />
-        <input type="hidden" name="rekening" value="<?php echo $data_bank; ?>" />
-        <input type="hidden" name="produk_kode" value="<?php echo $produk_kode; ?>" />
-        <input type="hidden" name="produk_harga" value="<?php echo $produk_harga; ?>" />
-        <input type="hidden" name="session" value="<?php $_SESSION["keranjang_belanja"] ?>" />
-        <input type="submit" value="Print Nota bentuk PDF" name="submit" />
-    </table>
+$data = $_SESSION["pengguna"]["no"];
+$sql = "SELECT * FROM pemesanan WHERE oleh_pengguna = '$data'";
+$kueri = mysql_query($sql);
+while ($row=mysql_fetch_assoc($kueri)):?>
+<form action="index.php?halaman=detail_pembelian2" method="post">
+        <table>
+            <tr>
+                <td>
+                    <h3>No transaksi : <?php echo $no = $row["no"] ?></h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tujuan rekening : <?php $bank = $row["metode_pembayaran"];
+                                            if ($bank == 1)
+                                            {
+                                                echo "BCA";
+                                            }
+                                            else
+                                            {
+                                                echo "MANDIRI";
+                                            }?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ID Pemesan: <?php $user = $row["oleh_pengguna"];
+                                        $sql55 = mysql_query("SELECT * FROM pengguna WHERE no='$user'");
+                                        while ($row56 = mysql_fetch_assoc($sql55))
+                                        {
+                                            echo $row56["kode"];
+                                        } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Penerima : <?php echo $row["nama_penerima"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Alamat Penerima : <?php echo $row["alamat_pengiriman"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Kota Pengiriman : <?php $a = $row["kota_pengiriman"];
+                                            $kota = mysql_query("SELECT * FROM kota WHERE no='$a' ");
+                                            while ($kow = mysql_fetch_assoc($kota))
+                                            {
+                                                echo $kow["nama"];
+                                            }  ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telepon Penerima : <?php echo $row["telepon_penerima"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Kode Transaksi : <?php $kode4 = $row["kode"]; echo $kode4; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Total Transfer : <?php echo $hargatotal = $row["harga_keseluruhan"] + $row["biaya_pengiriman"]; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Status Pemesanan :<b> <?php $dataku = $row["status_pemesanan"];
+                                                    if ($dataku == 1)
+                                                    {
+                                                        echo "menunggu pembayaran";
+                                                    }
+                                                    elseif ($dataku == 2)
+                                                    {
+                                                        echo "sedang diproses";
+                                                    }
+                                                    elseif ($dataku == 3)
+                                                    {
+                                                        echo "SELESAI";
+                                                    } ?></b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Print Nota bentuk PDF" name="submit" />
+                </td>
+            </tr>
+        </table>
+        <hr />
 </form>
-
-<html>
-<table align="center">
-<tr>
-    <td>
-Shorcut Website BCA <a href="http://www.klikbca.com/" target="_blank">BCA</a>
-    </td>
-</tr>
-    <tr>
-    <td>
-Shorcut Website Mandiri <a href="http://www.bankmandiri.co.id/" target="_blank">MANDIRI</a>
-    </td>
-</tr>
-</table>
-</html>
+<?php endwhile ?>

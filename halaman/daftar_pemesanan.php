@@ -1,10 +1,51 @@
+<h3>
+    Cek Pesanan :
+</h3>
+<form method="post" action="index.php?halaman=daftar_pemesanan2">
+    <table>
+        <tr>
+            <td>
+                Sorting Berdasarkan Kode    :
+            </td>
+            <td>
+                <input type="text" name="submiter" size="40" />
+                <input type="submit" name="submit" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Sorting Bedasarkan Status   :
+            </td>
+            <td>
+                <input type="submit" name="menunggu" value="Menunggu &nbsp pembayaran" />
+                <input type="submit" name="proses" value="Diproses" />
+                <input type="submit" name="selesai" value="Selesai" />
+                <input type="submit" name="semua" value="Semua" />
+            </td>
+        </tr>
+    </table>
+</form>
+<form action="index.php?halaman=detail_pembelian" method="post">
+    <table>
+        <tr>
+            <td>
+                Cetak Nota  :
+            </td>
+            <td>
+                <input type="submit" name="submit" value="Cari &nbsp & &nbsp Cetak" />
+            </td>
+        </tr>
+    </table>
+</form>
 <?php
+/*
 $user = $_SESSION["pengguna"]["no"];
 $sql = "SELECT * FROM pemesanan WHERE oleh_pengguna = '$user'";
 $jalan = mysql_query($sql);
 while ($row = mysql_fetch_assoc($jalan)):?>
 <form action="index.php?halaman=daftar_pemesanan" method="post">
-    <tr>
+        <table>
+            <tr>
                 <td>
                     <h3>No transaksi : <?php echo $no = $row["no"] ?></h3>
                 </td>
@@ -64,7 +105,7 @@ while ($row = mysql_fetch_assoc($jalan)):?>
             </tr>
             <tr>
                 <td>
-                    Total Transfer : <?php echo $hargatotal = $row["harga_keseluruhan"]; ?>
+                    Total Transfer : <?php echo $hargatotal = $row["harga_keseluruhan"] + $row["biaya_pengiriman"]; ?>
                 </td>
             </tr>
             <tr>
@@ -178,4 +219,5 @@ if (isset($_POST["submit"]))
         <?php
     }
 }
+*/
 ?>

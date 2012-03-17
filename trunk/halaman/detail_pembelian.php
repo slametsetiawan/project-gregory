@@ -12,6 +12,11 @@ while ($row=mysql_fetch_assoc($kueri)):?>
             </tr>
             <tr>
                 <td>
+                    <h4>Tanggal transaksi : <?php echo $tanggalku = $row["tanggal_disisipkan"] ?></h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Tujuan rekening : <?php $bank = $row["metode_pembayaran"];
                                         $sql555 = mysql_query("SELECT * FROM metode_pembayaran WHERE no='$bank'");
                                         while ($row22 = mysql_fetch_assoc($sql555))

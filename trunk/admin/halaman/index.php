@@ -12,18 +12,27 @@ if (isset($_SESSION["administrator"]))
     echo "<br/>";
     if ($hitung > 0)
     {
-        while ($row = mysql_fetch_assoc($laku))
-        {
-            $tampil = $row["pemesanan"];
-            $tampil_nama = $row["atas_nama"];
-            echo "No Transaksi  :";
-            echo $tampil;
-            echo "<br/>";
-            echo "Pemesan   :";
-            echo $tampil_nama;
-            echo "<br/>";
-            echo "<br/>";
-        }
+        while ($row = mysql_fetch_assoc($laku)):?>
+        <table>
+            <tr>
+                <td>
+                    No Transaksi    :
+                </td>
+                <td>
+                    <?php echo $row["pemesanan"] ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Pemesan    :
+                </td>
+                <td>
+                    <?php echo $row["atas_nama"] ?>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <?php endwhile; 
     } 
 }
 else
@@ -35,3 +44,17 @@ else
     </script>
     <?php
 }
+?>
+
+<table width="100%">
+    <tr align="left">
+        <td>
+            Konten
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            Untuk Bantuan teknis Harap Hubungi <a href="http://www.greyzher.com">Greyzher</a>
+        </td>
+    </tr>
+</table>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2012 at 01:56 
+-- Generation Time: Mar 11, 2012 at 08:14 
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `detil_pemesanan` (
   PRIMARY KEY (`no`),
   KEY `produk` (`produk`),
   KEY `pada_pemesanan` (`pada_pemesanan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `detil_pemesanan`
@@ -47,7 +47,9 @@ INSERT INTO `detil_pemesanan` (`no`, `produk`, `jumlah`, `berat`, `harga`, `pada
 (2, 1, 1, 0.5, 125000, 2),
 (3, 3, 1, 0.35, 320000, 3),
 (4, 4, 1, 0.18, 230000, 4),
-(5, 3, 1, 0.35, 320000, 4);
+(5, 3, 1, 0.35, 320000, 4),
+(6, 1, 30, 0.5, 125000, 6),
+(7, 6, 1, 0.2, 135000, 7);
 
 -- --------------------------------------------------------
 
@@ -61,12 +63,15 @@ CREATE TABLE IF NOT EXISTS `faq` (
   `jawaban` text NOT NULL,
   PRIMARY KEY (`no`),
   UNIQUE KEY `pertanyaan` (`pertanyaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `faq`
 --
 
+INSERT INTO `faq` (`no`, `pertanyaan`, `jawaban`) VALUES
+(1, 'Bagaimana Cara Mencetak Nota Penjualan?', 'Melalui side menu Daftar Pemesanan dan pilih transaksi Tertentu yang ingin dicetak menjadi Bukti Pemesanan'),
+(2, 'Kenapa Bukti Pembelian Tidak Lsg dicetak Saat transaksi Selesai', 'Karen Untuk Memudahkan pengguna yang kehilangan bukti pembeliannya pada saat ingin melakukan transaksi pengiriman uang');
 
 -- --------------------------------------------------------
 
@@ -182,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `laporan_produk` (
   `kuantitas` int(11) NOT NULL,
   PRIMARY KEY (`no`),
   KEY `produk` (`nama`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `laporan_produk`
@@ -246,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   KEY `status_pemesanan` (`status_pemesanan`),
   KEY `tarif_pengiriman` (`tarif_pengiriman`),
   KEY `kota_pengiriman` (`kota_pengiriman`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `pemesanan`
@@ -256,7 +261,11 @@ INSERT INTO `pemesanan` (`no`, `kode`, `tanggal_disisipkan`, `oleh_pengguna`, `n
 (2, '665f644e43731ff9db3d341da5c827e', '2012-03-08 00:09:01', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.5, 2, 9000, 125000, 1, 3, 'Harap Segera Dikirim'),
 (3, '38026ed22fc1a91d92b5d2ef93540f2', '2012-03-08 10:26:43', 6, 'Leo Pradipta', 'Jagiran 3/45', 1, '081331224022', 0.35, 4, 5000, 320000, 2, 3, 'oke'),
 (4, '011ecee7d295c066ae68d4396215c3d', '2013-01-01 10:36:17', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 11, '03151500745', 0.53, 5, 11000, 550000, 1, 3, 'oke'),
-(5, '4e44f1ac85cd60e3caa56bfd4afb675', '2013-01-01 10:37:42', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 11, '03151500745', 0, 5, 0, 0, 1, 1, 'oke');
+(6, '3d2f8900f2e49c02b481c2f717aa902', '2012-03-11 08:56:13', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 15, 1, 165000, 3750000, 1, 1, ''),
+(7, 'cd7fd1517e323f26c6f1b0b6b96e3b3', '2012-03-12 00:55:14', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 4, 5000, 135000, 2, 1, ''),
+(8, '815e6212def15fe76ed27cec7a393d5', '2012-03-12 00:57:57', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, ''),
+(9, '4c0d13d3ad6cc317017872e51d01b23', '2012-03-12 00:58:07', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, ''),
+(10, '8d8e353b98d5191d5ceea1aa3eb05d4', '2012-03-12 00:58:38', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, '');
 
 -- --------------------------------------------------------
 
@@ -337,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `produk`
@@ -443,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `tarif_pengiriman` (
   PRIMARY KEY (`no`),
   KEY `oleh_pengirim` (`oleh_pengirim`),
   KEY `ke_kota` (`ke_kota`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tarif_pengiriman`
@@ -455,7 +464,8 @@ INSERT INTO `tarif_pengiriman` (`no`, `nama`, `deskripsi`, `tarif`, `oleh_pengir
 (3, 'REGULAR', '', 3500, 3, 1),
 (4, 'REGULAR', '', 5000, 2, 1),
 (5, 'YES', 'Yakin Esok Sampai', 11000, 3, 11),
-(6, 'REGULAR', '', 15000, 1, 11);
+(6, 'REGULAR', '', 15000, 1, 11),
+(7, 'MND', 'expres 1 hari', 25000, 2, 11);
 
 -- --------------------------------------------------------
 
@@ -470,14 +480,15 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `sebagai_default` enum('YA','TIDAK') NOT NULL DEFAULT 'TIDAK',
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
-(1, 'emotion', 'Web template created by ddQ.', 'YA');
+(1, 'emotion', 'Web template created by ddQ.', 'YA'),
+(2, 'social_net', 'template awal', 'TIDAK');
 
 --
 -- Constraints for dumped tables

@@ -143,6 +143,10 @@ if(isset($_POST["selesaikan_belanja"]))
                     </span>
                 </div>
             </div>
+            <hr />
+            <div>
+                Silahkan Ke halaman <a href="index.php?halaman=daftar_pemesanan" target="_blank">Daftar Pemesanan</a> Untuk Mencetak Bukti Pembelian anda.
+            </div>
             <?
         }
 }

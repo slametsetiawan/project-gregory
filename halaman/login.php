@@ -25,7 +25,8 @@ if(!isset($_SESSION["pengguna"]))
                         pengguna
                     WHERE
                         kode = '".$_POST["kode"]."' AND
-                        kata_kunci = '".md5($_POST["kata_kunci"])."'
+                        kata_kunci = '".md5($_POST["kata_kunci"])."' AND
+                        status_akses = 'DIPERBOLEHKAN'
                     LIMIT 0, 1";
                 
                 $sumber_data = mysql_query($sql);
@@ -34,7 +35,7 @@ if(!isset($_SESSION["pengguna"]))
                 
                 if($pengguna==FALSE)
                 {
-                    ?><div style="padding: 5px; background-color: #FDB;">Akun tidak ditemukan.</div><?php
+                    ?><div style="padding: 5px; background-color: #FDB;">Akun tidak ditemukan / telah di blockir oleh admin.</div><?php
                 }
                 else
                 {

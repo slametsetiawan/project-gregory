@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["submit"]))
 {
-        $impostor = $_POST["submiter"];
+        $impostor = $_POST["submit"];
         $sql = "SELECT * FROM pemesanan WHERE kode = '$impostor'";
         $jalan = mysql_query($sql);
         while ($row = mysql_fetch_assoc($jalan)):?>
@@ -232,7 +232,7 @@ elseif (isset($_POST["semua"]))
                                     <b>masukkan no Rekening yang Anda Gunakan Untuk Mentransfer :</b>
                                     <br />
                                     <input type="text" name="no_akun" maxlength="16" size="18"/>
-                                    <input type="submit" name="submit" value="Konfirmasi pesanan" />
+                                    <input type="submit" name="submit" value="<?php echo $kode4 ?>" />
                                     <?php
                                 } 
                                 elseif ($dataku == 2)

@@ -17,7 +17,7 @@ $nama = $_SESSION["administrator"]["kode"];
 //session_destroy("administrator");
 //session_unset("administrator");
 unset($_SESSION['administrator']);
-session_destroy("administrator");
+@session_destroy("administrator");
 ?>
 <script>
     alert("Terima kasih, <?php echo($nama);?>.");

@@ -99,14 +99,17 @@ elseif (isset($_POST["terkirim"]))
                 }
                     
             }
-        //ini_set("STMP","")
-//        $to = "greyzher@gmail.com";
-//        $subject = "Terkirim";
-//        $message = "Pemesanan Anda Sudah terkirim";
-//        $from = "admin@berbaju.com";
-//        $headers = "From:" . $from;
-//        mail($to,$subject,$message,$headers);
-//        echo "Mail Sent.";            
+            $from_name = "Justrealized";
+            $from_email = "greyzher@gmail.com";
+            $headers = "From: $from_name <$from_email>";
+            $body = "Hi, \nThis is a test mail from $from_name <$from_email>.";
+            $subject = "Test mail from Justrealized";
+            $to = "glayzher@yahoo.com";
+            if (mail($to, $subject, $body, $headers)) {
+              echo "success!";
+            } else {
+              echo "fail…";
+            }   
     ?>
     <script language="javascript">
         alert("Transaksi Telah Di Ubah");

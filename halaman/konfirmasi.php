@@ -1,4 +1,9 @@
 <?php
+echo $_POST["nomer_pesanan"];
+echo $_SESSION["pengguna"]["nama"];
+echo $_POST["no_akun"];
+echo $_POST["sejumlah"];
+
 
 if (isset($_POST["submit"]))
 {
@@ -21,7 +26,7 @@ if (isset($_POST["submit"]))
         `pemesanan`, 
         `metode_pembayaran`, 
         `atas_nama`, 
-        `no_akun`, 
+        `no_akun_bank`, 
         `sejumlah`, 
         `tanggal_disisipkan`
         ) 
@@ -30,7 +35,7 @@ if (isset($_POST["submit"]))
         '', 
         '" . $_POST["nomer_pesanan"] . "', 
         '2', 
-        '" . $_SESSION["pengguna"] . "', 
+        '" . $_SESSION["pengguna"]["nama"] . "', 
         '" . $_POST["no_akun"] . "', 
         '" . $_POST["sejumlah"] . "', 
         NOW()
@@ -40,6 +45,7 @@ if (isset($_POST["submit"]))
         ?>
         <script language="javascript">
             alert("Berhasil KONFIRMASI")
+            location.href="index.php?halaman=daftar_pemesanan2"
         </script>
         <?php
         }

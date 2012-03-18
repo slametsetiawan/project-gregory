@@ -133,7 +133,7 @@ elseif (isset($_POST["semua"]))
     $sql = "SELECT * FROM pemesanan WHERE oleh_pengguna = '$user'";
     $jalan = mysql_query($sql);
     while ($row = mysql_fetch_assoc($jalan)):?>
-        <form action="index.php?halaman=daftar_pemesanan2" method="post">
+        <form action="index.php?halaman=konfirmasi" method="post">
                 <table>
                     <tr>
                         <td>
@@ -259,7 +259,7 @@ elseif (isset($_POST["semua"]))
 elseif (isset($_POST["proses"]))
 {
     $user = $_SESSION["pengguna"]["no"];
-    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '2'";
+    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '2' AND oleh_pengguna='$user'";
     $jalan = mysql_query($sql);
     while ($row = mysql_fetch_assoc($jalan)):?>
         <form action="index.php?halaman=daftar_pemesanan2" method="post">
@@ -388,10 +388,10 @@ elseif (isset($_POST["proses"]))
 elseif (isset($_POST["menunggu"]))
 {
     $user = $_SESSION["pengguna"]["no"];
-    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '1'";
+    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '1' AND oleh_pengguna='$user'";
     $jalan = mysql_query($sql);
     while ($row = mysql_fetch_assoc($jalan)):?>
-        <form action="index.php?halaman=daftar_pemesanan2" method="post">
+        <form action="index.php?halaman=konfirmasi" method="post">
                 <table>
                     <tr>
                         <td>
@@ -517,7 +517,7 @@ elseif (isset($_POST["menunggu"]))
 elseif (isset($_POST["selesai"]))
 {
     $user = $_SESSION["pengguna"]["no"];
-    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '3'";
+    $sql = "SELECT * FROM pemesanan WHERE status_pemesanan = '3' AND oleh_pengguna='$user'";
     $jalan = mysql_query($sql);
     while ($row = mysql_fetch_assoc($jalan)):?>
         <form action="index.php?halaman=daftar_pemesanan2" method="post">

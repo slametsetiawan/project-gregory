@@ -8,12 +8,7 @@
             <div class="sheet">
                 <div class="top-sheet">
                     <div class="top-left-sheet">
-                        <div class="site-name">
-                            <?php echo($GLOBALS["nama_situs"]);?>
-                        </div>
-                        <div class="site-sub-name">
-                            <?php echo($GLOBALS["slogan_situs"]);?>
-                        </div>
+                        <?php include_once("template_menu.php") ?>
                     </div>
                     <div class="top-right-sheet">
                         <!--
@@ -23,10 +18,7 @@
                     <div class="clear"></div>
                 </div>
                 <div class="top-middle-sheet">
-                    <div>
-                        <?php widget_menu_utama();?>
-                    </div>
-                    <div class="clear"></div>
+                    <?php include_once("template_widget_menu.php") ?>
                 </div>
                 <div class="header-sheet"></div>
                 <div class="body-sheet">

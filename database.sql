@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2012 at 08:14 
+-- Generation Time: Mar 19, 2012 at 03:00 
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -187,14 +187,14 @@ CREATE TABLE IF NOT EXISTS `laporan_produk` (
   `kuantitas` int(11) NOT NULL,
   PRIMARY KEY (`no`),
   KEY `produk` (`nama`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `laporan_produk`
 --
 
 INSERT INTO `laporan_produk` (`no`, `nama`, `kuantitas`) VALUES
-(10, 'NEW POLO BURBERRY IMPORT', 2),
+(10, 'NEW POLO BURBERRY IMPORT', 11),
 (11, 'JEANS BURBERRY', 0),
 (12, 'JEANS GUESS PREMIUM', 2),
 (13, 'KEMEJA GUESS PENDEK PREMIUM', 0),
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   KEY `status_pemesanan` (`status_pemesanan`),
   KEY `tarif_pengiriman` (`tarif_pengiriman`),
   KEY `kota_pengiriman` (`kota_pengiriman`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `pemesanan`
@@ -262,10 +262,7 @@ INSERT INTO `pemesanan` (`no`, `kode`, `tanggal_disisipkan`, `oleh_pengguna`, `n
 (3, '38026ed22fc1a91d92b5d2ef93540f2', '2012-03-08 10:26:43', 6, 'Leo Pradipta', 'Jagiran 3/45', 1, '081331224022', 0.35, 4, 5000, 320000, 2, 3, 'oke'),
 (4, '011ecee7d295c066ae68d4396215c3d', '2013-01-01 10:36:17', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 11, '03151500745', 0.53, 5, 11000, 550000, 1, 3, 'oke'),
 (6, '3d2f8900f2e49c02b481c2f717aa902', '2012-03-11 08:56:13', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 15, 1, 165000, 3750000, 1, 1, ''),
-(7, 'cd7fd1517e323f26c6f1b0b6b96e3b3', '2012-03-12 00:55:14', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 4, 5000, 135000, 2, 1, ''),
-(8, '815e6212def15fe76ed27cec7a393d5', '2012-03-12 00:57:57', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, ''),
-(9, '4c0d13d3ad6cc317017872e51d01b23', '2012-03-12 00:58:07', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, ''),
-(10, '8d8e353b98d5191d5ceea1aa3eb05d4', '2012-03-12 00:58:38', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0, 4, 0, 0, 2, 1, '');
+(7, 'cd7fd1517e323f26c6f1b0b6b96e3b3', '2012-03-12 00:55:14', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 4, 5000, 135000, 2, 1, '');
 
 -- --------------------------------------------------------
 
@@ -346,14 +343,14 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`no`, `kode`, `nama`, `kategori_produk`, `deskripsi`, `berat`, `harga`, `kuantitas`) VALUES
-(1, 'PB01', 'NEW POLO BURBERRY IMPORT', 3, 'Tersedia Ukuran 29-38', 0.5, 125000, 32),
+(1, 'PB01', 'NEW POLO BURBERRY IMPORT', 3, 'Tersedia Ukuran 29-38', 0.5, 125000, 23),
 (2, 'JBB2', 'JEANS BURBERRY', 1, 'Tersedia Ukuran 29-38', 0.3, 340000, 37),
 (3, 'JG001', 'JEANS GUESS PREMIUM', 2, 'Tersedia ukuran 30-24', 0.35, 320000, 65),
 (4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.18, 230000, 41),
@@ -480,15 +477,16 @@ CREATE TABLE IF NOT EXISTS `tema` (
   `sebagai_default` enum('YA','TIDAK') NOT NULL DEFAULT 'TIDAK',
   PRIMARY KEY (`no`),
   UNIQUE KEY `kode` (`kode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`no`, `kode`, `deskripsi`, `sebagai_default`) VALUES
-(1, 'emotion', 'Web template created by ddQ.', 'YA'),
-(2, 'social_net', 'template awal', 'TIDAK');
+(1, 'emotion', 'Web template created by ddQ.', 'TIDAK'),
+(2, 'social_net', 'template awal', 'TIDAK'),
+(3, 'full_cut', '', 'YA');
 
 --
 -- Constraints for dumped tables

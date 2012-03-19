@@ -11,9 +11,7 @@
                         <?php include_once("template_menu.php") ?>
                     </div>
                     <div class="top-right-sheet">
-                        <!--
-                        Search <input type="text" />
-                        -->
+                        <?php include_once("template_search.php") ?>
                     </div>
                     <div class="clear"></div>
                 </div>

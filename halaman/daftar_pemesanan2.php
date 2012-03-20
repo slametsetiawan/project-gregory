@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["submit"]))
 {
-        $impostor = $_POST["submit"];
+        $impostor = $_POST["submiter"];
         $sql = "SELECT * FROM pemesanan WHERE kode = '$impostor'";
         $jalan = mysql_query($sql);
         while ($row = mysql_fetch_assoc($jalan)):?>

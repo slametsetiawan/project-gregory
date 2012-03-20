@@ -136,7 +136,12 @@ if(isset($_POST["selesaikan_belanja"]))
             <div id="halaman_selesaikan_belanja">
                 <h3>Selesaikan Belanja</h3>
                 <div>
-                    Terima kasih Pemesanan anda telah kami terima.<br/>
+                    <b>
+                        <h3>
+                            Terima kasih Pemesanan anda telah kami terima.
+                        </h3>
+                    </b>
+                    <br/>
                     Kode pemesanan anda:<br/>
                     <span style="font-size: 20px; font-weight: bold; color: #F00; ">
                         <?php echo($pemesanan["kode"]);?>
@@ -146,6 +151,13 @@ if(isset($_POST["selesaikan_belanja"]))
             <hr />
             <div>
                 Silahkan Ke halaman <a href="index.php?halaman=daftar_pemesanan" target="_blank">Daftar Pemesanan</a> Untuk Mencetak Bukti Pembelian anda.
+            </div>
+            <div>
+                <h4>
+                    <b>
+                        Harap Diperhatikan bahwa transaksi yang sudah terjadi akan dianggap tidak valid bila anda tidak menyelesaikannya dalam waktu SATU MINGGU
+                    </b>
+                </h4>
             </div>
             <?
         }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2012 at 03:00 
+-- Generation Time: Mar 20, 2012 at 04:14 
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `detil_pemesanan` (
   PRIMARY KEY (`no`),
   KEY `produk` (`produk`),
   KEY `pada_pemesanan` (`pada_pemesanan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `detil_pemesanan`
@@ -49,7 +49,10 @@ INSERT INTO `detil_pemesanan` (`no`, `produk`, `jumlah`, `berat`, `harga`, `pada
 (4, 4, 1, 0.18, 230000, 4),
 (5, 3, 1, 0.35, 320000, 4),
 (6, 1, 30, 0.5, 125000, 6),
-(7, 6, 1, 0.2, 135000, 7);
+(7, 6, 1, 0.2, 135000, 7),
+(8, 1, 1, 0.5, 125000, 8),
+(9, 6, 1, 0.2, 135000, 11),
+(10, 9, 1, 0.5, 125000, 12);
 
 -- --------------------------------------------------------
 
@@ -105,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `kategori_produk` (
   `no` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(31) NOT NULL,
   PRIMARY KEY (`no`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `kategori_produk`
@@ -116,7 +119,9 @@ INSERT INTO `kategori_produk` (`no`, `nama`) VALUES
 (2, 'jaket'),
 (3, 'lainnya'),
 (4, 'Kemeja'),
-(8, 'celana panjang');
+(8, 'celana panjang'),
+(9, 'Kaos'),
+(10, 'Jas');
 
 -- --------------------------------------------------------
 
@@ -251,18 +256,21 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   KEY `status_pemesanan` (`status_pemesanan`),
   KEY `tarif_pengiriman` (`tarif_pengiriman`),
   KEY `kota_pengiriman` (`kota_pengiriman`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `pemesanan`
 --
 
 INSERT INTO `pemesanan` (`no`, `kode`, `tanggal_disisipkan`, `oleh_pengguna`, `nama_penerima`, `alamat_pengiriman`, `kota_pengiriman`, `telepon_penerima`, `berat_keseluruhan`, `tarif_pengiriman`, `biaya_pengiriman`, `harga_keseluruhan`, `metode_pembayaran`, `status_pemesanan`, `pesan`) VALUES
-(2, '665f644e43731ff9db3d341da5c827e', '2012-03-08 00:09:01', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.5, 2, 9000, 125000, 1, 3, 'Harap Segera Dikirim'),
+(2, '665f644e43731ff9db3d341da5c827e', '2012-03-08 00:09:01', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.5, 2, 9000, 125000, 1, 2, 'Harap Segera Dikirim'),
 (3, '38026ed22fc1a91d92b5d2ef93540f2', '2012-03-08 10:26:43', 6, 'Leo Pradipta', 'Jagiran 3/45', 1, '081331224022', 0.35, 4, 5000, 320000, 2, 3, 'oke'),
 (4, '011ecee7d295c066ae68d4396215c3d', '2013-01-01 10:36:17', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 11, '03151500745', 0.53, 5, 11000, 550000, 1, 3, 'oke'),
 (6, '3d2f8900f2e49c02b481c2f717aa902', '2012-03-11 08:56:13', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 15, 1, 165000, 3750000, 1, 1, ''),
-(7, 'cd7fd1517e323f26c6f1b0b6b96e3b3', '2012-03-12 00:55:14', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 4, 5000, 135000, 2, 1, '');
+(7, 'cd7fd1517e323f26c6f1b0b6b96e3b3', '2012-03-12 00:55:14', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 4, 5000, 135000, 2, 1, ''),
+(8, '815e6212def15fe76ed27cec7a393d5', '2012-03-20 08:45:17', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.5, 4, 5000, 125000, 2, 1, ''),
+(11, '7bfc85c0d74ff05806e0b5a0fa0c1df', '2012-03-20 08:54:38', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.2, 2, 9000, 135000, 1, 1, 'harap cepat'),
+(12, 'c8b2f17833a4c73bb20f88876219ddc', '2012-03-20 09:22:53', 2, 'Gregory Adrianto Setiawan', 'Jalan Kenjeran no 31', 1, '03151500745', 0.5, 4, 5000, 125000, 2, 1, '');
 
 -- --------------------------------------------------------
 
@@ -343,19 +351,21 @@ CREATE TABLE IF NOT EXISTS `produk` (
   UNIQUE KEY `kode` (`kode`),
   UNIQUE KEY `nama` (`nama`),
   KEY `kategori_produk` (`kategori_produk`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`no`, `kode`, `nama`, `kategori_produk`, `deskripsi`, `berat`, `harga`, `kuantitas`) VALUES
-(1, 'PB01', 'NEW POLO BURBERRY IMPORT', 3, 'Tersedia Ukuran 29-38', 0.5, 125000, 23),
-(2, 'JBB2', 'JEANS BURBERRY', 1, 'Tersedia Ukuran 29-38', 0.3, 340000, 37),
-(3, 'JG001', 'JEANS GUESS PREMIUM', 2, 'Tersedia ukuran 30-24', 0.35, 320000, 65),
-(4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.18, 230000, 41),
-(5, 'PGS3', 'POLO SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.22, 160000, 38),
-(6, 'TGS3', 'T-SHIRT GUESS PREMIUM', 2, 'Tersedia ukuran M, L, XL', 0.2, 135000, 44);
+(1, 'PB01', 'NEW POLO BURBERRY IMPORT BIRU TUA', 9, 'Ukuran M\r\nBerbahan Katun 100%', 0.5, 125000, 16),
+(2, 'JBB2', 'JEANS BURBERRY', 1, 'Ukuran All size\r\n', 0.3, 340000, 37),
+(3, 'JG001', 'JEANS GUESS PREMIUM', 1, 'ukuran All siza', 0.35, 320000, 65),
+(4, 'KSG1', 'KEMEJA GUESS PENDEK PREMIUM MERAH', 4, 'ukuran All siza\r\nBerbahan Katun 100%', 0.18, 230000, 41),
+(5, 'PGS3', 'POLO SHIRT GUESS PREMIUM', 9, 'Ukuran All size\r\nBerbahan Katun 100%', 0.22, 160000, 38),
+(6, 'TGS3', 'T-SHIRT GUESS PREMIUM', 9, 'Ukuran All size\r\nBerbahan Katun 100%', 0.2, 135000, 44),
+(8, 'KSG2', 'KEMEJA GUESS PENDEK PREMIUM BIRU', 4, 'ukuran All siza\r\nBerbahan Katun 100%\r\ndengan tambahan kancing dari italia', 0.18, 230000, 100),
+(9, 'PB02', 'NEW POLO BURBERRY IMPORT HITAM', 9, 'Ukuran M\r\nBerbahan Katun 100%', 0.5, 125000, 100);
 
 -- --------------------------------------------------------
 

@@ -143,6 +143,7 @@ if ($productCount > 0)
                      <!--<a href="transaksi_edit.php?ID=<?php echo $no ?> "> Ubah Status </a>--> &bull;
                      <input type="hidden" value="<?php echo $kode4; ?>" name="kode" />
                      <input type="hidden" value="<?php echo $no ?>" name="ID" />
+                     <input type="hidden" value="<?php echo $user ?>" name="oleh_pengguna" />
                      <input type="submit" name="submit" value="Ubah Statusnya" /> &bull;
                      <a href="index.php?halaman=transaksi&deleteid=<?php echo $no ?>"> Batalkan</a><br />
                 </form>

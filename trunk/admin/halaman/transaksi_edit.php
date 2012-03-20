@@ -29,7 +29,6 @@ if (!isset($_SESSION["administrator"]))
 if (isset($_POST['proses']))
 {
     @$id = $_POST['ID'];
-    echo $id;
     $sql = "UPDATE 
     pemesanan 
     SET 
@@ -39,6 +38,18 @@ if (isset($_POST['proses']))
     ";
     mysql_query($sql);
     //echo htmlspecialchars (mysql_error ());
+    $from_name = "Bebaju.com";
+    $from_email = "Berbaju@gmail.com";
+    $headers = "From: $from_name <$from_email>";
+    $body = "Hi, \nThis is a test mail from $from_name <$from_email>.";
+    $subject = "Alert mail from Berbaju.com";
+    $to = $_POST["surat_tujuan"];
+    if (mail($to, $subject, $body, $headers)) {
+      echo "success!";
+      echo "<br>";
+    } else {
+      echo "fail…";
+    }
     ?>
     <script language="javascript">
         alert("Transaksi Telah Di Ubah");
@@ -85,7 +96,7 @@ elseif (isset($_POST["terkirim"]))
             //pakai $beta buat mengambil nama produk dari tabel produk
             $malas = "SELECT * FROM produk WHERE no = '$beta' ";
             $muales = mysql_query($malas);
-            echo $malas;           
+            //echo $malas;           
             while ($row = mysql_fetch_assoc($muales))
             { 
                 $nama = $row["nama"];
@@ -99,20 +110,24 @@ elseif (isset($_POST["terkirim"]))
                 }
                     
             }
-            $from_name = "Justrealized";
-            $from_email = "greyzher@gmail.com";
+            $from_name = "Bebaju.com";
+            $from_email = "Berbaju@gmail.com";
             $headers = "From: $from_name <$from_email>";
             $body = "Hi, \nThis is a test mail from $from_name <$from_email>.";
-            $subject = "Test mail from Justrealized";
-            $to = "glayzher@yahoo.com";
-            if (mail($to, $subject, $body, $headers)) {
+            $subject = "Alert mail from Berbaju.com";
+            $to = $_POST["surat_tujuan"];
+            if (mail($to, $subject, $body, $headers)) 
+            {
               echo "success!";
-            } else {
+              echo "<br>";
+            } 
+            else 
+            {
               echo "fail…";
             }   
     ?>
     <script language="javascript">
-        alert("Transaksi Telah Di Ubah");
+        alert("Transaksi Telah Di Ubah dan Email pemberitahuan sudah terkirim ke pengguna");
         location.href("transaksi.php");
     </script>
     <?
@@ -182,7 +197,15 @@ if ($productCount > 0)
     while ($row = mysql_fetch_array($sql)):?>
     
         No Transaksi: <?php echo $row["no"]; ?>  <br/>
-        <strong>Tanggal : <?php echo $row["tanggal_disisipkan"]; ?> <br/>  
+        <strong>Tanggal : <?php echo $row["tanggal_disisipkan"]; ?> <br/>
+        ID Pemesan  : <?php @$userku = $_POST["oleh_pengguna"]; 
+                        $sequel = mysql_query("SELECT * FROM pengguna WHERE no='$userku'");
+                        while ($bboow=mysql_fetch_assoc($sequel))
+                        {
+                            echo $bboow["kode"];
+                            $surat = $bboow["email"];
+                        } 
+                      ?> <br /> 
         Ke Rekening Kode : <?php echo $row["metode_pembayaran"]; ?>  &nbsp; &nbsp; &nbsp; <br/>
         Total Uang Yang Harus Diterima : <?php echo $row["harga_keseluruhan"]; ?><br/>
         Pesan Dari Pemesanan : <?php echo $row["pesan"]; ?> <br/>
@@ -201,9 +224,10 @@ if ($productCount > 0)
                         <input type="hidden" value="<?php echo $jumlah_kuantitas; ?>" name="jumlah_k" />
                         <input type="hidden" value="<?php echo $kode_kuantitas; ?>" name="kode_k" />
                         <input type="hidden" value="<?php echo $_POST["ID"]; ?>" name="ID" />
-                        <input type="submit" value="terkirim(5)" name="terkirim"  />
-                        <input type="submit" value="Menunggu_Pembayaran(1)" name="menunggu"  />
-                        <input type="submit" value="Diproses(3)" name="proses"  />
+                        <input type="hidden" value="<?php echo $surat; ?>" name="surat_tujuan" />
+                        <input type="submit" value="Menunggu &nbsp Pembayaran(1)" name="menunggu"  />
+                        <input type="submit" value="Diproses(2)" name="proses"  />
+                        <input type="submit" value="terkirim(3)" name="terkirim" />
                     </td>
                 </tr>
             </table>

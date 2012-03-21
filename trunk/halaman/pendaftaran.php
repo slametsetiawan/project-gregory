@@ -145,6 +145,33 @@
 						
 		}}}}}}}}}}}
 </script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#username").blur(function() { // when focus out
+
+		$("#message").html('checking username...'); //before AJAX response
+
+		var form_data = {
+			action: 'check_username',
+			username: $(this).val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "cek_user.php",
+			data: form_data,
+			success: function(result) {
+				$("#message").html(result);
+			}
+		});
+
+	});
+
+});
+</script>
+
 <?php
 
 if (isset($_POST["submit"]))
@@ -186,22 +213,30 @@ if (isset($_POST["submit"]))
     
     if($return)
     {
-        echo("Pendaftaran berhasil!");
+        ?>
+        <script language="javascript">
+            alert("Pendaftaran anda berhasil!")
+        </script>
+        <?php
     }
     else
     {
-        echo("Pendaftaran gagal!");
+        ?>
+        <script language="javascript">
+            alert("Pendaftaran Gagal")
+        </script>
+        <?php
     }
 }
 ?>
 <div>
-    <form action="<?php echo buat_url("pendaftaran");?>"  method="post" onsubmit="return validasiForm();" name="reg">
+    <form action="<?php echo buat_url("pendaftaran");?>"  method="post" onsubmit="return validasiForm();" name="reg" id="form1">
         <h3>Formulir Pendaftaran</h3>
-        <table>
+        <table id="tbl">
             <tr>                
                 <td align="right">Username : </td>
                 <td>
-                    <input name="kode" type="text" size="31"/>
+                    <input name="username" type="text" size="31" id="username"/>
                 </td>
             </tr>
             <tr>

@@ -249,63 +249,20 @@ if (isset($_POST['nama']))
 
 ?>
 
-<?php 
-
-$product_list = "";
-$sql = mysql_query("SELECT * FROM pengguna ORDER BY no ASC");
-$productCount = mysql_num_rows($sql);
-if ($productCount > 0) 
-{
-	while($row = mysql_fetch_array($sql))
-        { 
-            $no = $row["no"];
-	    $kode = $row["kode"];
-	    $nama = $row["nama"];
-	    $alamat = $row["alamat"];
-            $email = $row["email"];
-            $kota = $row["kota"];
-	    $telepom = $row["telepon"];
-            $tanggal_disisipkan = $row["tanggal_disisipkan"];
-            $jenis_pengguna = $row["jenis_pengguna"];
-	    $status_akses = $row["status_akses"]; 
-	    $product_list .= "No Urut Pengguna: $no -
-            <strong><br/>Username Pengguna : $kode</strong> -
-            <br/>
-            Nama Pengguna    : $nama -<br/>
-            Tipe Pengguna    : $status_akses
-            &nbsp; &nbsp; &nbsp; 
-             <a href='pengguna2_edit.php?pid=$no'>edit</a> &bull;
-             <a href='pengguna2.php?deleteid=$no'>delete</a><br />
-             =======================================================<br/>";
-        }
-} 
-else 
-{
-	$product_list = "belum ada pengguna yang terdaftar di dalam database";
-}
-
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>manage pengguna</title>
 <link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
-<a href="../index.php">kembali ke menu utama</a>
 </head>
 <body>
 <div align="center" id="ContentmainWrapper">
   <div id="pageContent"><br />
 <div align="left" style="margin-left:24px;">
-      <h2>List Pengguna dalam database</h2>
-      <?php echo $product_list; ?>
     </div>
-    <hr />
     <a name="inventoryForm" id="inventoryForm"></a>
-    <h3>
-    &darr; tambah pengguna secara manual &darr;
-    </h3>
+
     <form action=""  method="post" onsubmit="return validasiForm();" name="reg">
         <h3>Formulir Pendaftaran</h3>
         <table border="0">
@@ -401,7 +358,7 @@ else
                     </font>       
                	</td>
                 <td>
-                    <img src="index.php?halaman=v"/>
+                    <img src="v.php"/>
 				</td>
             </tr>
             <tr>

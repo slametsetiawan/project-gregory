@@ -2,10 +2,10 @@
 
  function validasiForm()
     	{
-		if ((document.reg.kode.value != ""))
+		if ((document.reg.uname.value != ""))
 		{
 		var user = /^[a-zA-Z0-9]{4,15}$/; 
-		if ((user.test(document.reg.kode.value) == false))
+		if ((user.test(document.reg.uname.value) == false))
 				{
 					alert("Terdapat kesalahan penulisan pada kolom Username.");
 					return false;
@@ -13,7 +13,7 @@
 		}
 		{
         formObj = document.reg;
-        if ((formObj.kode.value == ""))
+        if ((formObj.uname.value == ""))
  
         { 
             alert("Username tisak boleh kosong.");
@@ -144,91 +144,121 @@
             return true;
 						
 		}}}}}}}}}}}
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-
-	$("#username").blur(function() { // when focus out
-
-		$("#message").html('checking username...'); //before AJAX response
-
-		var form_data = {
-			action: 'check_username',
-			username: $(this).val()
-		};
-
-		$.ajax({
-			type: "POST",
-			url: "cek_user.php",
-			data: form_data,
-			success: function(result) {
-				$("#message").html(result);
+		
+	function checkusername(){
+	var status = document.getElementById("usernamestatus");
+	var u = document.getElementById("uname").value;
+	if(u != ""){
+		status.innerHTML = 'checking...';
+		var hr = new XMLHttpRequest();
+		hr.open("POST", "http://localhost/gregory-ta/halaman/pendaftaran.php", true);
+		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		hr.onreadystatechange = function() {
+			if(hr.readyState == 4 && hr.status == 200) {
+				status.innerHTML = hr.responseText;
 			}
-		});
-
-	});
-
-});
+		}
+    var v = "name2check="+u;
+    hr.send(v);
+	}
+}
 </script>
 
+<?php
+if(isset($_POST["name2check"]) && $_POST["name2check"] != ""){
+    //include_once 'my_folder/connect_to_mysql.php';
+    $sql = mysql_connect("localhost","root","");
+    mysql_select_db("perdagangan_elektronik",$sql);
+    $username = preg_replace('#[^a-z0-9]#i', '', $_POST['name2check']); 
+    $sql_uname_check = mysql_query("SELECT kode FROM pengguna WHERE kode='$username' LIMIT 1"); 
+    $uname_check = mysql_num_rows($sql_uname_check);
+    if (strlen($username) < 4) {
+	    echo '4 - 15 characters please';
+	    exit();
+    }
+	if (is_numeric($username[0])) {
+	    echo 'First character must be a letter';
+	    exit();
+    }
+    if ($uname_check < 1) {
+	    echo '<strong>' . $username . '</strong> is OK';
+	    exit();
+    } else {
+	    echo '<strong>' . $username . '</strong> is taken';
+	    exit();
+    }
+}
+?>
 <?php
 
 if (isset($_POST["submit"]))
 {
-    require_once ("./konfigurasi.php");
-
-    $sql = "
-        INSERT INTO 
-            `perdagangan_elektronik`.`pengguna`
-            (
-                `kode`,
-                `nama`,
-                `kata_kunci`,
-                `alamat`,
-				`kode_pos`,
-                `email`,
-                `kota`,
-                `telepon`,
-                `tanggal_disisipkan`,
-                `jenis_pengguna`,
-                `status_akses`
-            )
-        VALUES
-        (   
-            '".$_POST["kode"]."',  
-            '".$_POST["nama"]."',  
-            '".md5($_POST["kata_kunci"])."',  
-            '".$_POST["alamat"]."',
-			'".$_POST["kodepos"]."',
-            '".$_POST["email"]."',
-            '".$_POST["kota"]."',  
-            '".$_POST["telepon"]."',  
-            NOW(),  
-            '2',
-            'DIPERBOLEHKAN'
-        )";
+	if(md5($_POST['pin']) == $_SESSION['image_random_value'])
+	{  
+		 require_once ("./konfigurasi.php");
+	
+		$sql = "
+			INSERT INTO 
+				`perdagangan_elektronik`.`pengguna`
+				(
+					`kode`,
+					`nama`,
+					`kata_kunci`,
+					`alamat`,
+					`kode_pos`,
+					`email`,
+					`kota`,
+					`telepon`,
+					`tanggal_disisipkan`,
+					`jenis_pengguna`,
+					`status_akses`
+				)
+			VALUES
+			(   
+				'".$_POST["uname"]."',  
+				'".$_POST["nama"]."',  
+				'".md5($_POST["kata_kunci"])."',  
+				'".$_POST["alamat"]."',
+				'".$_POST["kodepos"]."',
+				'".$_POST["email"]."',
+				'".$_POST["kota"]."',  
+				'".$_POST["telepon"]."',  
+				NOW(),  
+				'2',
+				'DIPERBOLEHKAN'
+			)";
+		
+		$return = mysql_query($sql);
+		
+		if($return)
+		{
+			?>
+			<script language="javascript">
+				alert("Pendaftaran anda berhasil!")
+			</script>
+			<?php
+		}
+		else
+		{
+			?>
+			<script language="javascript">
+				alert("Pendaftaran Gagal")
+			</script>
+			<?php
+		}  
+	}
+	else
+	{  
+	 ?>
+	 	<script language="javascript">
+			alert("terjadi kesalahan pada captcha");
+		</script>
+	 <?php  
+	} 
     
-    $return = mysql_query($sql);
-    
-    if($return)
-    {
-        ?>
-        <script language="javascript">
-            alert("Pendaftaran anda berhasil!")
-        </script>
-        <?php
-    }
-    else
-    {
-        ?>
-        <script language="javascript">
-            alert("Pendaftaran Gagal")
-        </script>
-        <?php
-    }
 }
 ?>
+
 <div>
     <form action="<?php echo buat_url("pendaftaran");?>"  method="post" onsubmit="return validasiForm();" name="reg" id="form1">
         <h3>Formulir Pendaftaran</h3>
@@ -236,7 +266,8 @@ if (isset($_POST["submit"]))
             <tr>                
                 <td align="right">Username : </td>
                 <td>
-                    <input name="username" type="text" size="31" id="username"/>
+                    <input type="text" name="uname" id="uname" onBlur="checkusername()" maxlength="15" />
+					<span id="usernamestatus"></span>
                 </td>
             </tr>
             <tr>
@@ -376,6 +407,15 @@ if (isset($_POST["submit"]))
                     <input name="telepon" type="text"size="15"/>
                 </td>
             </tr>
+			<tr>
+				<td></td>
+				<td>
+					<img src="<?php echo url_dasar(); ?>/halaman/captcha.php?date=<?php echo date('YmdHis');?>" alt="security image" />  
+					<div>  
+					Input Text Above: <input type="text" name="pin" /> 
+					</div>
+				</td>
+			</tr>
             <tr>
                 <td></td>
                 <td>

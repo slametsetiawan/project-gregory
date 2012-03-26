@@ -172,8 +172,8 @@ if(isset($_POST["name2check"]) && $_POST["name2check"] != ""){
     $username = preg_replace('#[^a-z0-9]#i', '', $_POST['name2check']); 
     $sql_uname_check = mysql_query("SELECT kode FROM pengguna WHERE kode='$username' LIMIT 1"); 
     $uname_check = mysql_num_rows($sql_uname_check);
-    if (strlen($username) < 4) {
-	    echo '4 - 15 characters please';
+    if (strlen($username) < 6) {
+	    echo '6 - 15 characters please';
 	    exit();
     }
 	if (is_numeric($username[0])) {

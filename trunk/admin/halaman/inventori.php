@@ -61,8 +61,11 @@ else
         $productMatch = mysql_num_rows($sql);
         if ($productMatch > 0)
         {
-            echo 'Sorry you tried to place a duplicate "Product Name" into the system, <a href="index.php?halaman=inventori">click here</a>';
-            exit();
+            ?>
+			<script language="javascript" >
+				alert("Terjadi kesamaan Nama Produk");
+			</script>
+			<?php
         }
         $sql = mysql_query("INSERT INTO produk (no, kode, nama, kategori_produk, deskripsi, berat, harga, kuantitas) 
         VALUES('','$kode_unik','$nama_produk','$category','$details','$berat','$price','$kuantitas')") or

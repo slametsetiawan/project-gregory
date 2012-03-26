@@ -28,7 +28,7 @@ elseif (isset($_GET["hapus"]))
 {
     echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
     <a href="index.php?halaman=tarif_pengirim&yesdelete=' . $_GET["hapus"] . '">Yes
-    </a> | <a href="index.php?halaman=tarifpengirim">No</a>';
+    </a> | <a href="index.php?halaman=tarif_pengirim">No</a>';
     exit();
 }
 elseif (isset($_GET["yesdelete"]))
@@ -123,6 +123,8 @@ elseif (isset($_GET["yesdelete"]))
 
 if (isset($_POST["submit"]))
 {
+    if (!empty($_POST["nama"]))
+    {
     $nama = $_POST["nama"];
     $deskripsi = $_POST["deskripsi"];
     $tarif = $_POST["tarif"];
@@ -153,6 +155,15 @@ if (isset($_POST["submit"]))
             alert("Anda berhasil memasukkan Pengirim baru");
         </script>
         <?php
+    }
+    else
+    {
+        ?>
+        <script language="javascript">
+            alert("Terjadi Kesalahan Input Harap Diulangi");
+        </script>
+        <?php
+    }
 }
 else
 {

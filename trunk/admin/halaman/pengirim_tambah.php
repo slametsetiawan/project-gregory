@@ -78,7 +78,7 @@ if (isset($_POST["submit"]))
 {
     $kategori_baru = $_POST["nama"];
     $deskripsi = $_POST["deskripsi"];
-    $periksa = mysql_query("SELECT kode FROM pengirim WHERE nama='$kategori_baru' LIMIT 1");
+    $periksa = mysql_query("SELECT * FROM pengirim WHERE kode='$kategori_baru' LIMIT 1");
     if ($periksa == 1)
     {
         ?>

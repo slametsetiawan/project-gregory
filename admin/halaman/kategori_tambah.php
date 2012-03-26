@@ -57,7 +57,7 @@ if (isset($_POST["submit"]))
     if (!empty($_POST["kategori"]))
     {
         $kategori_baru = $_POST["kategori"];
-        $periksa = mysql_query("SELECT nama FROM kategori_produk WHERE nama = '$kategori_baru' ");
+        $periksa = mysql_query("SELECT * FROM kategori_produk WHERE nama = '$kategori_baru' ");
         echo htmlspecialchars (mysql_error ());
         if ($periksa == 1)
         {

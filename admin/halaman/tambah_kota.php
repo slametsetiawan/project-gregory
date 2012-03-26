@@ -24,7 +24,20 @@ if (isset($_GET["edit"]))
 }
 elseif (isset($_GET["hapus"]))
 {
-    
+    echo 'Yakin Menghapus Kategori ini ' . $_GET["hapus"] . '? 
+    <a href="index.php?halaman=tambah_kota&yesdelete=' . $_GET["hapus"] . '">Yes
+    </a> | <a href="index.php?halaman=tambah_kota">No</a>';
+    exit();
+}
+elseif (isset($_GET["yesdelete"]))
+{
+    $id_to_delete = $_GET['yesdelete'];
+    mysql_query("DELETE FROM kota WHERE no='$id_to_delete' LIMIT 1") or die(mysql_error());
+    ?>
+    <script language="javascript">
+        alert("Kota telah terhapus");
+    </script>
+    <?php
 }
 ?>
 <html>
@@ -94,12 +107,12 @@ if (isset($_POST["submit"]))
     $deskripsi = $_POST["deskripsi"];
     $prop = $_POST["kota"];
     $kodek = $_POST["kode_kota"];
-    $periksa = mysql_query("SELECT nama FROM kota WHERE nama='$kategori_baru' LIMIT 1");
-    if ($periksa == 1)
+    $periksa = mysql_query("SELECT * FROM kota WHERE nama='$kategori_baru' LIMIT 1");
+    if ($periksa = 1)
     {
         ?>
         <script language="javascript">
-            alert("terjadi kesamaan nama Kode Pengiriman / nama sudah ada");
+            alert("terjadi kesamaan nama Kode Kota / nama sudah ada");
         </script>
         <?php
     }
